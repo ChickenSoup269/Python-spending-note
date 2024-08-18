@@ -50,16 +50,6 @@ pip install rich
 
 `collections`
 
-
-## How to run
-
-To run this project you we need
-
-```bash
-  py run deploy
-```
-
-
 ## Run Locally
 
 Clone the project
