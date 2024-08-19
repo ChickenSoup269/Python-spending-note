@@ -170,21 +170,26 @@ def expense_menu():
 # Menu categories
 categories = {
     "Chi tiêu thiết yếu": [
-        "Đi chợ siêu thị", "Nhà hàng", "Chi trả hóa đơn", "Tiền nhà", "Đi lại"
+        "Đi chợ siêu thị", "Nhà hàng", "Chi trả hóa đơn", "Tiền nhà", "Đi lại", "Giúp việc", "Khác"
     ],
     "Mua sắm giải trí": [
-        "Vui chơi giải trí", "Mua sắm"
+        "Vui chơi giải trí", "Mua sắm", 'Đồ gia dụng', "Làm đẹp thể thao", "Khác"
     ],
     "Giáo dục và y tế": [
-        "Giáo dục", "Y tế", "Bảo hiểm", "Tiết kiệm"
+        "Giáo dục", "Y tế", "Bảo hiểm", "Khác"
+    ],
+    "Tiết kiệm": [
+        "Tiết kiệm", "Khác"
     ],
     "Đầu tư": [
-        "Chứng khoán", "Bất động sản", "Quỹ"
+        "Sự kiện", "Chứng khoán", "Bất động sản", "Quỹ", "Khác"
     ],
     "Chi khác": [
-        "Sự kiện", "Biếu tặng", "Dịch vụ công"
+        "Biếu tặng", "Dịch vụ công", "Khác"
     ],
-    "Tiền vay": []
+    "Tiền vay": [
+       "Tiền vay"  ,"Khác"
+    ]
 }
 
 # Chuyển đổi ngày Anh -> Việt
@@ -318,64 +323,106 @@ def plot_expenses(categories, amounts, title):
 
 # Thêm chi tiêu 
 def add_expense():
-    questions = [
-        inquirer.List(
-            'main_category',
-            message="Chọn loại chi tiêu:",
-            choices=list(categories.keys()) + ["Bỏ qua"],
-        ),
-    ]
-    answers = inquirer.prompt(questions)
+    while True:
+        questions = [
+            inquirer.List(
+                'main_category',
+                message="Chọn loại chi tiêu:",
+                choices=list(categories.keys()) + ["Bỏ qua"],
+            ),
+        ]
+        answers = inquirer.prompt(questions)
 
-    if answers['main_category'] == "Bỏ qua":
-        print("Đã hủy thêm chi tiêu.")
-        return
+        if answers['main_category'] == "Bỏ qua":
+            print("Đã hủy thêm chi tiêu.")
+            return
 
-    sub_questions = [
-        inquirer.List(
-            'subcategory',
-            message="Chọn chi tiêu cụ thể:",
-            choices=categories[answers['main_category']] + ["Bỏ qua"],
-        ),
-        # -*- coding: utf-8 -*-
-        inquirer.Text('description', message="Mô tả chi tiêu (có thể bỏ qua)", default=""),
-        inquirer.Text('amount', message="Số tiền (VNĐ, có thể bỏ qua)", default="0", validate=lambda _, x: x.isdigit()),
-        inquirer.Text('quantity', message="Số lượng (có thể bỏ qua)", default="1", validate=lambda _, x: x.isdigit())
-    ]
-    
-    sub_answers = inquirer.prompt(sub_questions)
+        while True:
+            sub_questions = [
+                inquirer.List(
+                    'subcategory',
+                    message="Chọn chi tiêu cụ thể:",
+                    choices=categories[answers['main_category']] + ["Bỏ qua"],
+                ),
+                inquirer.Text('description', message="Mô tả chi tiêu (có thể bỏ qua)", default=""),
+                inquirer.Text('amount', message="Số tiền (VNĐ, có thể bỏ qua)", default="0", validate=lambda _, x: x.isdigit()),
+                inquirer.Text('quantity', message="Số lượng (có thể bỏ qua)", default="1", validate=lambda _, x: x.isdigit())
+            ]
+            
+            sub_answers = inquirer.prompt(sub_questions)
 
-    if sub_answers['subcategory'] == "Bỏ qua" or sub_answers['amount'] == "0":
-        print("Đã hủy thêm chi tiêu.")
-        return
+            if sub_answers['subcategory'] == "Bỏ qua" or sub_answers['amount'] == "0":
+                print("Đã hủy thêm chi tiêu.")
+                return
 
-    # Lấy ngày hiện tại và tên thứ trong tuần
-    today = datetime.now()
-    date = today.strftime('%Y-%m-%d')
-    weekday_name = today.strftime('%A')  # Lấy tên thứ trong tuần
-    weekday_name_vn = weekday_translation.get(weekday_name, weekday_name)  # Dịch sang tiếng Việt
+            # Tính toán tổng tiền
+            total_amount = int(sub_answers['amount']) * int(sub_answers['quantity'])
 
-    total_amount = int(sub_answers['amount']) * int(sub_answers['quantity'])
-    user = "TranPhuocThien-2003"  # Giả định ID người dùng
+            # Tạo dữ liệu cho bảng
+            table_data = [
+                [Fore.CYAN + "Loại chi tiêu" + Style.RESET_ALL, sub_answers['subcategory']],
+                [Fore.CYAN + "Mô tả" + Style.RESET_ALL, sub_answers['description']],
+                [Fore.CYAN + "Số lượng" + Style.RESET_ALL, sub_answers['quantity']],
+                [Fore.CYAN + "Tổng tiền (VNĐ)" + Style.RESET_ALL, f"{total_amount:,}"]
+            ]
 
-    if user not in expenses:
-        expenses[user] = {}
-    if date not in expenses[user]:
-        expenses[user][date] = []
+            # In bảng ra với màu sắc
+            print(Fore.GREEN + tabulate(table_data, headers=["Thông tin", "Chi tiết"], tablefmt="rounded_outline") + Style.RESET_ALL)
 
-    expense_id = str(uuid.uuid4())  # Tạo ID duy nhất cho mỗi chi tiêu
+            # Xác nhận từ người dùng
+            confirm_question = [
+                inquirer.Confirm('confirm', message="Bạn có muốn xác nhận chi tiêu này không?", default=True)
+            ]
+            confirm_answer = inquirer.prompt(confirm_question)
 
-    expenses[user][date].append({
-        "id": expense_id,
-        "category": sub_answers['subcategory'],
-        "description": sub_answers['description'],
-        "amount": total_amount,
-        "quantity": int(sub_answers['quantity']),
-        "weekday": weekday_name_vn  # Thêm tên thứ vào thông tin chi tiêu
-    })
+            if confirm_answer['confirm']:
+                # Lấy ngày hiện tại và tên thứ trong tuần
+                today = datetime.now()
+                date = today.strftime('%Y-%m-%d')
+                weekday_name = today.strftime('%A')  # Lấy tên thứ trong tuần
+                weekday_name_vn = weekday_translation.get(weekday_name, weekday_name)  # Dịch sang tiếng Việt
 
-    save_expenses()
-    print(f"Đã thêm chi tiêu: {sub_answers['subcategory']} - {sub_answers['description']} - Số lượng: {sub_answers['quantity']} - Tổng tiền: {total_amount:,} VNĐ - Ngày: {weekday_name_vn}")
+                user = "TranPhuocThien-2003"  # Giả định ID người dùng
+
+                if user not in expenses:
+                    expenses[user] = {}
+                if date not in expenses[user]:
+                    expenses[user][date] = []
+
+                expense_id = str(uuid.uuid4())  # Tạo ID duy nhất cho mỗi chi tiêu
+
+                expenses[user][date].append({
+                    "id": expense_id,
+                    "category": sub_answers['subcategory'],
+                    "description": sub_answers['description'],
+                    "amount": total_amount,
+                    "quantity": int(sub_answers['quantity']),
+                    "weekday": weekday_name_vn  # Thêm tên thứ vào thông tin chi tiêu
+                })
+
+                save_expenses()
+                print(Fore.YELLOW + f"Đã thêm chi tiêu: {sub_answers['subcategory']} - {sub_answers['description']} - Số lượng: {sub_answers['quantity']} - Tổng tiền: {total_amount:,} VNĐ - Ngày: {weekday_name_vn}" + Style.RESET_ALL)
+
+            
+                # Hỏi người dùng có muốn thêm chi tiêu khác trong cùng danh mục
+                continue_question = [
+                    inquirer.Confirm('continue', message="Bạn có muốn thêm chi tiêu khác trong cùng danh mục không?", default=False)
+                ]
+                continue_answer = inquirer.prompt(continue_question)
+
+                if not continue_answer['continue']:
+                    break  # Thoát khỏi vòng lặp danh mục con và quay lại menu chính
+            else:
+                print("Đã hủy chi tiêu này.")
+
+        # Hỏi người dùng có muốn quay lại menu chính
+        more_expense_question = [
+            inquirer.Confirm('more', message="Bạn có muốn quay lại menu chính không?", default=True)
+        ]
+        more_expense_answer = inquirer.prompt(more_expense_question)
+
+        if not more_expense_answer['more']:
+            break
 
 
 # Tính chiêu tiêu trong tuần
