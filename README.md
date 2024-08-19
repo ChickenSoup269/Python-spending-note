@@ -80,13 +80,10 @@ Go to the project directory
   cd to project
 ```
 
-And make sure you Install all pip
+Install one for all pip
 
 ```bash
-  pip install inquirer
-  pip install termcharts
-  pip install tabulate
-  pip install rich
+  pip install inquirer jsonlib-python3 uuid termcharts pyfiglet tabulate colorama rich
 ```
 
 Start the python project
