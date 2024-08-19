@@ -39,6 +39,22 @@ pip install rich
  | Type     | Description                |
  :------- | :------------------------- |
  `rich` | **Được** sử dụng để định dạng dữ liệu thành table hiển thị trên terminal. |
+ 
+ ```bash
+pip install colorama
+```
+
+ | Type     | Description                |
+ :------- | :------------------------- |
+ `colorama` | **Được** sử dụng để đổi màu bảng hoặc làm gì đó liên quan đến màu. |
+ 
+ ```bash
+pip install pyfiglet
+```
+
+ | Type     | Description                |
+ :------- | :------------------------- |
+ `pyfiglet` | **Được** sử dụng vẽ mấy cái chữ pixel ASCII. |
 
 
 ## Các thư viện khác có sẵn trên python
