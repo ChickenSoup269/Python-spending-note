@@ -39,7 +39,28 @@ pip install rich
  | Type     | Description                |
  :------- | :------------------------- |
  `rich` | **Được** sử dụng để định dạng dữ liệu thành table hiển thị trên terminal. |
+ 
+ ```bash
+pip install colorama
+```
 
+ | Type     | Description                |
+ :------- | :------------------------- |
+ `colorama` | **Được** sử dụng để đổi màu bảng hoặc làm gì đó liên quan đến màu. |
+ 
+ ```bash
+pip install pyfiglet
+```
+
+ | Type     | Description                |
+ :------- | :------------------------- |
+ `pyfiglet` | **Được** sử dụng vẽ mấy cái chữ pixel ASCII. |
+
+## Install one for all pip
+
+```bash
+  pip install inquirer jsonlib-python3 uuid termcharts pyfiglet tabulate colorama rich
+```
 
 ## Các thư viện khác có sẵn trên python
 `uuid`
@@ -62,15 +83,6 @@ Go to the project directory
 
 ```bash
   cd to project
-```
-
-And make sure you Install all pip
-
-```bash
-  pip install inquirer
-  pip install termcharts
-  pip install tabulate
-  pip install rich
 ```
 
 Start the python project
