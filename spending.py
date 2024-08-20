@@ -3,6 +3,7 @@ import json #
 import uuid #
 import termcharts #
 import pyfiglet #
+import random #
 import termcharts.bar_chart
 from datetime import datetime, timedelta
 from tabulate import tabulate
@@ -16,23 +17,24 @@ from rich.text import Text
 # Dictionary to store expenses
 expenses = {}
 console = Console()
+
+# tính giờ để chào sáng, chiều ,tối
+current_time = datetime.now()
+dt_string = current_time.strftime("%H:%M:%S")
+current_hour = current_time.hour
+
 # Khởi tạo Colorama
 init(autoreset=True)
 
-# In ra lời chào đầu 
-art = pyfiglet.figlet_format('Zero Spending', font='standard')
-print(68*'=')
-print(art)
-print(68*'=')
+chitieu = 'Chitieu.json' 
+menu_file = "menu.json"
 
-chitieu = 'Chitieu.json'
-
-# Lưu file
+# Lưu file chi tiêu
 def save_expenses():
    with open(chitieu, 'w', encoding='utf-8') as f:
         json.dump(expenses, f, indent=4, ensure_ascii=False)
 
-# Tải file
+# Tải file chi tiêu
 def load_expenses():
     global expenses
     try:
@@ -44,9 +46,7 @@ def load_expenses():
 # Load expenses when the script starts
 load_expenses()
 
-
-menu_file = "menu.json"
-
+# Đọc file menu kinh doanh
 # Load menu from JSON file
 def load_menu():
     try:
@@ -61,7 +61,33 @@ def save_menu(menu):
     with open(menu_file, "w" , encoding='utf-8') as f:
         json.dump(menu, f, indent=4)
 
-# Add a new product to the menu
+
+# In ra lời chào đầu 
+art = pyfiglet.figlet_format('Zero Spending', font='standard')
+dateTimes = pyfiglet.figlet_format(dt_string, font='banner3')
+colors = [Fore.RED, Fore.GREEN, Fore.YELLOW, Fore.BLUE, Fore.MAGENTA, Fore.CYAN, Fore.WHITE]
+
+# Check giờ để in lời chào sáng, chiều, tối
+def get_greeting():
+    if 5 <= current_hour < 12:
+        return 'Chào buổi sáng, chúc bạn buổi sáng tốt lành! 😆'
+    elif 12 <= current_hour < 18:
+        return 'Chào buổi chiều, chúc bạn buổi chiều vui vẻ! 😁'
+    else:
+        return 'Chào buổi tối, chúc bạn buổi tối thư giãn! 😮‍💨'
+#  in =
+
+colored_line = ''.join(random.choice(colors) + '=' for _ in range(68))
+print(colored_line)
+
+# In từng ký tự của chữ nghệ thuật với màu ngẫu nhiên
+print(Style.BRIGHT + art)
+print(dateTimes)
+# In dòng cuối cùng với màu ngẫu nhiên
+print(colored_line)
+# In ra lời chào
+print(get_greeting(), Fore.CYAN + dt_string + '\n')
+# dự báo thời tiết hoặc cái gì đó đại loại vậy 
 
 # Menu cho người dùng chọn chức năng
 def main_menu():
@@ -70,13 +96,14 @@ def main_menu():
         main_choices = [
             "Kinh doanh",
             "Kiểm soát chi tiêu",
+            "Xem giá vàng",
             "Thoát"
         ]
 
         main_questions = [
             inquirer.List(
                 'main_choice',
-                message="Chọn nhóm chức năng bạn muốn thực hiện",
+                message= 5*'*' + " Chọn chức năng bạn muốn thực hiện "  + 5*'*',
                 choices=main_choices,
             )
         ]
@@ -106,7 +133,7 @@ def business_menu():
         business_questions = [
             inquirer.List(
                 'choice',
-                message="Chọn chức năng bạn muốn thực hiện",
+                message= 5*'*' + " Chọn chức năng bạn muốn thực hiện "  + 5*'*',
                 choices=business_choices,
             )
         ]
