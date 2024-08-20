@@ -1,5 +1,7 @@
 import inquirer #
 import json #
+import requests #
+import os #
 import uuid #
 import termcharts #
 import pyfiglet #
@@ -65,7 +67,7 @@ def save_menu(menu):
 # In ra lời chào đầu 
 art = pyfiglet.figlet_format('Zero Spending', font='standard')
 dateTimes = pyfiglet.figlet_format(dt_string, font='banner3')
-colors = [Fore.RED, Fore.GREEN, Fore.YELLOW, Fore.BLUE, Fore.MAGENTA, Fore.CYAN, Fore.WHITE]
+colors = [Fore.LIGHTRED_EX, Fore.LIGHTGREEN_EX, Fore.LIGHTYELLOW_EX, Fore.LIGHTBLUE_EX, Fore.LIGHTMAGENTA_EX, Fore.LIGHTCYAN_EX, Fore.LIGHTWHITE_EX]
 
 # Check giờ để in lời chào sáng, chiều, tối
 def get_greeting():
@@ -78,6 +80,8 @@ def get_greeting():
 #  in =
 
 colored_line = ''.join(random.choice(colors) + '=' for _ in range(68))
+end_line = ''.join(random.choice(colors) + '*' for _ in range(68))
+
 print(colored_line)
 
 # In từng ký tự của chữ nghệ thuật với màu ngẫu nhiên
@@ -87,7 +91,9 @@ print(dateTimes)
 print(colored_line)
 # In ra lời chào
 print(get_greeting(), Fore.CYAN + dt_string + '\n')
-# dự báo thời tiết hoặc cái gì đó đại loại vậy 
+
+# Dự báo thời tiết hoặc cái gì đó đại loại vậy 
+
 
 # Menu cho người dùng chọn chức năng
 def main_menu():
@@ -115,7 +121,9 @@ def main_menu():
         elif main_answer['main_choice'] == "Kiểm soát chi tiêu":
             expense_menu()
         elif main_answer['main_choice'] == "Thoát":
-            print(20*'*' + " | Cảm ơn bạn đã sử dụng chương trình! | " + 20*'*')
+            print(end_line)
+            print(10*'=' + " | Cảm ơn bạn đã sử dụng chương trình! | " + 10*'=')
+            print(end_line + '\n')
             break
 
 
@@ -320,6 +328,13 @@ def plot_expenses(categories, amounts, title):
         # Tạo biểu đồ dạng thanh
         console.print("\n" + title, style="bold underline")
         max_length = 50  # Độ dài tối đa của thanh
+
+        # Sắp xếp các hạng mục và số tiền chi tiêu từ nhỏ đến lớn
+        sorted_items = sorted(zip(sorted_categories, sorted_amounts), key=lambda x: x[1])
+
+        # Tách lại danh sách sau khi sắp xếp
+        sorted_categories, sorted_amounts = zip(*sorted_items)
+
         max_amount = max(sorted_amounts) if sorted_amounts else 1
         console.print("\nBiểu đồ Thanh:")
         for category, amount in zip(sorted_categories, sorted_amounts):
@@ -1098,6 +1113,65 @@ def view_sales_statistics():
                 print(f"{product}: {quantity} sản phẩm")
         else:
             print("Không có sản phẩm nào được bán trong tuần này.")
+
+# Cho lời khuyên
+def give_spending_advice(expenses):
+    # Tổng hợp chi tiêu theo từng loại
+    category_totals = {}
+    for user, dates in expenses.items():
+        for date, expense_list in dates.items():
+            for expense in expense_list:
+                category = expense['category']
+                amount = expense['amount']
+                if category not in category_totals:
+                    category_totals[category] = 0
+                category_totals[category] += amount
+
+    # Đưa ra lời khuyên dựa trên chi tiêu
+    advice = []
+
+    # Giả sử các mức chi tiêu hợp lý (VNĐ)
+    reasonable_limits = {
+        "Đi chợ siêu thị": 2000000,
+        "Nhà hàng": 1000000,
+        "Chi trả hóa đơn": 3000000,
+        "Tiền nhà": 5000000,
+        "Đi lại": 1000000,
+        "Vui chơi giải trí": 500000,
+        "Mua sắm": 2000000,
+        "Giáo dục": 2000000,
+        "Y tế": 1000000,
+        "Bảo hiểm": 2000000,
+        "Tiết kiệm": 0,  # Không có giới hạn, nên tiết kiệm càng nhiều càng tốt
+        "Chứng khoán": 0,  # Không có giới hạn cụ thể
+        "Bất động sản": 0,  # Không có giới hạn cụ thể
+        "Quỹ": 0,  # Không có giới hạn cụ thể
+        "Sự kiện": 1000000,
+        "Biếu tặng": 500000,
+        "Dịch vụ công": 500000,
+    }
+
+    for category, total in category_totals.items():
+        if category in reasonable_limits:
+            limit = reasonable_limits[category]
+            if total > limit and limit != 0:
+                advice.append(
+                    f"Chi tiêu cho {category} ({total:,} VNĐ) vượt mức hợp lý ({limit:,} VNĐ). Bạn nên cân nhắc giảm chi tiêu ở hạng mục này."
+                )
+            elif limit == 0 and total > 0:
+                advice.append(
+                    f"Bạn đã chi tiêu {total:,} VNĐ cho {category}. Hãy đảm bảo rằng các khoản chi này là cần thiết."
+                )
+
+    if not advice:
+        advice.append("Chi tiêu của bạn trong các hạng mục hiện tại đang hợp lý. Tiếp tục duy trì!")
+
+    return advice
+
+# In ra lời khuyên
+advice = give_spending_advice(expenses)
+for line in advice:
+    print(line + "\n")
 
 # Chạy menu chính
 main_menu()
