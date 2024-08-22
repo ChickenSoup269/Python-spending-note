@@ -15,9 +15,12 @@ from rich.console import Console
 from rich.table import Table
 from rich.panel import Panel
 from rich.text import Text
+# -*- coding: utf-8 -*-
+
 # ================================================================================
 # Dictionary to store expenses
-expenses = {}
+expenses = {} # mục chi tiêu
+savings = {} # mục tiết kiệm
 console = Console()
 
 # tính giờ để chào sáng, chiều ,tối
@@ -30,20 +33,24 @@ init(autoreset=True)
 
 chitieu = 'Chitieu.json' 
 menu_file = "menu.json"
+savings_file = 'saving.json'
 
-# Lưu file chi tiêu
+# Lưu file chi tiêu và tiết kiệm cùng một file json
 def save_expenses():
-   with open(chitieu, 'w', encoding='utf-8') as f:
-        json.dump(expenses, f, indent=4, ensure_ascii=False)
+    with open('./json/' + chitieu, 'w', encoding='utf-8') as f:
+        json.dump({"expenses": expenses, "savings": savings}, f, indent=4, ensure_ascii=False)
 
 # Tải file chi tiêu
 def load_expenses():
-    global expenses
+    global expenses, savings
     try:
-        with open(chitieu, 'r', encoding='utf-8') as f:
-            expenses = json.load(f)
+        with open('./json/' + chitieu, 'r', encoding='utf-8') as f:
+            data = json.load(f)
+            expenses = data.get("expenses", {})
+            savings = data.get("savings", {})
     except FileNotFoundError:
         expenses = {}
+        savings = {}
 
 # Load expenses when the script starts
 load_expenses()
@@ -52,7 +59,7 @@ load_expenses()
 # Load menu from JSON file
 def load_menu():
     try:
-        with open(menu_file, "r", encoding='utf-8') as f:
+        with open('./json/'+ menu_file, "r", encoding='utf-8') as f:
             menu = json.load(f)
     except FileNotFoundError:
         menu = {}
@@ -60,7 +67,7 @@ def load_menu():
 
 # Save menu to JSON file
 def save_menu(menu):
-    with open(menu_file, "w" , encoding='utf-8') as f:
+    with open('./json/'+ menu_file, "w" , encoding='utf-8') as f:
         json.dump(menu, f, indent=4)
 
 
@@ -93,7 +100,7 @@ print(colored_line)
 print(get_greeting(), Fore.CYAN + dt_string + '\n')
 
 # Dự báo thời tiết hoặc cái gì đó đại loại vậy 
-
+# ==============================
 
 # Menu cho người dùng chọn chức năng
 def main_menu():
@@ -103,6 +110,9 @@ def main_menu():
             "Kinh doanh",
             "Kiểm soát chi tiêu",
             "Xem giá vàng",
+            "Thêm tiền tiết kiệm",
+            "Sử dụng tiền tiết kiệm",
+            "Dự báo thời tiết",
             "Thoát"
         ]
 
@@ -120,12 +130,16 @@ def main_menu():
             business_menu()
         elif main_answer['main_choice'] == "Kiểm soát chi tiêu":
             expense_menu()
+        elif main_answer['main_choice'] == "Thêm tiền tiết kiệm":
+            amount = int(input("Nhập số tiền tiết kiệm (VNĐ): "))
+            add_savings(amount)
+        elif main_answer['main_choice'] == "Sử dụng tiền tiết kiệm":
+            apply_savings()
         elif main_answer['main_choice'] == "Thoát":
             print(end_line)
             print(10*'=' + " | Cảm ơn bạn đã sử dụng chương trình! | " + 10*'=')
             print(end_line + '\n')
             break
-
 
 def business_menu():
     while True:
@@ -165,7 +179,6 @@ def business_menu():
             view_sales_statistics()
         elif business_answer['choice'] == "Quay lại":
             break
-
 
 def expense_menu():
     while True:
@@ -214,7 +227,7 @@ categories = {
         "Giáo dục", "Y tế", "Bảo hiểm", "Khác"
     ],
     "Tiết kiệm": [
-        "Tiết kiệm", "Khác"
+        "Tiết kiệm"
     ],
     "Đầu tư": [
         "Sự kiện", "Chứng khoán", "Bất động sản", "Quỹ", "Khác"
@@ -237,6 +250,125 @@ weekday_translation = {
     "Saturday": "Thứ Bảy",
     "Sunday": "Chủ Nhật"
 }
+
+# Function to add savings
+def add_savings(amount):
+    today = datetime.now()
+    date = today.strftime('%Y-%m-%d')
+    weekday_name = today.strftime('%A')  # Lấy tên thứ (ví dụ: "Monday")
+
+    # Kiểm tra nếu ngày hôm nay chưa có trong savings
+    if date not in savings:
+        savings[date] = {"amount": 0, "weekday": weekday_translation.get(weekday_name)}
+    
+    # Cộng số tiền tiết kiệm vào ngày hiện tại
+    savings[date]["amount"] += amount
+
+    # Lưu dữ liệu
+    save_expenses()
+
+    # Thông báo cho người dùng  
+    print(display_savings_book())
+    print(Fore.GREEN + f"Đã thêm tiết kiệm: {amount:,} VNĐ vào ngày {date} ({weekday_translation.get(weekday_name)}) \n" + Style.RESET_ALL)
+
+# Function to apply savings to current expenses
+def apply_savings():
+    if not savings:
+        print(Fore.RED + "Không có tiền tiết kiệm nào để sử dụng." + Style.RESET_ALL)
+        return
+
+    date = input("Nhập ngày của khoản tiết kiệm cần sử dụng (YYYY-MM-DD): ")
+    if date not in savings:
+        print(Fore.RED + "Ngày tiết kiệm không hợp lệ." + Style.RESET_ALL)
+        return
+    
+    amount = int(input("Nhập số tiền cần sử dụng (VNĐ): "))
+    if amount > savings[date]["amount"]:
+        print(Fore.RED + "Số tiền yêu cầu vượt quá số tiền tiết kiệm hiện có." + Style.RESET_ALL)
+        return
+    
+    # Deduct savings and add to expenses
+    # Trước khi thực hiện điều này, gọi hàm add_expense_from_savings
+ 
+    add_expense_from_savings(amount, "Chi tiêu từ tiết kiệm")
+
+# Function to add an expense directly from savings
+def get_savings_balance():
+    today = datetime.now().strftime('%Y-%m-%d')
+    return savings.get(today, {"amount": 0})["amount"]
+
+def update_savings_balance(amount_spent):
+    today = datetime.now().strftime('%Y-%m-%d')
+    if today in savings:
+        savings[today]["amount"] -= amount_spent
+        if savings[today]["amount"] <= 0:
+            del savings[today]  # Xóa ngày nếu số dư không còn
+    else:
+        print(Fore.RED + "Không có số dư tiết kiệm cho ngày hôm nay!" + Style.RESET_ALL)
+
+
+def add_expense_from_savings(amount, category):
+    savings_balance = get_savings_balance()
+    
+    if amount > savings_balance:
+        print(Fore.RED + "Số tiền chi tiêu vượt quá số dư tiết kiệm hiện có!" + Style.RESET_ALL)
+        return
+    
+    # Thực hiện chi tiêu từ tiết kiệm
+    # Giảm số dư tiết kiệm trước khi thêm chi tiêu
+    update_savings_balance(amount)
+
+    # Tiến hành thêm chi tiêu
+    while True:
+        add_expense(amount, category)
+        
+        # Hỏi người dùng có muốn xác nhận chi tiêu không
+        confirm_question = [
+            inquirer.Confirm('confirm', message="Bạn có muốn xác nhận chi tiêu này không?", default=True)
+        ]
+        confirm_answer = inquirer.prompt(confirm_question)
+
+        if confirm_answer['confirm']:
+            print(Fore.GREEN + f"Chi tiêu được xác nhận. Đã trừ {amount:,} VNĐ từ số dư tiết kiệm." + Style.RESET_ALL)
+            break
+        else:
+            # Nếu không xác nhận, khôi phục số dư tiết kiệm
+            print(Fore.YELLOW + "Chi tiêu đã bị hủy. Không trừ số tiền từ số dư tiết kiệm." + Style.RESET_ALL)
+            # Hoàn lại số tiền vào số dư tiết kiệm
+            add_savings(amount)
+            break
+
+
+def display_savings_book():
+    if not savings:
+        print(Fore.RED + "Không có dữ liệu tiết kiệm để hiển thị." + Style.RESET_ALL)
+        return
+    
+    table_data = []
+    
+    # Thêm tiêu đề bảng
+    headers = [Fore.CYAN + "Ngày" + Style.RESET_ALL, 
+               Fore.CYAN + "Số Tiền (VNĐ)" + Style.RESET_ALL, 
+               Fore.CYAN + "Ngày Trong Tuần" + Style.RESET_ALL]
+
+    total_amount = 0
+    
+    for date, details in savings.items():
+        table_data.append([
+            date,
+            f"{details['amount']:,}",
+            details['weekday']
+        ])
+        total_amount += details['amount']
+
+    # In bảng ra với màu sắc
+    print(Fore.GREEN + tabulate(table_data, headers=headers, tablefmt="fancy_grid") + Style.RESET_ALL)
+    
+    # In tổng số tiền
+    print(Fore.YELLOW + f"Tổng tiền tiết kiệm: {total_amount:,} VNĐ" + Style.RESET_ALL)
+
+# Gọi hàm để hiển thị sổ tiết kiệm và tổng tiền
+display_savings_book()
 
 # Function to format expenses table
 def format_expenses_table(expenses_list):
@@ -313,7 +445,6 @@ def plot_expenses(categories, amounts, title):
         )
 
         # In biểu đồ 
-        print("\n" + bar_chart)
         table = Table(title="Danh sách chi tiêu")
         table.add_column("Danh mục", style="cyan", no_wrap=True)
         table.add_column("Số tiền (VNĐ)", style="magenta")
@@ -364,7 +495,7 @@ def plot_expenses(categories, amounts, title):
         print(f"Error generating charts: {e}")
 
 # Thêm chi tiêu 
-def add_expense():
+def add_expense(amount, category):
     while True:
         questions = [
             inquirer.List(
@@ -387,7 +518,7 @@ def add_expense():
                     choices=categories[answers['main_category']] + ["Bỏ qua"],
                 ),
                 inquirer.Text('description', message="Mô tả chi tiêu (có thể bỏ qua)", default=""),
-                inquirer.Text('amount', message="Số tiền (VNĐ, có thể bỏ qua)", default="0", validate=lambda _, x: x.isdigit()),
+                inquirer.Text('amount', message="Số tiền (VNĐ, có thể bỏ qua)", default=str(amount), validate=lambda _, x: x.isdigit() or x == ""),
                 inquirer.Text('quantity', message="Số lượng (có thể bỏ qua)", default="1", validate=lambda _, x: x.isdigit())
             ]
             
@@ -430,6 +561,13 @@ def add_expense():
                     expenses[user] = {}
                 if date not in expenses[user]:
                     expenses[user][date] = []
+
+                # Trừ tiền từ tiết kiệm
+                if total_amount <= get_savings_balance():
+                    add_expense_from_savings(total_amount, sub_answers['subcategory'])
+                else:
+                    print(Fore.RED + "Số tiền chi tiêu vượt quá số dư tiết kiệm hiện có!" + Style.RESET_ALL)
+                    return
 
                 expense_id = str(uuid.uuid4())  # Tạo ID duy nhất cho mỗi chi tiêu
 
@@ -610,9 +748,9 @@ def plot_weekly_comparison(num_weeks=4):
         
         # Đổi màu tuần hiện tại trong biểu đồ
         if week_label.strip("[/bold red]") == current_week_label.strip("[/bold red]"):
-            bar_chart += f"[bold red]{week_label.ljust(max_label_length)} | {'█' * bar_length} {value:,.0f}[/bold red]\n"
+            bar_chart += f"[bold red]{week_label.ljust(max_label_length)} | {'█' * bar_length} {value:,.0f} VNĐ[/bold red]\n"
         else:
-            bar_chart += f"{week_label.ljust(max_label_length)} | {'[yellow]' + '█' * bar_length + '[/]'} {value:,.0f}\n"
+            bar_chart += f"{week_label.ljust(max_label_length)} | {'[yellow]' + '█' * bar_length + '[/]'} {value:,.0f} VNĐ\n"
 
     # Hiển thị biểu đồ cột
     console.print(Panel(bar_chart, title="Biểu đồ cột chi tiêu", title_align="left"))
@@ -630,7 +768,6 @@ def plot_weekly_comparison(num_weeks=4):
     note = "Ghi chú: Biểu đồ và bảng chi tiết cho chi tiêu mỗi tuần trong 4 tuần gần đây."
     console.print(f"\n[note] {note}")
 
-    
 def calculate_monthly_totals(num_months=12):
     today = datetime.now().date()
     monthly_totals = []
@@ -668,7 +805,7 @@ def plot_monthly_comparison(num_months=12):
 
     for month, total in zip(month_labels, monthly_totals):
         if month == current_month:
-            table.add_row(f"[bold yellow]{month}[/bold yellow]", f"[bold yellow]{total:,.0f}[/bold yellow]")
+            table.add_row(f"[bold yellow]{month}[/bold yellow]", f"[bold yellow]{total:,.0f} VNĐ[/bold yellow]")
         else:
             table.add_row(month, f"{total:,.0f}")
 
@@ -688,7 +825,7 @@ def plot_monthly_comparison(num_months=12):
         bar_length = int((value / max_value) * 40)  # Quy định chiều dài cột
 
         if month == current_month:
-            bar_chart += f"[bold yellow]{month.ljust(max_label_length)}[/bold yellow] | [bold yellow]{'█' * bar_length}[/bold yellow] [bold yellow]{value:,.0f}[/bold yellow]\n"
+            bar_chart += f"[bold yellow]{month.ljust(max_label_length)}[/bold yellow] | [bold yellow]{'█' * bar_length}[/bold yellow] [bold yellow]{value:,.0f} VNĐ[/bold yellow]\n"
         else:
             bar_chart += f"{month.ljust(max_label_length)} | {'█' * bar_length} {value:,.0f}\n"
     
@@ -768,9 +905,10 @@ def yearly_expenses_by_day(year):
         print(f"Không có chi tiêu nào trong năm {year}.")
         return
 
-    table = Table(title=f'Chi tiêu hàng ngày trong năm {year}', title_style="bold blue")
-    table.add_column("Ngày", style="bold green")
-    table.add_column("Chi tiêu (VNĐ)", style="bold magenta")
+    # Apply color to the table title
+    table = Table(title=f'[bold blue]Chi tiêu hàng ngày trong năm {year}[/bold blue]', title_style="bold blue")
+    table.add_column("[bold green]Ngày[/bold green]", style="bold green")
+    table.add_column("[bold magenta]Chi tiêu (VNĐ)[/bold magenta]", style="bold magenta")
 
     for date, amount in zip(dates, amounts):
         table.add_row(date, f"{amount:,.0f}")
@@ -788,18 +926,20 @@ def yearly_expenses_by_day(year):
     if max_value > 0:
         for date in dates:
             value = plot_data[date]
-            bar_length = int((value / max_value) * 40)
-            bar_chart += f"{date.ljust(max_label_length)} | {'█' * bar_length} {value:,.0f}\n"
+            bar_length = int((value / max_value) * 50)
+            bar_chart += f"{date.ljust(max_label_length)} | [bold {color}]{'█' * bar_length}[/bold {color}] {value:,.0f} VNĐ\n"
     else:
         bar_chart = "Không có dữ liệu chi tiêu để hiển thị."
 
     # Sử dụng màu sắc cho biểu đồ
-    bar_chart_colored = Text.from_markup(f"[{color}] {bar_chart}[/]", style="bold")
+    bar_chart_colored = Text.from_markup(bar_chart)
 
-    console.print(Panel(bar_chart_colored, title=f"Biểu đồ cột chi tiêu hàng ngày {year}", title_align="left"))
+    # Apply color to the panel title
+    console.print(Panel(bar_chart_colored, title=f"[bold cyan]Biểu đồ cột chi tiêu hàng ngày {year}[/bold cyan]", title_align="left"))
 
     note = f"Ghi chú: Biểu đồ thể hiện tổng chi tiêu hàng ngày trong năm {year}."
-    console.print(f"\n[note] {note}")
+    console.print(f"\n[italic yellow]{note}[/italic yellow]")
+
 
 def compare_years_expenses(year=None):
     if year is None:
@@ -907,6 +1047,7 @@ def yearly_expenses(year=None):
 
 
 
+# Tính toán trong kinh doanh
 def add_product():
     menu = load_menu()
 
@@ -935,8 +1076,6 @@ def add_product():
 
     save_menu(menu)
     print(f"Đã thêm sản phẩm: {product_name} với giá {product_price:,} VNĐ vào menu.")
-
-
 # Add stock to existing products
 def add_stock():
     menu = load_menu()
@@ -960,7 +1099,6 @@ def add_stock():
 
     save_menu(menu)
     print(f"Đã thêm {quantity} vào số lượng của {product_name}. Số lượng hiện tại: {menu[product_name]['stock']}")
-
 # View the menu
 def view_menu():
     menu = load_menu()
@@ -987,7 +1125,6 @@ def view_menu():
 
     # Hiển thị bảng với tabulate
     print(tabulate(table, headers=headers, tablefmt='rounded_outline'))
-
 # Record a sale
 def record_sale():
     menu = load_menu()
@@ -1036,7 +1173,6 @@ def record_sale():
         'amount': total_sale
     })
     print(f"Đã ghi nhận doanh thu vào chi tiêu ngày {date_str}.")
-
 def calculate_sales_last_4_weeks():
     today = datetime.now().date()
     sales_last_4_weeks = []
@@ -1072,8 +1208,6 @@ def calculate_sales_last_4_weeks():
     sales_details = dict(reversed(list(sales_details.items())))
 
     return sales_last_4_weeks, sales_details
-
-
 def find_best_selling_product(sales_details):
     product_sales_count = {}
 
@@ -1087,8 +1221,6 @@ def find_best_selling_product(sales_details):
 
     best_selling_product = max(product_sales_count, key=product_sales_count.get)
     return best_selling_product, product_sales_count[best_selling_product]
-
-
 def view_sales_statistics():
     sales_last_4_weeks, sales_details = calculate_sales_last_4_weeks()
 
