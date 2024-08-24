@@ -362,7 +362,7 @@ def display_savings_book():
         total_amount += details['amount']
 
     # In bảng ra với màu sắc
-    print(Fore.GREEN + tabulate(table_data, headers=headers, tablefmt="fancy_grid") + Style.RESET_ALL)
+    print(Fore.GREEN + tabulate(table_data, headers=headers, tablefmt="rounded_outline") + Style.RESET_ALL)
     
     # In tổng số tiền
     print(Fore.YELLOW + f"Tổng tiền tiết kiệm: {total_amount:,} VNĐ" + Style.RESET_ALL)
@@ -433,10 +433,10 @@ def plot_expenses(categories, amounts, title):
     # Vẽ biểu đồ dạng bar chart
     try:
         # Tạo biểu đồ cột nằm nghiên
-        bar_chart = termcharts.bar(
-            dict(zip(sorted_categories, sorted_amounts)),
-            title=title,
-        )  
+        # bar_chart = termcharts.bar(
+        #     dict(zip(sorted_categories, sorted_amounts)),
+        #     title=title,
+        # )  
         
         # Biểu đồ pie chart
         pie_chart = termcharts.pie(
@@ -495,7 +495,7 @@ def plot_expenses(categories, amounts, title):
         print(f"Error generating charts: {e}")
 
 # Thêm chi tiêu 
-def add_expense(amount, category):
+def add_expense():
     while True:
         questions = [
             inquirer.List(
@@ -505,10 +505,11 @@ def add_expense(amount, category):
             ),
         ]
         answers = inquirer.prompt(questions)
-
+        
         if answers['main_category'] == "Bỏ qua":
             print("Đã hủy thêm chi tiêu.")
             return
+
 
         while True:
             sub_questions = [
@@ -517,16 +518,17 @@ def add_expense(amount, category):
                     message="Chọn chi tiêu cụ thể:",
                     choices=categories[answers['main_category']] + ["Bỏ qua"],
                 ),
-                inquirer.Text('description', message="Mô tả chi tiêu (có thể bỏ qua)", default=""),
-                inquirer.Text('amount', message="Số tiền (VNĐ, có thể bỏ qua)", default=str(amount), validate=lambda _, x: x.isdigit() or x == ""),
-                inquirer.Text('quantity', message="Số lượng (có thể bỏ qua)", default="1", validate=lambda _, x: x.isdigit())
+                   
+                inquirer.Text('description', message="Mô tả chi tiêu", default=""),
+                inquirer.Text('amount', message="Số tiền (VNĐ)", default="", validate=lambda _, x: x.isdigit() or x == ""),
+                inquirer.Text('quantity', message="Số lượng", default="1", validate=lambda _, x: x.isdigit())
             ]
             
             sub_answers = inquirer.prompt(sub_questions)
-
-            if sub_answers['subcategory'] == "Bỏ qua" or sub_answers['amount'] == "0":
+            if sub_answers['subcategory'] == "Bỏ qua":
                 print("Đã hủy thêm chi tiêu.")
                 return
+           
 
             # Tính toán tổng tiền
             total_amount = int(sub_answers['amount']) * int(sub_answers['quantity'])
@@ -561,13 +563,6 @@ def add_expense(amount, category):
                     expenses[user] = {}
                 if date not in expenses[user]:
                     expenses[user][date] = []
-
-                # Trừ tiền từ tiết kiệm
-                if total_amount <= get_savings_balance():
-                    add_expense_from_savings(total_amount, sub_answers['subcategory'])
-                else:
-                    print(Fore.RED + "Số tiền chi tiêu vượt quá số dư tiết kiệm hiện có!" + Style.RESET_ALL)
-                    return
 
                 expense_id = str(uuid.uuid4())  # Tạo ID duy nhất cho mỗi chi tiêu
 
