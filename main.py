@@ -107,13 +107,12 @@ def main_menu():
     while True:
         # Menu chính để chọn nhóm chức năng
         main_choices = [
-            "Kinh doanh",
-            "Kiểm soát chi tiêu",
-            "Xem giá vàng",
-            "Thêm tiền tiết kiệm",
-            "Sử dụng tiền tiết kiệm",
-            "Dự báo thời tiết",
-            "Thoát"
+            "💲 Kinh doanh",
+            "💵 Kiểm soát chi tiêu",
+            #🪙 "Giá vàng",
+            "👛 Tiết kiệm",
+            #☁️ "Thời tiết",
+            "❌ Thoát"
         ]
 
         main_questions = [
@@ -126,16 +125,13 @@ def main_menu():
 
         main_answer = inquirer.prompt(main_questions)
 
-        if main_answer['main_choice'] == "Kinh doanh":
+        if main_answer['main_choice'] == "💲 Kinh doanh":
             business_menu()
-        elif main_answer['main_choice'] == "Kiểm soát chi tiêu":
+        elif main_answer['main_choice'] == "💵 Kiểm soát chi tiêu":
             expense_menu()
-        elif main_answer['main_choice'] == "Thêm tiền tiết kiệm":
-            amount = int(input("Nhập số tiền tiết kiệm (VNĐ): "))
-            add_savings(amount)
-        elif main_answer['main_choice'] == "Sử dụng tiền tiết kiệm":
-            apply_savings()
-        elif main_answer['main_choice'] == "Thoát":
+        elif main_answer['main_choice'] == "👛 Tiết kiệm":
+            savings_menu()  
+        elif main_answer['main_choice'] == "❌ Thoát":
             print(end_line)
             print(10*'=' + " | Cảm ơn bạn đã sử dụng chương trình! | " + 10*'=')
             print(end_line + '\n')
@@ -144,12 +140,12 @@ def main_menu():
 def business_menu():
     while True:
         business_choices = [
-            "Thêm sản phẩm vào menu",
-            "Thêm số lượng sản phẩm",
-            "Xem menu sản phẩm",
-            "Ghi nhận bán hàng",
-            "Thống kê doanh thu",
-            "Quay lại"
+            "➕ Thêm sản phẩm vào menu",
+            "➕ Thêm số lượng sản phẩm",
+            "👁️ Xem menu sản phẩm",
+            "📝 Ghi nhận bán hàng",
+            "📈 Thống kê doanh thu",
+            "🔙 Quay lại"
         ]
 
         business_questions = [
@@ -162,32 +158,62 @@ def business_menu():
 
         business_answer = inquirer.prompt(business_questions)
 
-        if business_answer['choice'] == "Thêm sản phẩm vào menu":
+        if business_answer['choice'] == "➕ Thêm sản phẩm vào menu":
             print(40*'=*=')
             add_product()
-        elif business_answer['choice'] == "Thêm số lượng sản phẩm":
+        elif business_answer['choice'] == "➕ Thêm số lượng sản phẩm":
             print(40*'=*=')
             add_stock()
-        elif business_answer['choice'] == "Xem menu sản phẩm":
+        elif business_answer['choice'] == "👁️ Xem menu sản phẩm":
             print(40*'=*=')
             view_menu()
-        elif business_answer['choice'] == "Ghi nhận bán hàng":
+        elif business_answer['choice'] == "📝 Ghi nhận bán hàng":
             print(40*'=*=')
             record_sale()
-        elif business_answer['choice'] == "Thống kê doanh thu":
+        elif business_answer['choice'] == "📈 Thống kê doanh thu":
             print(40*'=*=')
             view_sales_statistics()
-        elif business_answer['choice'] == "Quay lại":
+        elif business_answer['choice'] == "🔙 Quay lại":
             break
+
+def savings_menu():
+    while True:
+        savings_choices = [
+            "➕ Thêm tiền tiết kiệm",
+            "💲Sử dụng tiền tiết kiệm",
+            "👁️ Xem tổng tiền tiết kiệm",
+            "🔙 Quay lại"
+        ]
+
+        savings_questions = [
+            inquirer.List(
+                'savings_choice',
+                message=5*'*' + " Chọn chức năng bạn muốn thực hiện " + 5*'*',
+                choices=savings_choices,
+            )
+        ]
+
+        savings_answer = inquirer.prompt(savings_questions)
+
+        if savings_answer['savings_choice'] == "➕ Thêm tiền tiết kiệm":
+            amount = int(input("Nhập số tiền tiết kiệm (VNĐ): "))
+            add_savings(amount)
+        elif savings_answer['savings_choice'] == "💲 Sử dụng tiền tiết kiệm":
+            apply_savings()
+        elif savings_answer['savings_choice'] == "👁️ Xem tổng tiền tiết kiệm":
+            display_savings_book()
+        elif savings_answer['savings_choice'] == "🔙 Quay lại":
+            break
+
 
 def expense_menu():
     while True:
         expense_choices = [
-            "Thêm chi tiêu",
-            "Xem chi tiêu tuần này",
-            "Xem chi tiêu tháng này",
-            "Xem chi tiêu năm này",
-            "Quay lại"
+            "➕ Thêm chi tiêu",
+            "👁️ Xem chi tiêu tuần này",
+            "👁️ Xem chi tiêu tháng này",
+            "👁️ Xem chi tiêu năm này",
+            "🔙 Quay lại"
         ]
 
         expense_questions = [
@@ -200,20 +226,21 @@ def expense_menu():
 
         expense_answer = inquirer.prompt(expense_questions)
 
-        if expense_answer['choice'] == "Thêm chi tiêu":
+        if expense_answer['choice'] == "➕ Thêm chi tiêu":
             print(40*'=*=')
             add_expense()
-        elif expense_answer['choice'] == "Xem chi tiêu tuần này":
+        elif expense_answer['choice'] == "👁️ Xem chi tiêu tuần này":
             print(40*'=*=')
             weekly_expenses()
-        elif expense_answer['choice'] == "Xem chi tiêu tháng này":
+        elif expense_answer['choice'] == "👁️ Xem chi tiêu tháng này":
             print(40*'=*=')
             monthly_expenses()
-        elif expense_answer['choice'] == "Xem chi tiêu năm này":
+        elif expense_answer['choice'] == "👁️ Xem chi tiêu năm này":
             print(40*'=*=')
             yearly_expenses()
-        elif expense_answer['choice'] == "Quay lại":
+        elif expense_answer['choice'] == "🔙 Quay lại":
             break
+
 
 # Menu categories
 categories = {
@@ -306,7 +333,6 @@ def update_savings_balance(amount_spent):
     else:
         print(Fore.RED + "Không có số dư tiết kiệm cho ngày hôm nay!" + Style.RESET_ALL)
 
-
 def add_expense_from_savings(amount, category):
     savings_balance = get_savings_balance()
     
@@ -338,7 +364,6 @@ def add_expense_from_savings(amount, category):
             add_savings(amount)
             break
 
-
 def display_savings_book():
     if not savings:
         print(Fore.RED + "Không có dữ liệu tiết kiệm để hiển thị." + Style.RESET_ALL)
@@ -367,8 +392,6 @@ def display_savings_book():
     # In tổng số tiền
     print(Fore.YELLOW + f"Tổng tiền tiết kiệm: {total_amount:,} VNĐ" + Style.RESET_ALL)
 
-# Gọi hàm để hiển thị sổ tiết kiệm và tổng tiền
-display_savings_book()
 
 # Function to format expenses table
 def format_expenses_table(expenses_list):
@@ -376,12 +399,12 @@ def format_expenses_table(expenses_list):
         return "Không có chi tiêu nào trong khoảng thời gian này."
 
     # Tiêu đề từng hàng
-    headers = ["Ngày", "Thứ trong tuần", "Danh mục", "Mô tả", "Đơn giá (VNĐ)", "Số lượng", "Số tiền (VNĐ)"]
+    headers = ["STT", "Ngày", "Thứ trong tuần", "Danh mục", "Mô tả", "Đơn giá (VNĐ)", "Số lượng", "Số tiền (VNĐ)"]
     table = []
 
     # Chi tiết danh sách từng hàng
     total_expense = 0
-    for expense in expenses_list:
+    for idx, expense in enumerate(expenses_list, start=1):
         date = expense['date']
         date_obj = datetime.strptime(date, "%Y-%m-%d")
         weekday_name = date_obj.strftime('%A')  # Lấy tên ngày trong tuần (ví dụ: Monday)
@@ -395,17 +418,19 @@ def format_expenses_table(expenses_list):
         unit_price = amount / quantity  # Tính giá gốc
         total_expense += amount
         
-        table.append([date, weekday_vn, category, description, f"{unit_price:,.0f}", quantity, f"{amount:,.0f}"])
+        table.append([idx, date, weekday_vn, category, description, f"{unit_price:,.0f}", quantity, f"{amount:,.0f}"])
     
-    table.append(["Tổng chi tiêu", "****", "****", "****", "****", "****", f"{total_expense:,} VNĐ"])
+    table.append(["", "Tổng chi tiêu", "****", "****", "****", "****", "****", f"{total_expense:,} VNĐ"])
     
     table_str = tabulate(table, headers=headers, tablefmt='rounded_outline')
 
     # Áp dụng màu sắc
     table_str_colored = table_str.replace(
+        'STT', Fore.LIGHTMAGENTA_EX + 'STT' + Style.RESET_ALL
+    ).replace(
         'Ngày', Fore.MAGENTA + 'Ngày' + Style.RESET_ALL
     ).replace(
-        'Thứ trong tuần', Fore.BLUE  + 'Thứ trong tuần' + Style.RESET_ALL
+        'Thứ trong tuần', Fore.BLUE + 'Thứ trong tuần' + Style.RESET_ALL
     ).replace(
         'Danh mục', Fore.CYAN + 'Danh mục' + Style.RESET_ALL
     ).replace(
