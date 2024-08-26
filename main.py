@@ -637,16 +637,17 @@ def weekly_expenses():
     categories = []
     amounts = []
 
-    # Chuẩn bị dữ liệu để so sánh với tuần trước
+    # Prepare data to compare with the previous week
     last_week_start = start_of_week - timedelta(days=7)
     last_week_end = end_of_week - timedelta(days=7)
     last_week_expenses = {}
+    total_last_week = 0
 
     for user_expenses in expenses.values():
         for date_str, items in user_expenses.items():
             date_obj = datetime.strptime(date_str, "%Y-%m-%d").date()
 
-            # Tính toán chi tiêu trong tuần hiện tại
+            # Calculate expenses for the current week
             if start_of_week <= date_obj <= today:
                 day_index = (date_obj - start_of_week).days  # Calculate the day index (0 for Monday, 6 for Sunday)
                 for item in items:
@@ -666,9 +667,10 @@ def weekly_expenses():
                         index = categories.index(item['category'])
                         amounts[index] += item['amount']
 
-            # Tính toán chi tiêu trong tuần trước
+            # Calculate expenses for the previous week
             if last_week_start <= date_obj <= last_week_end:
                 for item in items:
+                    total_last_week += item['amount']  # Add to the total for last week
                     if item['category'] not in last_week_expenses:
                         last_week_expenses[item['category']] = item['amount']
                     else:
@@ -686,11 +688,22 @@ def weekly_expenses():
     else:
         print("Không có chi tiêu nào trong tuần này.")
     
-    # Calculate the average daily spending
-    days_in_week = (today - start_of_week).days + 1  # Total number of days in this week (including today)
+    # Tính số chi tiêu trong bình hằng ngày trong tuấn
+    days_in_week = (today - start_of_week).days + 1  # tổng ngày trong tuần (including today)
     average_daily_spending = total_weekly / days_in_week
-    print(f"Tổng chi tiêu tuần: {total_weekly:,} VNĐ")
-    print(f"Chi tiêu trung bình mỗi ngày trong tuần: {average_daily_spending:,.0f} VNĐ\n")
+    print(f"Tổng chi tiêu tuần này: {total_weekly:,} VNĐ")
+    print(Fore.LIGHTMAGENTA_EX + f"Chi tiêu trung bình mỗi ngày trong tuần: {average_daily_spending:,.0f} VNĐ\n") 
+
+    # So sánh chi tiêu tuần trước
+    difference = total_weekly - total_last_week
+    if difference > 0:
+        print(Fore.RED + f"Bạn đã chi tiêu nhiều hơn tuần trước {difference:,} VNĐ.")
+    elif difference < 0:
+        print(Fore.GREEN + f"Bạn đã chi tiêu ít hơn tuần trước {abs(difference):,} VNĐ.")
+    else:
+        print(Fore.BLUE + "Chi tiêu tuần này không đổi so với tuần trước.")
+
+    print(Fore.YELLOW + f"Tổng chi tiêu tuần trước: {total_last_week:,} VNĐ\n")
 
 def calculate_weekly_totals(num_weeks=4):
     today = datetime.now().date()
@@ -722,7 +735,6 @@ def calculate_weekly_totals(num_weeks=4):
         week_labels.append(week_label)
 
     return weekly_totals[::-1], week_labels[::-1]  # Đảo ngược để tuần gần nhất lên đầu
-
 def plot_weekly_comparison(num_weeks=4):
     weekly_totals, week_labels = calculate_weekly_totals(num_weeks)
     weekly_expenses = {label: [] for label in week_labels}
@@ -817,7 +829,6 @@ def calculate_monthly_totals(num_months=12):
         month_labels.append(start_of_month.strftime('%m/%Y'))
 
     return monthly_totals[::-1], month_labels[::-1]  # Đảo ngược để tháng gần nhất lên đầu
-
 def plot_monthly_comparison(num_months=12):
     monthly_totals, month_labels = calculate_monthly_totals(num_months)
     
@@ -872,11 +883,22 @@ def monthly_expenses():
     categories = []
     amounts = []
 
-    days_in_month = today.day  # Number of days in the current month up to today
+    # Determine the number of days in the current month up to today
+    days_in_month = today.day
+
+    # Calculate start and end dates for the previous month
+    first_day_this_month = today.replace(day=1)
+    last_day_previous_month = first_day_this_month - timedelta(days=1)
+    first_day_previous_month = last_day_previous_month.replace(day=1)
+
+    total_last_month = 0
+    last_month_expenses = {}
 
     for user_expenses in expenses.values():
         for date_str, items in user_expenses.items():
             date_obj = datetime.strptime(date_str, "%Y-%m-%d").date()
+
+            # Calculate expenses for the current month
             if date_obj.year == today.year and date_obj.month == today.month:
                 if date_obj <= today:  # Include up to today's date
                     for item in items:
@@ -895,8 +917,17 @@ def monthly_expenses():
                             index = categories.index(item['category'])
                             amounts[index] += item['amount']
 
+            # Calculate expenses for the previous month
+            if first_day_previous_month <= date_obj <= last_day_previous_month:
+                for item in items:
+                    total_last_month += item['amount']
+                    if item['category'] not in last_month_expenses:
+                        last_month_expenses[item['category']] = item['amount']
+                    else:
+                        last_month_expenses[item['category']] += item['amount']
+
     print(f"Chi tiêu tháng {today.strftime('%m/%Y')}:")
-    
+
     if monthly_expenses_list:
         print(format_expenses_table(monthly_expenses_list))
         plot_expenses(categories, amounts, 'Chi tiêu trong tháng')
@@ -904,11 +935,21 @@ def monthly_expenses():
     else:
         print("Không có chi tiêu nào trong tháng này.")
     
-    # Calculate the average daily spending
+    # Tính chi tiêu trung bình một ngày trong 1 tháng
     average_daily_spending = total_monthly / days_in_month
-    print(f"Tổng chi tiêu tháng: {total_monthly:,} VNĐ")
-    print(f"Chi tiêu trung bình mỗi ngày trong tháng: {average_daily_spending:,.0f} VNĐ\n")
+    print(f"Tổng chi tiêu tháng này: {total_monthly:,} VNĐ")
+    print(Fore.LIGHTMAGENTA_EX + f"Chi tiêu trung bình mỗi ngày trong tháng: {average_daily_spending:,.0f} VNĐ\n")
 
+    # So sánh chi tiêu tháng trước và tháng hiện tại
+    difference = total_monthly - total_last_month
+    if difference > 0:
+        print(Fore.RED + f"Bạn đã chi tiêu nhiều hơn tháng trước {difference:,} VNĐ.")
+    elif difference < 0:
+        print(Fore.GREEN + f"Bạn đã chi tiêu ít hơn tháng trước {abs(difference):,} VNĐ.")
+    else:
+        print(Fore.BLUE + "Chi tiêu tháng này không đổi so với tháng trước.")
+
+    print(Fore.CYAN + f"Tổng chi tiêu tháng trước: {total_last_month:,} VNĐ\n")
 
 # =================================================================
 def yearly_expenses_by_day(year):
@@ -1050,9 +1091,16 @@ def yearly_expenses(year=None):
     # Determine the number of days in the year up to today
     days_in_year = (today - datetime(year, 1, 1).date()).days + 1
 
+    # Calculate start and end dates for the previous year
+    last_year = year - 1
+    total_last_year = 0
+    last_year_expenses = {}
+
     for user_expenses in expenses.values():
         for date_str, items in user_expenses.items():
             date_obj = datetime.strptime(date_str, "%Y-%m-%d").date()
+
+            # Calculate expenses for the current year
             if date_obj.year == year:
                 if date_obj <= today:  # Include up to today's date
                     for item in items:
@@ -1071,20 +1119,38 @@ def yearly_expenses(year=None):
                             index = categories.index(item['category'])
                             amounts[index] += item['amount']
 
+            # Tính chi tiêu năm trước
+            if date_obj.year == last_year:
+                for item in items:
+                    total_last_year += item['amount']
+                    if item['category'] not in last_year_expenses:
+                        last_year_expenses[item['category']] = item['amount']
+                    else:
+                        last_year_expenses[item['category']] += item['amount']
+
     print(f"Chi tiêu trong năm {year}:")
 
     if yearly_expenses_list:
         print(format_expenses_table(yearly_expenses_list))
         plot_expenses(categories, amounts, f'Chi tiêu trong năm {year}')
-        compare_years_expenses()
     else:
         print(f"Không có chi tiêu nào trong năm {year}.")
-    
-    # Calculate the average daily spending
+
+    # Tính trung bình chi tiêu một ngày trong năm
     average_daily_spending = total_yearly / days_in_year
     print(f"Tổng chi tiêu năm: {total_yearly:,} VNĐ")
-    print(f"Chi tiêu trung bình mỗi ngày trong năm: {average_daily_spending:,.0f} VNĐ\n")
+    print(Fore.LIGHTMAGENTA_EX + f"Chi tiêu trung bình mỗi ngày trong năm: {average_daily_spending:,.0f} VNĐ\n")
 
+    # So sánh chi tiêu năm trước với năm hiện tại
+    difference = total_yearly - total_last_year
+    if difference > 0:
+        print(Fore.RED + f"Bạn đã chi tiêu nhiều hơn năm trước {difference:,} VNĐ.")
+    elif difference < 0:
+        print(Fore.GREEN + f"Bạn đã chi tiêu ít hơn năm trước {abs(difference):,} VNĐ.")
+    else:
+        print(Fore.GREEN + "Chi tiêu năm này không đổi so với năm trước.")
+
+    print(Fore.CYAN + f"Tổng chi tiêu năm trước: {total_last_year:,} VNĐ\n")
 
 
 # Tính toán trong kinh doanh
