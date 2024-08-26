@@ -632,6 +632,7 @@ def weekly_expenses():
     end_of_week = start_of_week + timedelta(days=6)  # Sunday
 
     total_weekly = 0
+    daily_spendings = [0] * 7  # Create a list with 7 zeros to hold daily spending
     weekly_expenses_list = []
     categories = []
     amounts = []
@@ -647,8 +648,10 @@ def weekly_expenses():
 
             # Tính toán chi tiêu trong tuần hiện tại
             if start_of_week <= date_obj <= today:
+                day_index = (date_obj - start_of_week).days  # Calculate the day index (0 for Monday, 6 for Sunday)
                 for item in items:
                     total_weekly += item['amount']
+                    daily_spendings[day_index] += item['amount']  # Add amount to the correct day
                     weekly_expenses_list.append({
                         'date': date_str,
                         'category': item['category'],
@@ -682,8 +685,12 @@ def weekly_expenses():
         plot_weekly_comparison(4)
     else:
         print("Không có chi tiêu nào trong tuần này.")
-    print(f"Tổng chi tiêu tuần: {total_weekly:,} VNĐ\n")
-
+    
+    # Calculate the average daily spending
+    days_in_week = (today - start_of_week).days + 1  # Total number of days in this week (including today)
+    average_daily_spending = total_weekly / days_in_week
+    print(f"Tổng chi tiêu tuần: {total_weekly:,} VNĐ")
+    print(f"Chi tiêu trung bình mỗi ngày trong tuần: {average_daily_spending:,.0f} VNĐ\n")
 
 def calculate_weekly_totals(num_weeks=4):
     today = datetime.now().date()
@@ -865,6 +872,8 @@ def monthly_expenses():
     categories = []
     amounts = []
 
+    days_in_month = today.day  # Number of days in the current month up to today
+
     for user_expenses in expenses.values():
         for date_str, items in user_expenses.items():
             date_obj = datetime.strptime(date_str, "%Y-%m-%d").date()
@@ -894,7 +903,11 @@ def monthly_expenses():
         plot_monthly_comparison(12)
     else:
         print("Không có chi tiêu nào trong tháng này.")
-    print(f"Tổng chi tiêu tháng: {total_monthly:,} VNĐ\n")
+    
+    # Calculate the average daily spending
+    average_daily_spending = total_monthly / days_in_month
+    print(f"Tổng chi tiêu tháng: {total_monthly:,} VNĐ")
+    print(f"Chi tiêu trung bình mỗi ngày trong tháng: {average_daily_spending:,.0f} VNĐ\n")
 
 
 # =================================================================
@@ -1034,6 +1047,9 @@ def yearly_expenses(year=None):
     categories = []
     amounts = []
 
+    # Determine the number of days in the year up to today
+    days_in_year = (today - datetime(year, 1, 1).date()).days + 1
+
     for user_expenses in expenses.values():
         for date_str, items in user_expenses.items():
             date_obj = datetime.strptime(date_str, "%Y-%m-%d").date()
@@ -1056,14 +1072,18 @@ def yearly_expenses(year=None):
                             amounts[index] += item['amount']
 
     print(f"Chi tiêu trong năm {year}:")
-    
+
     if yearly_expenses_list:
         print(format_expenses_table(yearly_expenses_list))
         plot_expenses(categories, amounts, f'Chi tiêu trong năm {year}')
         compare_years_expenses()
     else:
         print(f"Không có chi tiêu nào trong năm {year}.")
-    print(f"Tổng chi tiêu năm: {total_yearly:,} VNĐ\n")
+    
+    # Calculate the average daily spending
+    average_daily_spending = total_yearly / days_in_year
+    print(f"Tổng chi tiêu năm: {total_yearly:,} VNĐ")
+    print(f"Chi tiêu trung bình mỗi ngày trong năm: {average_daily_spending:,.0f} VNĐ\n")
 
 
 
