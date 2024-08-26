@@ -883,10 +883,10 @@ def monthly_expenses():
     categories = []
     amounts = []
 
-    # Determine the number of days in the current month up to today
+    # Xác định số ngày trong tháng hiện tại tính đến hôm nay
     days_in_month = today.day
 
-    # Calculate start and end dates for the previous month
+    # Tính ngày bắt đầu và ngày kết thúc của tháng trước
     first_day_this_month = today.replace(day=1)
     last_day_previous_month = first_day_this_month - timedelta(days=1)
     first_day_previous_month = last_day_previous_month.replace(day=1)
@@ -898,9 +898,9 @@ def monthly_expenses():
         for date_str, items in user_expenses.items():
             date_obj = datetime.strptime(date_str, "%Y-%m-%d").date()
 
-            # Calculate expenses for the current month
+            # Tính chi tiêu cho tháng hiện tại
             if date_obj.year == today.year and date_obj.month == today.month:
-                if date_obj <= today:  # Include up to today's date
+                if date_obj <= today:  
                     for item in items:
                         total_monthly += item['amount']
                         monthly_expenses_list.append({
@@ -917,7 +917,7 @@ def monthly_expenses():
                             index = categories.index(item['category'])
                             amounts[index] += item['amount']
 
-            # Calculate expenses for the previous month
+            # Tính chi tiêu tháng trước
             if first_day_previous_month <= date_obj <= last_day_previous_month:
                 for item in items:
                     total_last_month += item['amount']
@@ -1014,7 +1014,6 @@ def yearly_expenses_by_day(year):
     note = f"Ghi chú: Biểu đồ thể hiện tổng chi tiêu hàng ngày trong năm {year}."
     console.print(f"\n[italic yellow]{note}[/italic yellow]")
 
-
 def compare_years_expenses(year=None):
     if year is None:
         year = datetime.now().year
@@ -1088,7 +1087,7 @@ def yearly_expenses(year=None):
     categories = []
     amounts = []
 
-    # Determine the number of days in the year up to today
+    # Xác định số ngày trong năm tính đến ngày hôm nay
     days_in_year = (today - datetime(year, 1, 1).date()).days + 1
 
     last_year = year - 1
@@ -1099,7 +1098,7 @@ def yearly_expenses(year=None):
         for date_str, items in user_expenses.items():
             date_obj = datetime.strptime(date_str, "%Y-%m-%d").date()
             if date_obj.year == year:
-                if date_obj <= today:  # Include up to today's date
+                if date_obj <= today:  
                     for item in items:
                         total_yearly += item['amount']
                         yearly_expenses_list.append({
@@ -1115,7 +1114,8 @@ def yearly_expenses(year=None):
                         else:
                             index = categories.index(item['category'])
                             amounts[index] += item['amount']
-            # Calculate expenses for the previous year
+
+            # Tính chi tiêu năm trước
             if date_obj.year == last_year:
                 for item in items:
                     total_last_year += item['amount']
@@ -1132,7 +1132,6 @@ def yearly_expenses(year=None):
     else:
         print(f"Không có chi tiêu nào trong năm {year}.")
     
- 
     # Tính trung bình chi tiêu một ngày trong năm
     average_daily_spending = total_yearly / days_in_year
     print(f"Tổng chi tiêu năm: {total_yearly:,} VNĐ")
