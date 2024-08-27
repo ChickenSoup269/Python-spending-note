@@ -140,12 +140,12 @@ def main_menu():
 def business_menu():
     while True:
         business_choices = [
-            "➕ Thêm sản phẩm vào menu",
-            "➕ Thêm số lượng sản phẩm",
-            "👁️ Xem menu sản phẩm",
-            "📝 Ghi nhận bán hàng",
-            "📈 Thống kê doanh thu",
-            "🔙 Quay lại"
+            "Thêm sản phẩm vào menu",
+            "Thêm số lượng sản phẩm",
+            "Xem menu sản phẩm",
+            "Ghi nhận bán hàng",
+            "Thống kê doanh thu",
+            "Quay lại"
         ]
 
         business_questions = [
@@ -158,31 +158,31 @@ def business_menu():
 
         business_answer = inquirer.prompt(business_questions)
 
-        if business_answer['choice'] == "➕ Thêm sản phẩm vào menu":
+        if business_answer['choice'] == "Thêm sản phẩm vào menu":
             print(40*'=*=')
             add_product()
-        elif business_answer['choice'] == "➕ Thêm số lượng sản phẩm":
+        elif business_answer['choice'] == "Thêm số lượng sản phẩm":
             print(40*'=*=')
             add_stock()
-        elif business_answer['choice'] == "👁️ Xem menu sản phẩm":
+        elif business_answer['choice'] == "Xem menu sản phẩm":
             print(40*'=*=')
             view_menu()
-        elif business_answer['choice'] == "📝 Ghi nhận bán hàng":
+        elif business_answer['choice'] == "Ghi nhận bán hàng":
             print(40*'=*=')
             record_sale()
-        elif business_answer['choice'] == "📈 Thống kê doanh thu":
+        elif business_answer['choice'] == "Thống kê doanh thu":
             print(40*'=*=')
             view_sales_statistics()
-        elif business_answer['choice'] == "🔙 Quay lại":
+        elif business_answer['choice'] == "Quay lại":
             break
 
 def savings_menu():
     while True:
         savings_choices = [
-            "➕ Thêm tiền tiết kiệm",
-            "💲Sử dụng tiền tiết kiệm",
-            "👁️ Xem tổng tiền tiết kiệm",
-            "🔙 Quay lại"
+            "Thêm tiền tiết kiệm",
+            "Sử dụng tiền tiết kiệm",
+            "Xem tổng tiền tiết kiệm",
+            "Quay lại"
         ]
 
         savings_questions = [
@@ -195,25 +195,25 @@ def savings_menu():
 
         savings_answer = inquirer.prompt(savings_questions)
 
-        if savings_answer['savings_choice'] == "➕ Thêm tiền tiết kiệm":
+        if savings_answer['savings_choice'] == "Thêm tiền tiết kiệm":
             amount = int(input("Nhập số tiền tiết kiệm (VNĐ): "))
             add_savings(amount)
-        elif savings_answer['savings_choice'] == "💲 Sử dụng tiền tiết kiệm":
+        elif savings_answer['savings_choice'] == "Sử dụng tiền tiết kiệm":
             apply_savings()
-        elif savings_answer['savings_choice'] == "👁️ Xem tổng tiền tiết kiệm":
+        elif savings_answer['savings_choice'] == "Xem tổng tiền tiết kiệm":
             display_savings_book()
-        elif savings_answer['savings_choice'] == "🔙 Quay lại":
+        elif savings_answer['savings_choice'] == "Quay lại":
             break
 
 
 def expense_menu():
     while True:
         expense_choices = [
-            "➕ Thêm chi tiêu",
-            "👁️ Xem chi tiêu tuần này",
-            "👁️ Xem chi tiêu tháng này",
-            "👁️ Xem chi tiêu năm này",
-            "🔙 Quay lại"
+            "Thêm chi tiêu",
+            "Xem chi tiêu tuần này",
+            "Xem chi tiêu tháng này",
+            "Xem chi tiêu năm này",
+            "Quay lại"
         ]
 
         expense_questions = [
@@ -226,19 +226,19 @@ def expense_menu():
 
         expense_answer = inquirer.prompt(expense_questions)
 
-        if expense_answer['choice'] == "➕ Thêm chi tiêu":
+        if expense_answer['choice'] == "Thêm chi tiêu":
             print(40*'=*=')
             add_expense()
-        elif expense_answer['choice'] == "👁️ Xem chi tiêu tuần này":
+        elif expense_answer['choice'] == "Xem chi tiêu tuần này":
             print(40*'=*=')
             weekly_expenses()
-        elif expense_answer['choice'] == "👁️ Xem chi tiêu tháng này":
+        elif expense_answer['choice'] == "Xem chi tiêu tháng này":
             print(40*'=*=')
             monthly_expenses()
-        elif expense_answer['choice'] == "👁️ Xem chi tiêu năm này":
+        elif expense_answer['choice'] == "Xem chi tiêu năm này":
             print(40*'=*=')
             yearly_expenses()
-        elif expense_answer['choice'] == "🔙 Quay lại":
+        elif expense_answer['choice'] == "Quay lại":
             break
 
 
@@ -982,10 +982,12 @@ def yearly_expenses_by_day(year):
     # Apply color to the table title
     table = Table(title=f'[bold blue]Chi tiêu hàng ngày trong năm {year}[/bold blue]', title_style="bold blue")
     table.add_column("[bold green]Ngày[/bold green]", style="bold green")
+    table.add_column("[bold cyan]Thứ[/bold cyan]", style="bold cyan")
     table.add_column("[bold magenta]Chi tiêu (VNĐ)[/bold magenta]", style="bold magenta")
 
     for date, amount in zip(dates, amounts):
-        table.add_row(date, f"{amount:,.0f}")
+        day_name_vn = weekday_translation.get(datetime.strptime(date, "%Y-%m-%d").strftime('%A'), "")
+        table.add_row(date, day_name_vn, f"{amount:,.0f}")
 
     console.print(table)
 
@@ -993,15 +995,20 @@ def yearly_expenses_by_day(year):
     
     max_value = max(amounts) if amounts else 0
     bar_chart = ""
-    max_label_length = max(len(label) for label in dates)
-    
+    # Fix (ngày và thứ) có cùng độ dài
+    max_label_length = max(len(f"{date} ({weekday_translation[datetime.strptime(date, '%Y-%m-%d').strftime('%A')]})") for date in dates)
+
     color = "yellow"  # Chọn màu cho cột
 
     if max_value > 0:
         for date in dates:
+            date_obj = datetime.strptime(date, "%Y-%m-%d")
+            weekday_str = weekday_translation[date_obj.strftime('%A')]  # Lấy tên thứ trong tuần
+            label = f"{date} - {weekday_str}".ljust(max_label_length)  # Canh lề trái bằng cách thêm khoảng trắng
+
             value = plot_data[date]
             bar_length = int((value / max_value) * 50)
-            bar_chart += f"{date.ljust(max_label_length)} | [bold {color}]{'█' * bar_length}[/bold {color}] {value:,.0f} VNĐ\n"
+            bar_chart += f"{label} | [bold {color}]{'█' * bar_length}[/bold {color}] {value:,.0f} VNĐ\n"
     else:
         bar_chart = "Không có dữ liệu chi tiêu để hiển thị."
 
@@ -1012,7 +1019,7 @@ def yearly_expenses_by_day(year):
     console.print(Panel(bar_chart_colored, title=f"[bold cyan]Biểu đồ cột chi tiêu hàng ngày {year}[/bold cyan]", title_align="left"))
 
     note = f"Ghi chú: Biểu đồ thể hiện tổng chi tiêu hàng ngày trong năm {year}."
-    console.print(f"\n[italic yellow]{note}[/italic yellow]")
+    console.print(f"\n[italic yellow]{note}[/italic yellow]") 
 
 def compare_years_expenses(year=None):
     if year is None:
