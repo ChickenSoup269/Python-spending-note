@@ -9,6 +9,7 @@ import random #
 import termcharts.bar_chart
 from datetime import datetime, timedelta
 from tabulate import tabulate
+from collections import defaultdict
 from colorama import Fore, Back, Style, init
 # 
 from rich.console import Console
@@ -1517,33 +1518,34 @@ def view_sales_statistics():
         else:
             print("Không có sản phẩm nào được bán trong tuần này.")
 
-# Cho lời khuyên
+
+# Cho lời khuyên chi tiêu nếu không hợp lý thì sẽ thông báo
 def give_spending_advice(expenses):
-    # Tổng hợp chi tiêu theo từng loại
-    category_totals = {}
+    # Tổng hợp chi tiêu theo từng loại và từng tháng
+    monthly_category_totals = defaultdict(lambda: defaultdict(float))
+    
     for user, dates in expenses.items():
         for date, expense_list in dates.items():
+            year_month = datetime.strptime(date, '%Y-%m-%d').strftime('%Y-%m')  # Chỉ lấy năm và tháng
             for expense in expense_list:
                 category = expense['category']
                 amount = expense['amount']
-                if category not in category_totals:
-                    category_totals[category] = 0
-                category_totals[category] += amount
+                monthly_category_totals[year_month][category] += amount
 
     # Đưa ra lời khuyên dựa trên chi tiêu
     advice = []
 
-    # Giả sử các mức chi tiêu hợp lý (VNĐ)
+    # Giả sử các mức chi tiêu hợp lý (VNĐ) cho mỗi tháng
     reasonable_limits = {
         "Đi chợ siêu thị": 2000000,
         "Nhà hàng": 1000000,
-        "Chi trả hóa đơn": 3000000,
-        "Tiền nhà": 5000000,
+        "Chi trả hóa đơn": 1000000,
+        "Tiền nhà": 2000000,
         "Đi lại": 1000000,
         "Vui chơi giải trí": 500000,
-        "Mua sắm": 2000000,
+        "Mua sắm": 1000000,
         "Giáo dục": 2000000,
-        "Y tế": 1000000,
+        "Y tế": 1000000, # không xác định được
         "Bảo hiểm": 2000000,
         "Tiết kiệm": 0,  # Không có giới hạn, nên tiết kiệm càng nhiều càng tốt
         "Chứng khoán": 0,  # Không có giới hạn cụ thể
@@ -1554,20 +1556,21 @@ def give_spending_advice(expenses):
         "Dịch vụ công": 500000,
     }
 
-    for category, total in category_totals.items():
-        if category in reasonable_limits:
-            limit = reasonable_limits[category]
-            if total > limit and limit != 0:
-                advice.append(
-                    f"Chi tiêu cho {category} ({total:,} VNĐ) vượt mức hợp lý ({limit:,} VNĐ). Bạn nên cân nhắc giảm chi tiêu ở hạng mục này."
-                )
-            elif limit == 0 and total > 0:
-                advice.append(
-                    f"Bạn đã chi tiêu {total:,} VNĐ cho {category}. Hãy đảm bảo rằng các khoản chi này là cần thiết."
-                )
+    for year_month, category_totals in monthly_category_totals.items():
+        for category, total in category_totals.items():
+            if category in reasonable_limits:
+                limit = reasonable_limits[category]
+                if total > limit and limit != 0:
+                    advice.append(
+                        Fore.RED + f"Tháng {year_month} - Chi tiêu cho {category} ({total:,} VNĐ) vượt mức hợp lý ({limit:,} VNĐ). Bạn nên cân nhắc giảm chi tiêu ở hạng mục này."
+                    )
+                elif limit == 0 and total > 0:
+                    advice.append(
+                       Fore.YELLOW + f"Tháng {year_month} - Bạn đã chi tiêu {total:,} VNĐ cho {category}. Hãy đảm bảo rằng các khoản chi này là cần thiết."
+                    )
 
     if not advice:
-        advice.append("Chi tiêu của bạn trong các hạng mục hiện tại đang hợp lý. Tiếp tục duy trì!")
+        advice.append(Fore.GREEN + "Chi tiêu của bạn trong các hạng mục hiện tại đang hợp lý. Tiếp tục duy trì!")
 
     return advice
 
