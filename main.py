@@ -176,19 +176,21 @@ def business_menu():
         elif business_answer['choice'] == "Quay lại":
             break
 
+# Menu tiết kiệm
 def savings_menu():
     while True:
         savings_choices = [
             "Thêm tiền tiết kiệm",
             "Sử dụng tiền tiết kiệm",
             "Xem tổng tiền tiết kiệm",
+            "Cập nhật tiền tiết kiệm",
             "Quay lại"
         ]
 
         savings_questions = [
             inquirer.List(
                 'savings_choice',
-                message=5*'*' + " Chọn chức năng bạn muốn thực hiện " + 5*'*',
+                message=5 * '*' + " Chọn chức năng bạn muốn thực hiện " + 5 * '*',
                 choices=savings_choices,
             )
         ]
@@ -198,21 +200,25 @@ def savings_menu():
         if savings_answer['savings_choice'] == "Thêm tiền tiết kiệm":
             amount = int(input("Nhập số tiền tiết kiệm (VNĐ): "))
             add_savings(amount)
+
         elif savings_answer['savings_choice'] == "Sử dụng tiền tiết kiệm":
             apply_savings()
+
         elif savings_answer['savings_choice'] == "Xem tổng tiền tiết kiệm":
             display_savings_book()
+
+        elif savings_answer['savings_choice'] == "Cập nhật tiền tiết kiệm":
+            update_savings()
+
         elif savings_answer['savings_choice'] == "Quay lại":
             break
-
 
 def expense_menu():
     while True:
         expense_choices = [
             "Thêm chi tiêu",
-            "Xem chi tiêu tuần này",
-            "Xem chi tiêu tháng này",
-            "Xem chi tiêu năm này",
+            "Xem chi tiêu",
+            "Xem chi tiêu theo năm",
             "Xem chi tiêu theo danh mục",
             "Quay lại"
         ]
@@ -228,23 +234,54 @@ def expense_menu():
         expense_answer = inquirer.prompt(expense_questions)
 
         if expense_answer['choice'] == "Thêm chi tiêu":
-            print(40*'=*=')
+            print(40 * '=*=')
             add_expense()
-        elif expense_answer['choice'] == "Xem chi tiêu tuần này":
-            print(40*'=*=')
-            weekly_expenses()
-        elif expense_answer['choice'] == "Xem chi tiêu tháng này":
-            print(40*'=*=')
-            monthly_expenses()
-        elif expense_answer['choice'] == "Xem chi tiêu năm này":
-            print(40*'=*=')
-            yearly_expenses()
+        elif expense_answer['choice'] == "Xem chi tiêu":
+            print(40 * '=*=')
+            view_expenses_menu()
+        elif expense_answer['choice'] == "Xem chi tiêu theo năm":
+            print(40 * '=*=')
+            select_yearly_expenses()
         elif expense_answer['choice'] == "Xem chi tiêu theo danh mục":
-            print(40*'=*=')
+            print(40 * '=*=')
             view_expenses_by_category()
+
         elif expense_answer['choice'] == "Quay lại":
             break
 
+def view_expenses_menu():
+    while True:
+        view_expense_choices = [
+            "Xem chi tiêu tuần",
+            "Xem chi tiêu tháng",
+            "Xem chi tiêu năm",
+            "Quay lại"
+        ]
+
+        view_expense_questions = [
+            inquirer.List(
+                'choice',
+                message="Chọn khoảng thời gian bạn muốn xem chi tiêu",
+                choices=view_expense_choices,
+            )
+        ]
+
+        view_expense_answer = inquirer.prompt(view_expense_questions)
+
+        if view_expense_answer['choice'] == "Xem chi tiêu tuần":
+            print(40 * '=*=')
+            weekly_expenses()
+
+        elif view_expense_answer['choice'] == "Xem chi tiêu tháng":
+            print(40 * '=*=')
+            monthly_expenses()
+
+        elif view_expense_answer['choice'] == "Xem chi tiêu năm":
+            print(40 * '=*=')
+            yearly_expenses()
+
+        elif view_expense_answer['choice'] == "Quay lại":
+            break
 
 # Menu categories
 categories = {
@@ -301,6 +338,36 @@ def add_savings(amount):
     # Thông báo cho người dùng  
     print(display_savings_book())
     print(Fore.GREEN + f"Đã thêm tiết kiệm: {amount:,} VNĐ vào ngày {date} ({weekday_translation.get(weekday_name)}) \n" + Style.RESET_ALL)
+
+# Cập nhật tiền tiết kiệm
+def update_savings():
+    if not savings:
+        print(Fore.RED + "Không có tiền tiết kiệm nào để cập nhật." + Style.RESET_ALL)
+        return
+
+    # In danh sách các ngày có trong savings để người dùng chọn
+    dates = list(savings.keys())
+    date_question = [
+        inquirer.List(
+            'selected_date',
+            message="Chọn ngày bạn muốn cập nhật số tiền tiết kiệm:",
+            choices=dates,
+        )
+    ]
+
+    date_answer = inquirer.prompt(date_question)
+    selected_date = date_answer['selected_date']
+
+    # Lấy số tiền mới từ người dùng
+    new_amount = int(input(f"Nhập số tiền tiết kiệm mới cho ngày {selected_date} (VNĐ): "))
+
+    # Cập nhật số tiền tiết kiệm
+    savings[selected_date]["amount"] = new_amount
+
+    # Lưu lại thay đổi
+    save_expenses()
+
+    print(Fore.GREEN + f"Số tiền tiết kiệm cho ngày {selected_date} đã được cập nhật thành {new_amount:,} VNĐ." + Style.RESET_ALL)
 
 # Function to apply savings to current expenses
 def apply_savings():
@@ -396,7 +463,7 @@ def display_savings_book():
     # In tổng số tiền
     print(Fore.YELLOW + f"Tổng tiền tiết kiệm: {total_amount:,} VNĐ" + Style.RESET_ALL)
 
-# Function to format expenses table
+# In ra bảng chi tiêu tất cả các mục điều sử dụng bảng này
 def format_expenses_table(expenses_list):
     if not expenses_list:
         return "Không có chi tiêu nào trong khoảng thời gian này."
@@ -461,6 +528,7 @@ def list_categories_with_expenses():
                         categories.add(item['category'])
     return list(categories)
 
+# Tìm kiếm danh mục đã chi tiêu 
 def view_expenses_by_category():
     categories = list_categories_with_expenses()
     
@@ -506,6 +574,40 @@ def view_expenses_by_category():
     formatted_table = format_expenses_table(filtered_expenses)
     print(formatted_table)
 
+
+# Xem chi tiêu theo năm
+def select_yearly_expenses():
+    # Lấy danh sách các năm từ file JSON
+    years = set()
+    for user_expenses in expenses.values():
+        for date_str in user_expenses.keys():
+            year = datetime.strptime(date_str, "%Y-%m-%d").year
+            years.add(year)
+
+    if not years:
+        print("Không có chi tiêu nào trong file.")
+        return
+
+    years = sorted(years, reverse=True)  # Sắp xếp các năm theo thứ tự giảm dần
+
+    # Sử dụng Inquirer để người dùng chọn năm
+    year_choices = [str(year) for year in years] + ["Quay lại"]
+    year_question = [
+        inquirer.List(
+            'selected_year',
+            message="Chọn năm bạn muốn xem chi tiêu:",
+            choices=year_choices,
+        )
+    ]
+
+    year_answer = inquirer.prompt(year_question)
+    selected_year = year_answer['selected_year']
+
+    if selected_year == "Quay lại":
+        return
+
+    print(40 * '=*=')
+    yearly_expenses(int(selected_year))
     
 def plot_expenses(categories, amounts, title):
     # Tạo dữ liệu cho biểu đồ
