@@ -104,7 +104,9 @@ Here are some related projects
 ## Screenshots
 
 ![App Screenshot](https://github.com/ChickenSoup269/Python-spending-note/blob/main/screenShot/Screenshot%202024-08-30%20072147.png)
-![App Screenshot][(](https://github.com/ChickenSoup269/Python-spending-note/blob/main/screenShot/Screenshot%202024-08-30%20072159.png))
+ 
+![App Screenshot](https://github.com/ChickenSoup269/Python-spending-note/blob/main/screenShot/Screenshot%202024-08-30%20072159.png)
+ 
 ![App Screenshot](https://github.com/ChickenSoup269/Python-spending-note/blob/main/screenShot/Screenshot%202024-08-30%20072209.png) 
 
 
