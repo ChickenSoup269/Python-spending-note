@@ -65,11 +65,8 @@ pip install pyfiglet
 ## Các thư viện khác có sẵn trên python
 
 `uuid`
-
 `json`
-
 `datetime`
-
 `collections`
 
 ## Run Locally
