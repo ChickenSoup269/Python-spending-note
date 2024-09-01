@@ -90,6 +90,7 @@ Start the python project
 
 ```bash
   python main.py
+  or
   run in terminal on vs code
 ```
 
@@ -98,8 +99,14 @@ Start the python project
 Here are some related projects
 
 [termcharts](https://pypi.org/project/termcharts/)
+
 [rich](https://rich.readthedocs.io/en/stable/introduction.html)
+
 [tabulate](https://pypi.org/project/tabulate/)
+
+[colorama](https://pypi.org/project/colorama/)
+
+[pyfiglet](https://pypi.org/project/pyfiglet/) -> Font example : http://www.figlet.org/examples.html
 
 ## Screenshots
 
