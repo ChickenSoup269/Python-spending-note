@@ -91,19 +91,14 @@ Start the python project
   run in terminal on vs code
 ```
 
-## Related
+## Tài liệu cách sử dụng thư viện
 
-Here are some related projects
+[termcharts](https://pypi.org/project/termcharts/) |
+[rich](https://rich.readthedocs.io/en/stable/introduction.html) |
+[tabulate](https://pypi.org/project/tabulate/) |
+[colorama](https://pypi.org/project/colorama/) |
 
-[termcharts](https://pypi.org/project/termcharts/)
-
-[rich](https://rich.readthedocs.io/en/stable/introduction.html)
-
-[tabulate](https://pypi.org/project/tabulate/)
-
-[colorama](https://pypi.org/project/colorama/)
-
-[pyfiglet](https://pypi.org/project/pyfiglet/) -> Font example : http://www.figlet.org/examples.html
+[pyfiglet](https://pypi.org/project/pyfiglet/) ~ Font example : `http://www.figlet.org/examples.html`
 
 ## Screenshots
 
