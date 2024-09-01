@@ -97,8 +97,12 @@ Start the python project
 [rich](https://rich.readthedocs.io/en/stable/introduction.html) |
 [tabulate](https://pypi.org/project/tabulate/) |
 [colorama](https://pypi.org/project/colorama/) |
+[inquirer](https://python-inquirer.readthedocs.io/en/latest/installation.html) |
 
-[pyfiglet](https://pypi.org/project/pyfiglet/) ~ Font example : `http://www.figlet.org/examples.html`
+[pyfiglet](https://pypi.org/project/pyfiglet/) ~ Font example :  
+```bash
+http://www.figlet.org/examples.html
+``` 
 
 ## Screenshots
 
