@@ -56,12 +56,11 @@ pip install pyfiglet
 | :--------- | :------------------------------------------- |
 | `pyfiglet` | **Được** sử dụng vẽ mấy cái chữ pixel ASCII. |
 
-## Install one for all pip
+## Install one for all pip [UPDATE]
 
 ```bash
-  pip install inquirer jsonlib-python3 uuid termcharts pyfiglet tabulate colorama rich
+ pip install -r requirements.txt
 ```
-
 ## Các thư viện khác có sẵn trên python
 
 `uuid`
@@ -90,6 +89,7 @@ Start the python project
   or
   run in terminal on vs code
 ```
+## Or download from release
 
 ## Tài liệu cách sử dụng thư viện
 
