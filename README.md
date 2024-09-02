@@ -1,8 +1,14 @@
 # Python Quản Lý Chi Tiêu Cá Nhân [![My Skills](https://skillicons.dev/icons?i=python)](https://skillicons.dev)
 
-Mô tả dự án:
+<strong>* Mô tả dự án:</strong > 
 
 Dự án Quản Lý Chi Tiêu Cá Nhân là một ứng dụng Python đơn giản giúp bạn theo dõi và quản lý chi tiêu hàng ngày, hàng tuần, hàng tháng và hàng năm của mình. Với giao diện dòng lệnh thân thiện, dự án này cung cấp các tính năng cơ bản như thêm chi tiêu, xem báo cáo chi tiêu, và trực quan hóa dữ liệu bằng các biểu đồ trực quan.
+
+##  [![My Skills](https://skillicons.dev/icons?i=docker)](https://skillicons.dev) Docker:
+- if u want to test on docker here the link for you:
+```bash
+https://hub.docker.com/repository/docker/zeroslayer/python-spending/general
+```
 
 ## Installation pip
 
