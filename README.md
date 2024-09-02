@@ -65,11 +65,8 @@ pip install pyfiglet
 ## Các thư viện khác có sẵn trên python
 
 `uuid`
-
 `json`
-
 `datetime`
-
 `collections`
 
 ## Run Locally
@@ -90,16 +87,22 @@ Start the python project
 
 ```bash
   python main.py
+  or
   run in terminal on vs code
 ```
 
-## Related
+## Tài liệu cách sử dụng thư viện
 
-Here are some related projects
+[termcharts](https://pypi.org/project/termcharts/) |
+[rich](https://rich.readthedocs.io/en/stable/introduction.html) |
+[tabulate](https://pypi.org/project/tabulate/) |
+[colorama](https://pypi.org/project/colorama/) |
+[inquirer](https://python-inquirer.readthedocs.io/en/latest/installation.html) |
 
-[termcharts](https://pypi.org/project/termcharts/)
-[rich](https://rich.readthedocs.io/en/stable/introduction.html)
-[tabulate](https://pypi.org/project/tabulate/)
+[pyfiglet](https://pypi.org/project/pyfiglet/) ~ Font example :  
+```bash
+http://www.figlet.org/examples.html
+``` 
 
 ## Screenshots
 
