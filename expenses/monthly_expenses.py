@@ -1,5 +1,6 @@
 from expenses import *
 
+
 # Tính chi tiêu trong tháng
 def calculate_monthly_totals(num_months=12):
     today = datetime.now().date()

@@ -21,7 +21,7 @@ def get_greeting():
         return 'Chào buổi chiều, chúc bạn buổi chiều vui vẻ! 😁'
     else:
         return 'Chào buổi tối, chúc bạn buổi tối thư giãn! 😮‍💨'
-#  in =
+
 
 colored_line = ''.join(random.choice(colors) + '=' for _ in range(68))
 end_line = ''.join(random.choice(colors) + '*' for _ in range(68))
@@ -44,10 +44,10 @@ def main_menu():
     while True:
         # Menu chính để chọn nhóm chức năng
         main_choices = [
-            "💲 Kinh doanh",
-            "💵 Kiểm soát chi tiêu",
+            "Kinh doanh",
+            "Kiểm soát chi tiêu [BEST]",
             #🪙 "Giá vàng",
-            "👛 Tiết kiệm",
+            "Tiết kiệm",
             #☁️ "Thời tiết",
             "❌ Thoát"
         ]
@@ -62,11 +62,11 @@ def main_menu():
 
         main_answer = inquirer.prompt(main_questions)
 
-        if main_answer['main_choice'] == "💲 Kinh doanh":
+        if main_answer['main_choice'] == "Kinh doanh":
             business_menu()
-        elif main_answer['main_choice'] == "💵 Kiểm soát chi tiêu":
+        elif main_answer['main_choice'] == "Kiểm soát chi tiêu [BEST]":
             expense_menu()
-        elif main_answer['main_choice'] == "👛 Tiết kiệm":
+        elif main_answer['main_choice'] == "Tiết kiệm":
             savings_menu()  
         elif main_answer['main_choice'] == "❌ Thoát":
             print(end_line)

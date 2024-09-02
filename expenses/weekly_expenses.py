@@ -110,6 +110,7 @@ def calculate_weekly_totals(num_weeks=4):
         week_labels.append(week_label)
 
     return weekly_totals[::-1], week_labels[::-1]  # Đảo ngược để tuần gần nhất lên đầu
+
 def plot_weekly_comparison(num_weeks=4):
     weekly_totals, week_labels = calculate_weekly_totals(num_weeks)
     weekly_expenses = {label: [] for label in week_labels}

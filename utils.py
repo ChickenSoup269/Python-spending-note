@@ -8,6 +8,10 @@ chitieu = 'Chitieu.json'
 savings_file = 'saving.json'
 menu_file = "menu.json"
 
+# tính giờ để chào sáng, chiều ,tối
+current_time = datetime.now()
+dt_string = current_time.strftime("%H:%M:%S")
+current_hour = current_time.hour
 
 # Khởi tạo Colorama
 init(autoreset=True)
@@ -51,9 +55,11 @@ def load_expenses():
             data = json.load(f)
             expenses = data.get("expenses", {})
             savings = data.get("savings", {})
+            return expenses  
     except FileNotFoundError:
         expenses = {}
         savings = {}
+        return expenses 
 
 # Load expenses when the script starts
 load_expenses()
@@ -186,4 +192,57 @@ def plot_expenses(categories, amounts, title):
     except TypeError as e:
         print(f"Error generating charts: {e}")
 
+# ============================================
+
+# DÙNG TRONG CHỈNH SỬA VÀ XÓA CHI TIÊU
+# lấy năm
+def get_years(expenses):
+    years = set()
+    for user_expenses in expenses.values():
+        for date_str in user_expenses.keys():
+            year = datetime.strptime(date_str, "%Y-%m-%d").year
+            years.add(year)
+    return sorted(years, reverse=True)
+
+#  Lấy tháng
+def get_months(expenses, year):
+    months = set()
+    for user_expenses in expenses.values():
+        for date_str in user_expenses.keys():
+            if datetime.strptime(date_str, "%Y-%m-%d").year == year:
+                month = datetime.strptime(date_str, "%Y-%m-%d").month
+                months.add(month)
+    return sorted(months)
+
+# Lấy tuần
+def get_weeks(expenses, year, month):
+    weeks = set()
+    for user_expenses in expenses.values():
+        for date_str in user_expenses.keys():
+            date_obj = datetime.strptime(date_str, "%Y-%m-%d")
+            if date_obj.year == year and date_obj.month == month:
+                week_start = date_obj - timedelta(days=date_obj.weekday())
+                week_label = week_start.strftime("%d/%m")
+                weeks.add(week_label)
+    return sorted(weeks)
+
+# Lấy tuần sử dụng trong tuần
+def get_expenses_for_week(expenses, year, month, week_label):
+    week_start = datetime.strptime(week_label, "%d/%m")
+    week_start = week_start.replace(year=year, month=month)
+    week_end = week_start + timedelta(days=6)
+    expense_list = []
+    for user, user_expenses in expenses.items():
+        for date_str, expense_items in user_expenses.items():
+            date_obj = datetime.strptime(date_str, "%Y-%m-%d")
+            if week_start <= date_obj <= week_end:
+                if isinstance(expense_items, list):
+                    for item in expense_items:
+                        if isinstance(item, dict):
+                            expense_list.append((user, date_str, item))
+                        else:
+                            print(f"Unexpected item format: {item}")
+                else:
+                    print(f"Unexpected expenses format for date {date_str}: {expense_items}")
+    return expense_list
 # ============================================

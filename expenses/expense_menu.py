@@ -4,9 +4,9 @@ def expense_menu():
     while True:
         expense_choices = [
             "Thêm chi tiêu",
+            "Xóa chi tiêu",
+            "Cập nhật chi tiêu",
             "Xem chi tiêu",
-            "Xem chi tiêu theo năm",
-            "Xem chi tiêu theo danh mục",
             "Quay lại"
         ]
 
@@ -23,25 +23,31 @@ def expense_menu():
         if expense_answer['choice'] == "Thêm chi tiêu":
             print(40 * '=*=')
             add_expense()
+
         elif expense_answer['choice'] == "Xem chi tiêu":
             print(40 * '=*=')
             view_expenses_menu()
-        elif expense_answer['choice'] == "Xem chi tiêu theo năm":
+
+        elif expense_answer['choice'] == "Xóa chi tiêu":
             print(40 * '=*=')
-            select_yearly_expenses()
-        elif expense_answer['choice'] == "Xem chi tiêu theo danh mục":
+            delete_expense()
+
+        elif expense_answer['choice'] == "Cập nhật chi tiêu":
             print(40 * '=*=')
-            view_expenses_by_category()
+            edit_expense()
 
         elif expense_answer['choice'] == "Quay lại":
             break
 
+# Menu xem chi tiêu
 def view_expenses_menu():
     while True:
         view_expense_choices = [
             "Xem chi tiêu tuần",
             "Xem chi tiêu tháng",
             "Xem chi tiêu năm",
+            "Xem chi tiêu theo năm",
+            "Xem chi tiêu theo danh mục",
             "Quay lại"
         ]
 
@@ -66,6 +72,14 @@ def view_expenses_menu():
         elif view_expense_answer['choice'] == "Xem chi tiêu năm":
             print(40 * '=*=')
             yearly_expenses()
+
+        elif view_expense_answer['choice'] == "Xem chi tiêu theo năm":
+            print(40 * '=*=')
+            select_yearly_expenses()
+
+        elif view_expense_answer['choice'] == "Xem chi tiêu theo danh mục":
+            print(40 * '=*=')
+            view_expenses_by_category()
 
         elif view_expense_answer['choice'] == "Quay lại":
             break

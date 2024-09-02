@@ -1,7 +1,6 @@
 from expenses import *
 from common.categories import categories
 
-
 # Thêm chi tiêu 
 def add_expense():
     while True:
