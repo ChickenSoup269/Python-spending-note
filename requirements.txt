@@ -1,0 +1,7 @@
+inquirer
+requests
+termcharts
+pyfiglet
+tabulate
+colorama
+rich
