@@ -6,7 +6,7 @@ Dự án Quản Lý Chi Tiêu Cá Nhân là một ứng dụng Python đơn gi�
 
 ##  [![My Skills](https://skillicons.dev/icons?i=docker)](https://skillicons.dev) Docker:
 - if u want to test on docker here the link for you:
-[DockerSpending](https://hub.docker.com/repository/docker/zeroslayer/python-spending/general) 
+[DockerSpending](https://hub.docker.com/r/zeroslayer/python-spending) 
 
 ## Installation pip
 
