@@ -1,4 +1,5 @@
 from imports import *
+from expenses import *
 
 from .add_savings import add_savings
 from .apply_savings import apply_savings

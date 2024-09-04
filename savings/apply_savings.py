@@ -1,5 +1,5 @@
 from savings import *
-from expenses import *
+
 
 # Function to apply savings to current expenses
 def apply_savings():

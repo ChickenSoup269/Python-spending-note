@@ -23,7 +23,8 @@ def savings_menu():
 
         if savings_answer['savings_choice'] == "Thêm tiền tiết kiệm":
             amount = int(input("Nhập số tiền tiết kiệm (VNĐ): "))
-            add_savings(amount)
+            description = input("Mô tả: ")
+            add_savings(amount,description)
 
         elif savings_answer['savings_choice'] == "Sử dụng tiền tiết kiệm":
             apply_savings()

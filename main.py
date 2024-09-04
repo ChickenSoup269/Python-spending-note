@@ -95,7 +95,7 @@ def give_spending_advice(expenses):
         "Đi chợ siêu thị": 2000000,
         "Nhà hàng": 1000000,
         "Chi trả hóa đơn": 1000000,
-        "Tiền nhà": 2000000,
+        "Tiền nhà": 2500000,
         "Đi lại": 1000000,
         "Vui chơi giải trí": 500000,
         "Mua sắm": 1000000,
