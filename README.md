@@ -114,13 +114,15 @@ http://www.figlet.org/examples.html
 
 ## Screenshots
 
-![App Screenshot](https://github.com/ChickenSoup269/Python-spending-note/blob/main/screenShot/Screenshot%202024-08-30%20072147.png)
+<kbd><img src="https://github.com/ChickenSoup269/Python-spending-note/blob/main/screenShot/Screenshot%202024-09-03%20143537.png"></kbd>
 
-![App Screenshot](https://github.com/ChickenSoup269/Python-spending-note/blob/main/screenShot/Screenshot%202024-08-30%20072159.png)
+<kbd><img src="https://github.com/ChickenSoup269/Python-spending-note/blob/main/screenShot/Screenshot%202024-09-03%20143550.png"></kbd>
 
-![App Screenshot](https://github.com/ChickenSoup269/Python-spending-note/blob/main/screenShot/Screenshot%202024-08-30%20072209.png)
+<kbd><img src="https://github.com/ChickenSoup269/Python-spending-note/blob/main/screenShot/Screenshot%202024-09-03%20143557.png"></kbd>
 
-![App Screenshot](https://github.com/ChickenSoup269/Python-spending-note/blob/main/screenShot/image.png)
+<kbd><img src="https://github.com/ChickenSoup269/Python-spending-note/blob/main/screenShot/Screenshot%202024-09-03%20143622.png"></kbd>
+
+<kbd><img src="https://github.com/ChickenSoup269/Python-spending-note/blob/main/screenShot/Screenshot%202024-09-03%20143629.png"></kbd>
 
 ## Video demo
 
