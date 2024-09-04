@@ -1,4 +1,8 @@
 # Python Quản Lý Chi Tiêu Cá Nhân [![My Skills](https://skillicons.dev/icons?i=python)](https://skillicons.dev)
+[![Generic badge](https://img.shields.io/badge/StatusProject-OK-green.svg)](https://shields.io/) [![1.0.1!](https://img.shields.io/badge/Version-1.0.2-1abc9c.svg)](https://GitHub.com/Naereen/ama) ![Maintainer](https://img.shields.io/badge/Python-3.12-blue)
+
+**Tech & version:**  
+[![Generic badge](https://img.shields.io/badge/pyfiglet-1.0.2-green.svg)](https://shields.io/) [![Generic badge](https://img.shields.io/badge/termcharts-1.1.2-blue.svg)](https://shields.io/) [![1.0.1!](https://img.shields.io/badge/inquirer-3.4.0-1abc9c.svg)](https://GitHub.com/Naereen/ama)  [![Generic badge](https://img.shields.io/badge/tabulate-0.9.0-red.svg)](https://shields.io/) [![Generic badge](https://img.shields.io/badge/rich-13.7.1-yellow.svg)](https://shields.io/) ![Generic badge](https://img.shields.io/badge/colorama-0.4.6-white.svg)
 
 <strong>* Mô tả dự án:</strong > 
 
@@ -123,3 +127,5 @@ http://www.figlet.org/examples.html
 ## Support
 
 If you want to support me complete this project and improve it please contact lamo lmao bruh bruh nah just kidding =))
+
+> **_NOTE:_**  🔴 Nếu có bug trong quá trình sử dụng hãy liên hệ với mình để fix vấn đề ngay lập tức.
