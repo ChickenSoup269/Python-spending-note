@@ -38,7 +38,7 @@ def edit_expense():
             ]
             month_answer = inquirer.prompt(month_question)
             if month_answer['selected_month'] == "Quay lại":
-                break  # Return to the year selection
+                break
 
             month = int(month_answer['selected_month'])
 
@@ -54,7 +54,7 @@ def edit_expense():
                 ]
                 week_answer = inquirer.prompt(week_question)
                 if week_answer['selected_week'] == "Quay lại":
-                    break  # Return to the month selection
+                    break
 
                 week_label = week_answer['selected_week']
 
@@ -63,7 +63,7 @@ def edit_expense():
 
                 if not expense_list:
                     print("Không có chi tiêu nào để chỉnh sửa trong tuần này.")
-                    break  # Return to the week selection
+                    break
 
                 # Step 5: Hiển thị danh sách chi tiêu để chọn
                 while True:
@@ -82,15 +82,15 @@ def edit_expense():
 
                     answer = inquirer.prompt(edit_question)
                     if answer['selected_expense'] == "Quay lại":
-                        break  # Return to the week selection
+                        break
 
                     # Extract the selected expense
                     selected_index = int(answer['selected_expense'].split(']')[0][1:])
                     user, selected_date, selected_expense = expense_list[selected_index]
 
-                    # Allow the user to edit fields
+                    # Step 6: Chỉnh sửa chi tiêu đã chọn
                     new_description = input(f"Nhập mô tả mới (hiện tại: {selected_expense.get('description', 'Không mô tả')}): ") or selected_expense.get('description', 'Không mô tả')
-                    
+
                     # Chọn danh mục từ danh sách có sẵn
                     categories_list = [cat for sublist in categories.values() for cat in sublist]
                     new_category = inquirer.prompt([
@@ -115,16 +115,48 @@ def edit_expense():
                         except ValueError:
                             print("Số lượng không hợp lệ. Vui lòng nhập lại.")
 
-                    # Update the selected expense
+                    # Step 7: Cập nhật chi tiêu đã chọn
                     selected_expense['description'] = new_description
                     selected_expense['category'] = new_category
                     selected_expense['amount'] = new_amount
                     selected_expense['quantity'] = new_quantity
 
-                    # Update expenses in the dictionary
+                    # Cập nhật danh sách chi tiêu trong từ điển expenses
                     expenses[user][selected_date] = [item if item['id'] != selected_expense['id'] else selected_expense for item in expenses[user][selected_date]]
 
-                    # Save the updated expenses
+                    # Lưu lại chi tiêu đã chỉnh sửa
                     save_expenses()
                     print("Chi tiêu đã được cập nhật thành công.")
-                    break  # Return to the week selection
+
+                    # Step 8: In lại bảng sau khi chỉnh sửa
+                    entries = expenses[user][selected_date]
+                    table_data = []
+                    for entry in entries:
+                        table_data.append([
+                            entry.get('category', 'Không danh mục'),
+                            entry.get('description', 'Không mô tả'),
+                            entry.get('quantity', 'Không số lượng'),
+                            f"{entry.get('amount', 0) * entry.get('quantity', 1):,}"
+                        ])
+
+                    headers = [Fore.CYAN + "Loại chi tiêu" + Style.RESET_ALL,
+                               Fore.CYAN + "Mô tả" + Style.RESET_ALL,
+                               Fore.CYAN + "Số lượng" + Style.RESET_ALL,
+                               Fore.CYAN + "Tổng tiền (VNĐ)" + Style.RESET_ALL]
+
+                    print(Fore.GREEN + tabulate(table_data, headers=headers, tablefmt="rounded_outline") + Style.RESET_ALL)
+
+                    # Step 9: Hỏi người dùng có muốn tiếp tục chỉnh sửa hay quay lại menu chính
+                    continue_question = [
+                        inquirer.Confirm(
+                            'continue_editing',
+                            message="Bạn có muốn tiếp tục chỉnh sửa các chi tiêu khác trong tuần này không?",
+                            default=False
+                        )
+                    ]
+                    continue_answer = inquirer.prompt(continue_question)
+
+                    if not continue_answer['continue_editing']:
+                        return  # Quay lại menu chính
+
+                    break  # Tiếp tục chỉnh sửa trong tuần hiện tại

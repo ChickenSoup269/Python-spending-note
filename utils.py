@@ -61,9 +61,6 @@ def load_expenses():
         savings = {}
         return expenses 
 
-# Load expenses when the script starts
-load_expenses()
-
 # In ra bảng chi tiêu tất cả các mục điều sử dụng bảng này
 def format_expenses_table(expenses_list):
     if not expenses_list:
@@ -246,3 +243,6 @@ def get_expenses_for_week(expenses, year, month, week_label):
                     print(f"Unexpected expenses format for date {date_str}: {expense_items}")
     return expense_list
 # ============================================
+
+# Load expenses when the script starts
+load_expenses()

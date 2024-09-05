@@ -36,7 +36,7 @@ def delete_expense():
             ]
             month_answer = inquirer.prompt(month_question)
             if month_answer['selected_month'] == "Quay lại":
-                break  # Return to the year selection
+                break  
 
             month = int(month_answer['selected_month'])
 
@@ -52,7 +52,7 @@ def delete_expense():
                 ]
                 week_answer = inquirer.prompt(week_question)
                 if week_answer['selected_week'] == "Quay lại":
-                    break  # Return to the month selection
+                    break  
 
                 week_label = week_answer['selected_week']
 
@@ -61,7 +61,7 @@ def delete_expense():
 
                 if not expense_list:
                     print("Không có chi tiêu nào để xóa trong tuần này.")
-                    break  # Return to the week selection
+                    break  
 
                 # Step 5: Hiển thị danh sách chi tiêu để chọn xóa
                 while True:
@@ -80,7 +80,7 @@ def delete_expense():
 
                     delete_answer = inquirer.prompt(delete_question)
                     if delete_answer['selected_expense'] == "Quay lại":
-                        break  # Return to the week selection
+                        break  
 
                     # Extract the selected expense to delete
                     selected_index = int(delete_answer['selected_expense'].split(']')[0][1:])
@@ -97,18 +97,53 @@ def delete_expense():
 
                     confirm_delete_answer = inquirer.prompt(confirm_delete_question)
                     if confirm_delete_answer['confirm_delete'] == "Có":
-                        # Remove the selected expense
+                        # Remove the selected expense - xóa chi tiêu user chọn
                         expenses[user][selected_date] = [item for item in expenses[user][selected_date] if item['id'] != selected_expense['id']]
 
-                        # Remove the date entry if no expenses left for that date
+                        # Remove the date entry if no expenses left for that date - xóa chi tiêu ngày
                         if not expenses[user][selected_date]:
                             del expenses[user][selected_date]
 
-                        # Remove the user entry if no dates left
+                        # Remove the user entry if no dates left - xóa mục user nhập nếu không có ngày
                         if not expenses[user]:
                             del expenses[user]
 
-                        # Save the updated expenses
+                        # Save the updated expenses - lưu thông tin xóa
                         save_expenses()
                         print("Chi tiêu đã được xóa thành công.")
-                        break  # Return to the week selection
+
+                        # In ra bảng sau khi hoàn thành xóa
+                        if selected_date in expenses[user]:
+                            remaining_expenses = expenses[user][selected_date]
+                            table_data = []
+                            for entry in remaining_expenses:
+                                table_data.append([
+                                    entry.get('category', 'Không danh mục'),
+                                    entry.get('description', 'Không mô tả'),
+                                    entry.get('quantity', 'Không số lượng'),
+                                    f"{entry.get('amount', 0) * entry.get('quantity', 1):,}"
+                                ])
+
+                            headers = [Fore.CYAN + "Loại chi tiêu" + Style.RESET_ALL,
+                                       Fore.CYAN + "Mô tả" + Style.RESET_ALL,
+                                       Fore.CYAN + "Số lượng" + Style.RESET_ALL,
+                                       Fore.CYAN + "Tổng tiền (VNĐ)" + Style.RESET_ALL]
+
+                            print(Fore.GREEN + tabulate(table_data, headers=headers, tablefmt="rounded_outline") + Style.RESET_ALL)
+                        else:
+                            print("Không còn chi tiêu nào cho ngày này.")
+
+                        # Hỏi người dùng có muốn tiếp tục xóa các chi tiêu khác hay không
+                        continue_question = [
+                            inquirer.Confirm(
+                                'continue_deleting',
+                                message="Bạn có muốn tiếp tục xóa các chi tiêu khác trong tuần này không?",
+                                default=False
+                            )
+                        ]
+                        continue_answer = inquirer.prompt(continue_question)
+
+                        if not continue_answer['continue_deleting']:
+                            return  # Quay lại menu chính
+                    
+                    break  # Nếu người dùng chọn tiếp tục, thoát khỏi vòng lặp để tiếp tục xóa trong tuần hiện tại
