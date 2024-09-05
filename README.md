@@ -1,16 +1,18 @@
 # Python Quản Lý Chi Tiêu Cá Nhân [![My Skills](https://skillicons.dev/icons?i=python)](https://skillicons.dev)
-[![Generic badge](https://img.shields.io/badge/StatusProject-OK-green.svg)](https://shields.io/) [![1.0.1!](https://img.shields.io/badge/Version-1.0.2-1abc9c.svg)](https://GitHub.com/Naereen/ama) ![Maintainer](https://img.shields.io/badge/Python-3.12-blue)
+
+[![Generic badge](https://img.shields.io/badge/StatusProject-OK-green.svg)](https://shields.io/) [![1.0.1!](https://img.shields.io/badge/Version-1.0.3-1abc9c.svg)](https://GitHub.com/Naereen/ama) ![Maintainer](https://img.shields.io/badge/Python-3.12-blue)
 
 **Tech & version:**  
-[![Generic badge](https://img.shields.io/badge/pyfiglet-1.0.2-green.svg)](https://shields.io/) [![Generic badge](https://img.shields.io/badge/termcharts-1.1.2-blue.svg)](https://shields.io/) [![1.0.1!](https://img.shields.io/badge/inquirer-3.4.0-1abc9c.svg)](https://GitHub.com/Naereen/ama)  [![Generic badge](https://img.shields.io/badge/tabulate-0.9.0-red.svg)](https://shields.io/) [![Generic badge](https://img.shields.io/badge/rich-13.7.1-yellow.svg)](https://shields.io/) ![Generic badge](https://img.shields.io/badge/colorama-0.4.6-white.svg)
+[![Generic badge](https://img.shields.io/badge/pyfiglet-1.0.2-green.svg)](https://shields.io/) [![Generic badge](https://img.shields.io/badge/termcharts-1.1.2-blue.svg)](https://shields.io/) [![1.0.1!](https://img.shields.io/badge/inquirer-3.4.0-1abc9c.svg)](https://GitHub.com/Naereen/ama) [![Generic badge](https://img.shields.io/badge/tabulate-0.9.0-red.svg)](https://shields.io/) [![Generic badge](https://img.shields.io/badge/rich-13.7.1-yellow.svg)](https://shields.io/) ![Generic badge](https://img.shields.io/badge/colorama-0.4.6-white.svg)
 
-<strong>* Mô tả dự án:</strong > 
+<strong>\* Mô tả dự án:</strong >
 
 Dự án Quản Lý Chi Tiêu Cá Nhân là một ứng dụng Python đơn giản giúp bạn theo dõi và quản lý chi tiêu hàng ngày, hàng tuần, hàng tháng và hàng năm của mình. Với giao diện dòng lệnh thân thiện, dự án này cung cấp các tính năng cơ bản như thêm chi tiêu, xem báo cáo chi tiêu, và trực quan hóa dữ liệu bằng các biểu đồ trực quan.
 
-##  [![My Skills](https://skillicons.dev/icons?i=docker)](https://skillicons.dev) Docker:
+## [![My Skills](https://skillicons.dev/icons?i=docker)](https://skillicons.dev) Docker:
+
 - if u want to test on docker here the link for you:
-[DockerSpending](https://hub.docker.com/r/zeroslayer/python-spending) 
+  [DockerSpending](https://hub.docker.com/r/zeroslayer/python-spending)
 
 ## Installation pip
 
@@ -69,6 +71,7 @@ pip install pyfiglet
 ```bash
  pip install -r requirements.txt
 ```
+
 ## Các thư viện khác có sẵn trên python
 
 `uuid`
@@ -97,6 +100,7 @@ Start the python project
   or
   run in terminal on vs code
 ```
+
 ## Or download from release
 
 ## Tài liệu cách sử dụng thư viện
@@ -107,10 +111,11 @@ Start the python project
 [colorama](https://pypi.org/project/colorama/) |
 [inquirer](https://python-inquirer.readthedocs.io/en/latest/installation.html) |
 
-[pyfiglet](https://pypi.org/project/pyfiglet/) ~ Font example :  
+[pyfiglet](https://pypi.org/project/pyfiglet/) ~ Font example :
+
 ```bash
 http://www.figlet.org/examples.html
-``` 
+```
 
 ## Screenshots
 
@@ -130,4 +135,4 @@ http://www.figlet.org/examples.html
 
 If you want to support me complete this project and improve it please contact lamo lmao bruh bruh nah just kidding =))
 
-> **_NOTE:_**  🔴 Nếu có bug trong quá trình sử dụng hãy liên hệ với mình để fix vấn đề ngay lập tức.
+> **_NOTE:_** 🔴 Nếu có bug trong quá trình sử dụng hãy liên hệ với mình để fix vấn đề ngay lập tức.
