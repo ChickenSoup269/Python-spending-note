@@ -9,10 +9,10 @@
 
 Dự án Quản Lý Chi Tiêu Cá Nhân là một ứng dụng Python đơn giản giúp bạn theo dõi và quản lý chi tiêu hàng ngày, hàng tuần, hàng tháng và hàng năm của mình. Với giao diện dòng lệnh thân thiện, dự án này cung cấp các tính năng cơ bản như thêm chi tiêu, xem báo cáo chi tiêu, và trực quan hóa dữ liệu bằng các biểu đồ trực quan.
 
-## [![My Skills](https://skillicons.dev/icons?i=docker)](https://skillicons.dev) Docker:
+## Docker spending [![My Skills](https://skillicons.dev/icons?i=docker)](https://skillicons.dev):
 
-- if u want to test on docker here the link for you:
-  [DockerSpending](https://hub.docker.com/r/zeroslayer/python-spending)
+> if u want to test on docker here the link for you:
+> [DockerSpending](https://hub.docker.com/r/zeroslayer/python-spending)
 
 ## Installation pip
 
@@ -119,17 +119,19 @@ http://www.figlet.org/examples.html
 
 ## Screenshots
 
-<kbd><img src="https://github.com/ChickenSoup269/Python-spending-note/blob/main/screenShot/Screenshot%202024-09-03%20143537.png"></kbd>
+<kbd><img src="./screenShot/Screenshot 2024-09-03 143537.png"></kbd>
 
-<kbd><img src="https://github.com/ChickenSoup269/Python-spending-note/blob/main/screenShot/Screenshot%202024-09-03%20143550.png"></kbd>
+<kbd><img src="./screenShot/Screenshot 2024-09-03 143550.png"></kbd>
 
-<kbd><img src="https://github.com/ChickenSoup269/Python-spending-note/blob/main/screenShot/Screenshot%202024-09-03%20143557.png"></kbd>
+<kbd><img src="./screenShot/Screenshot 2024-09-03 143557.png"></kbd>
 
-<kbd><img src="https://github.com/ChickenSoup269/Python-spending-note/blob/main/screenShot/Screenshot%202024-09-03%20143622.png"></kbd>
+<kbd><img src="./screenShot/Screenshot 2024-09-03 143622.png"></kbd>
 
-<kbd><img src="https://github.com/ChickenSoup269/Python-spending-note/blob/main/screenShot/Screenshot%202024-09-03%20143629.png"></kbd>
+<kbd><img src="./screenShot/Screenshot 2024-09-03 143629.png"></kbd>
 
 ## Video demo
+
+> **Comming soon**
 
 ## Support
 
