@@ -9,7 +9,7 @@
 
 Dự án Quản Lý Chi Tiêu Cá Nhân là một ứng dụng Python đơn giản giúp bạn theo dõi và quản lý chi tiêu hàng ngày, hàng tuần, hàng tháng và hàng năm của mình. Với giao diện dòng lệnh thân thiện, dự án này cung cấp các tính năng cơ bản như thêm chi tiêu, xem báo cáo chi tiêu, và trực quan hóa dữ liệu bằng các biểu đồ trực quan.
 
-## Docker spending [![My Skills](https://skillicons.dev/icons?i=docker)](https://skillicons.dev):
+## Docker spending [![My Skills](https://skillicons.dev/icons?i=docker)](https://skillicons.dev)
 
 > if u want to test on docker here the link for you:
 > [DockerSpending](https://hub.docker.com/r/zeroslayer/python-spending)
