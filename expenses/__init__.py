@@ -8,6 +8,7 @@ from .monthly_expenses import monthly_expenses
 from .yearly_expenses import yearly_expenses
 from .edit_expense import edit_expense
 from .delete_expense import delete_expense
+from .search_expenses_by_description import search_expenses_by_description
 from common.categories import categories
 # ====================================
 

@@ -6,6 +6,7 @@ import uuid #
 import termcharts #
 import pyfiglet #
 import random #
+import re #
 import termcharts.bar_chart
 # =================================
 from datetime import datetime, timedelta

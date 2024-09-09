@@ -48,6 +48,7 @@ def view_expenses_menu():
             "Xem chi tiêu năm",
             "Xem chi tiêu theo năm",
             "Xem chi tiêu theo danh mục",
+            "Tìm kiếm chi tiêu theo mô tả",
             "Quay lại"
         ]
 
@@ -80,6 +81,10 @@ def view_expenses_menu():
         elif view_expense_answer['choice'] == "Xem chi tiêu theo danh mục":
             print(40 * '=*=')
             view_expenses_by_category()
+        
+        elif view_expense_answer['choice'] == "Tìm kiếm chi tiêu theo mô tả":  # Mới thêm
+            print(40 * '=*=')
+            search_expenses_by_description()  # Gọi hàm tìm kiếm chi tiêu theo mô tả
 
         elif view_expense_answer['choice'] == "Quay lại":
             break
