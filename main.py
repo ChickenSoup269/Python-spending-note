@@ -4,9 +4,7 @@ from utils import *
 from business.business_menu import business_menu
 from expenses.expense_menu import expense_menu
 from savings.savings_menu import savings_menu
-
 # ================================================================================
-# Dictionary to store expenses
 
 # In ra lời chào đầu 
 art = pyfiglet.figlet_format('Zero Spending', font='standard')
@@ -44,10 +42,11 @@ def main_menu():
     while True:
         # Menu chính để chọn nhóm chức năng
         main_choices = [
-            "Kinh doanh",
-            "Kiểm soát chi tiêu [BEST]",
-            #🪙 "Giá vàng",
             "Tiết kiệm",
+            # "Kinh doanh",
+            "Kiểm soát chi tiêu",
+            "Xem danh mục chi tiêu",
+            #🪙 "Giá vàng",
             #☁️ "Thời tiết",
             "❌ Thoát"
         ]
@@ -62,17 +61,21 @@ def main_menu():
 
         main_answer = inquirer.prompt(main_questions)
 
-        if main_answer['main_choice'] == "Kinh doanh":
-            business_menu()
-        elif main_answer['main_choice'] == "Kiểm soát chi tiêu [BEST]":
-            expense_menu()
-        elif main_answer['main_choice'] == "Tiết kiệm":
+        # if main_answer['main_choice'] == "Kinh doanh":
+        #     business_menu()
+        if main_answer['main_choice'] == "Tiết kiệm":
             savings_menu()  
+        elif main_answer['main_choice'] == "Kiểm soát chi tiêu":
+            expense_menu()
+        elif main_answer['main_choice'] == "Xem danh mục chi tiêu":
+            expenses = load_expenses()
+            give_spending_advice(expenses) 
         elif main_answer['main_choice'] == "❌ Thoát":
             print(end_line)
             print(10*'=' + " | Cảm ơn bạn đã sử dụng chương trình! | " + 10*'=')
             print(end_line + '\n')
             break
+
 
 # Cho lời khuyên chi tiêu nếu không hợp lý thì sẽ thông báo
 def give_spending_advice(expenses):
@@ -84,55 +87,79 @@ def give_spending_advice(expenses):
             year_month = datetime.strptime(date, '%Y-%m-%d').strftime('%Y-%m')  # Chỉ lấy năm và tháng
             for expense in expense_list:
                 category = expense['category']
-                amount = expense['amount']
+                amount = expense['amount'] * expense.get('quantity', 1)  # Nhân với số lượng nếu có
                 monthly_category_totals[year_month][category] += amount
 
-    # Đưa ra lời khuyên dựa trên chi tiêu
+   
     advice = []
+    table_data = []  
 
-    # Giả sử các mức chi tiêu hợp lý (VNĐ) cho mỗi tháng
+    # Mức chi tiêu đưa ra 
     reasonable_limits = {
-        "Đi chợ siêu thị": 2000000,
-        "Nhà hàng": 1000000,
+        "Đi chợ siêu thị": 3000000,
+        "Nhà hàng": 500000,
         "Chi trả hóa đơn": 1000000,
         "Tiền nhà": 2500000,
         "Đi lại": 1000000,
         "Vui chơi giải trí": 500000,
         "Mua sắm": 1000000,
         "Giáo dục": 2000000,
-        "Y tế": 1000000, # không xác định được
+        "Y tế": 1000000,
         "Bảo hiểm": 2000000,
-        "Tiết kiệm": 0,  # Không có giới hạn, nên tiết kiệm càng nhiều càng tốt
-        "Chứng khoán": 0,  # Không có giới hạn cụ thể
-        "Bất động sản": 0,  # Không có giới hạn cụ thể
-        "Quỹ": 0,  # Không có giới hạn cụ thể
+        "Tiết kiệm": 0,  
+        "Chứng khoán": 0,
+        "Bất động sản": 0,
+        "Quỹ": 0,
         "Sự kiện": 1000000,
         "Biếu tặng": 500000,
         "Dịch vụ công": 500000,
+        "Đồ gia dụng": 1000000,
+        "Khác": 500000,
     }
 
+    # Tạo dữ liệu cho bảng
     for year_month, category_totals in monthly_category_totals.items():
         for category, total in category_totals.items():
-            if category in reasonable_limits:
-                limit = reasonable_limits[category]
-                if total > limit and limit != 0:
-                    advice.append(
-                        Fore.RED + f"Tháng {year_month} - Chi tiêu cho {category} ({total:,} VNĐ) vượt mức hợp lý ({limit:,} VNĐ). Bạn nên cân nhắc giảm chi tiêu ở hạng mục này."
-                    )
-                elif limit == 0 and total > 0:
-                    advice.append(
-                       Fore.YELLOW + f"Tháng {year_month} - Bạn đã chi tiêu {total:,} VNĐ cho {category}. Hãy đảm bảo rằng các khoản chi này là cần thiết."
-                    )
+            limit = reasonable_limits.get(category, 0)
+            
+            if limit != 0 and total > limit:
+                advice_text = Fore.RED + "Vượt mức"
+                advice.append(
+                    Fore.RED + f"Tháng {year_month} - Chi tiêu cho {category} ({total:,} VNĐ) vượt mức hợp lý ({limit:,} VNĐ)."
+                )
+            elif limit == 0 and total > 0:
+                advice_text = Fore.YELLOW + "Không giới hạn"
+            else:
+                advice_text = Fore.GREEN + "Hợp lý"
 
+            # Thêm dữ liệu vào bảng
+            table_data.append([
+                year_month, 
+                category, 
+                f"{total:,} VNĐ", 
+                f"{limit:,} VNĐ" if limit != 0 else "Không giới hạn", 
+                advice_text + Style.RESET_ALL  # Reset màu sau mỗi dòng
+            ])
+
+    # Bảng tổng hợp
+    headers = [
+        Fore.CYAN + "Tháng" + Style.RESET_ALL,
+        Fore.CYAN + "Danh mục" + Style.RESET_ALL,
+        Fore.CYAN + "Chi tiêu" + Style.RESET_ALL,
+        Fore.CYAN + "Mức hợp lý" + Style.RESET_ALL,
+        Fore.CYAN + "Trạng thái" + Style.RESET_ALL
+    ]
+
+    print(Fore.LIGHTBLUE_EX + "Bảng tổng chi tiêu theo danh mục và tháng:" + Style.RESET_ALL)
+    print(tabulate(table_data, headers=headers, tablefmt="rounded_outline"))
+
+    # In ra lời khuyên
+    print("\n" + Fore.LIGHTBLUE_EX + "Lời khuyên chi tiêu:" + Style.RESET_ALL)
     if not advice:
-        advice.append(Fore.GREEN + "Chi tiêu của bạn trong các hạng mục hiện tại đang hợp lý. Tiếp tục duy trì!")
-
-    return advice
-
-# In ra lời khuyên
-advice = give_spending_advice(expenses)
-for line in advice:
-    print(line + "\n")
+        print(Fore.GREEN + "Chi tiêu của bạn trong các hạng mục hiện tại đang hợp lý. Tiếp tục duy trì!" + Style.RESET_ALL + "\n" )
+    else:
+        for line in advice:
+            print(line + Style.RESET_ALL + "\n" )
 
 # Chạy menu chính
 main_menu()
