@@ -127,6 +127,8 @@ http://www.figlet.org/examples.html
 
 <kbd><img src="./screenShot/Screenshot 2024-09-03 143629.png"></kbd>
 
+<kbd><img src="./screenShot/image.png"></kbd>
+
 ## Video demo
 
 > **Comming soon**
