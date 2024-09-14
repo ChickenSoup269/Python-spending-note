@@ -4,34 +4,26 @@ from utils import *
 from business.business_menu import business_menu
 from expenses.expense_menu import expense_menu
 from savings.savings_menu import savings_menu
+# =================================THEME===============================================
+from theme.Other.themeDefault import theme_menu
+from theme.changeThemes import *
 # ================================================================================
 
-# In ra lời chào đầu 
-art = pyfiglet.figlet_format('Zero Spending', font='standard')
-dateTimes = pyfiglet.figlet_format(dt_string, font='banner3')
-colors = [Fore.LIGHTRED_EX, Fore.LIGHTGREEN_EX, Fore.LIGHTYELLOW_EX, Fore.LIGHTBLUE_EX, Fore.LIGHTMAGENTA_EX, Fore.LIGHTCYAN_EX, Fore.LIGHTWHITE_EX]
 
 # Check giờ để in lời chào sáng, chiều, tối
 def get_greeting():
     if 5 <= current_hour < 12:
-        return 'Chào buổi sáng, chúc bạn buổi sáng tốt lành! 😆'
+        return 'Chào buổi sáng, chúc bạn buổi sáng tốt lành! ⛅'
     elif 12 <= current_hour < 18:
-        return 'Chào buổi chiều, chúc bạn buổi chiều vui vẻ! 😁'
+        return 'Chào buổi chiều, chúc bạn buổi chiều vui vẻ! 🌄'
     else:
-        return 'Chào buổi tối, chúc bạn buổi tối thư giãn! 😮‍💨'
+        return 'Chào buổi tối, chúc bạn buổi tối thư giãn! 🌝'
 
+if days_left_display:
+    print(days_left_display)
 
-colored_line = ''.join(random.choice(colors) + '=' for _ in range(68))
-end_line = ''.join(random.choice(colors) + '*' for _ in range(68))
-
-print(colored_line)
-
-# In từng ký tự của chữ nghệ thuật với màu ngẫu nhiên
-print(Style.BRIGHT + art)
-print(dateTimes)
-# In dòng cuối cùng với màu ngẫu nhiên
-print(colored_line)
 # In ra lời chào
+print('Ngày: ' + current_date + '\n')
 print(get_greeting(), Fore.CYAN + dt_string + '\n')
 
 # Dự báo thời tiết hoặc cái gì đó đại loại vậy 
@@ -48,6 +40,7 @@ def main_menu():
             "Xem danh mục chi tiêu",
             #🪙 "Giá vàng",
             #☁️ "Thời tiết",
+            "Cài đặt",
             "❌ Thoát"
         ]
 
@@ -70,12 +63,13 @@ def main_menu():
         elif main_answer['main_choice'] == "Xem danh mục chi tiêu":
             expenses = load_expenses()
             give_spending_advice(expenses) 
+        elif main_answer['main_choice'] == "Cài đặt":  # Gọi hàm thay đổi theme
+            theme_menu()
         elif main_answer['main_choice'] == "❌ Thoát":
             print(end_line)
             print(10*'=' + " | Cảm ơn bạn đã sử dụng chương trình! | " + 10*'=')
             print(end_line + '\n')
             break
-
 
 # Cho lời khuyên chi tiêu nếu không hợp lý thì sẽ thông báo
 def give_spending_advice(expenses):
@@ -90,7 +84,6 @@ def give_spending_advice(expenses):
                 amount = expense['amount'] * expense.get('quantity', 1)  # Nhân với số lượng nếu có
                 monthly_category_totals[year_month][category] += amount
 
-   
     advice = []
     table_data = []  
 

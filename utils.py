@@ -7,9 +7,11 @@ console = Console()
 chitieu = 'Chitieu.json' 
 savings_file = 'saving.json'
 menu_file = "menu.json"
+theme = 'theme_settings.json'
 
 # tính giờ để chào sáng, chiều ,tối
 current_time = datetime.now()
+current_date = datetime.now().strftime("%d/%m/%Y")
 dt_string = current_time.strftime("%H:%M:%S")
 current_hour = current_time.hour
 
@@ -60,6 +62,29 @@ def load_expenses():
         expenses = {}
         savings = {}
         return expenses 
+
+# Hàm để load cài đặt theme từ file JSON
+def load_theme_settings():
+    try:
+        with open('./json/' + theme, 'r') as f:
+            settings = json.load(f)
+    except FileNotFoundError:
+        # Nếu file không tồn tại, trả về cài đặt mặc định
+        settings = {
+            "color": "Fore.LIGHTRED_EX",
+            "art_style": "standard",
+            "use_random_colors": False,
+            "program_name": "Zero Spending",
+            "show_time": True
+        }
+    return settings
+
+# Hàm để lưu cài đặt theme vào file JSON
+def save_theme_settings(settings):
+    with open('./json/' + theme, 'w') as f:
+        json.dump(settings, f, indent=4)
+
+# =============================
 
 # In ra bảng chi tiêu tất cả các mục điều sử dụng bảng này
 def format_expenses_table(expenses_list):

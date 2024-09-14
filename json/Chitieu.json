@@ -1,1 +1,767 @@
-{}
+{
+    "expenses": {
+        "TranPhuocThien-2003": {
+            "2023-08-25": [
+                {
+                    "id": "24905af6-1cac-42bf-8dab-b073453129b8",
+                    "category": "Nhà hàng",
+                    "description": "XIN CHÀO HỒNG NHƯ",
+                    "amount": 1.0,
+                    "quantity": 1,
+                    "weekday": "Chủ Nhật"
+                }
+            ],
+            "2024-08-07": [
+                {
+                    "id": "12c22ec9-f620-4268-874c-b0b957ca7a7c",
+                    "category": "Đi lại",
+                    "description": "Tiền xăng",
+                    "amount": 50000,
+                    "quantity": 1,
+                    "weekday": "Thứ tư"
+                },
+                {
+                    "id": "12c22ec9-f620-4268-874c-b0b957ca7a7c",
+                    "category": "Đi chợ siêu thị",
+                    "description": "Snack ostar kimchi",
+                    "amount": 24000,
+                    "quantity": 2,
+                    "weekday": "Thứ tư"
+                },
+                {
+                    "id": "5b2686a0-be85-49a1-9642-cdbe21d3c31b",
+                    "category": "Đi chợ siêu thị",
+                    "description": "Bánnh quy Cosy Marie gói 240g",
+                    "amount": 32500,
+                    "quantity": 1,
+                    "weekday": "Thứ tư"
+                },
+                {
+                    "id": "c6eb9168-166a-4868-88a4-14958601a3d1",
+                    "category": "Đi chợ siêu thị",
+                    "description": "Khoai tây Slides potato criginal 160g/150g",
+                    "amount": 47500,
+                    "quantity": 1,
+                    "weekday": "Thứ tư"
+                },
+                {
+                    "id": "bef96d78-576b-48dd-9a69-47c7ffdb0502",
+                    "category": "Đi chợ siêu thị",
+                    "description": "Nước tăng lực Rockstar lon 250ml",
+                    "amount": 66600,
+                    "quantity": 6,
+                    "weekday": "Thứ tư"
+                },
+                {
+                    "id": "12c22ec9-f620-4268-874c-b0b957ca7a7c",
+                    "category": "Đi chợ siêu thị",
+                    "description": "SCA sữa chân châu đường đen VNM hộp 100g",
+                    "amount": 38500,
+                    "quantity": 1,
+                    "weekday": "Thứ tư"
+                }
+            ],
+            "2024-08-13": [
+                {
+                    "id": "5b2686a0-be85-49a1-9642-cdbe21d3c31b",
+                    "category": "Đi chợ siêu thị",
+                    "description": "Sữa THTRUE MILK",
+                    "amount": 40200,
+                    "quantity": 1,
+                    "weekday": "Thứ ba"
+                },
+                {
+                    "id": "c6eb9168-166a-4868-88a4-14958601a3d1",
+                    "category": "Đi chợ siêu thị",
+                    "description": "Nước tăng lực Rockstar lon 250ml",
+                    "amount": 56500,
+                    "quantity": 5,
+                    "weekday": "Thứ ba"
+                },
+                {
+                    "id": "bef96d78-576b-48dd-9a69-47c7ffdb0502",
+                    "category": "Đi chợ siêu thị",
+                    "description": "PONNIE thịt áp chảo",
+                    "amount": 66000,
+                    "quantity": 1,
+                    "weekday": "Thứ ba"
+                },
+                {
+                    "id": "bef96d78-576b-48dd-9a69-47c7ffdb0502",
+                    "category": "Đi chợ siêu thị",
+                    "description": "Tương ớt CHIN-SU",
+                    "amount": 90000,
+                    "quantity": 1,
+                    "weekday": "Thứ ba"
+                },
+                {
+                    "id": "bef96d78-576b-48dd-9a69-47c7ffdb0502",
+                    "category": "Đi chợ siêu thị",
+                    "description": "Xúc xích Deli Việt Nam 500g",
+                    "amount": 100500,
+                    "quantity": 1,
+                    "weekday": "Thứ ba"
+                }
+            ],
+            "2024-08-19": [
+                {
+                    "id": "9b32fcc7-ee8d-4dd3-9a8c-3f424620ddcf",
+                    "category": "Đi chợ siêu thị",
+                    "description": "Nước tăng lực Rockstar lon 250ml",
+                    "amount": 97200,
+                    "quantity": 9,
+                    "weekday": "Thứ Hai"
+                },
+                {
+                    "id": "43982392-054b-4ca7-aa67-d3c7712b305f",
+                    "category": "Đi chợ siêu thị",
+                    "description": "Mì hảo hảo xào khô tôm hành 75g   ",
+                    "amount": 25800,
+                    "quantity": 6,
+                    "weekday": "Thứ Hai"
+                },
+                {
+                    "id": "8941cf97-593a-4541-bbbd-83e6b844b527",
+                    "category": "Đi chợ siêu thị",
+                    "description": "Mì hảo hảo xào hải sản đậm vị Việt 71g",
+                    "amount": 26400,
+                    "quantity": 6,
+                    "weekday": "Thứ Hai"
+                },
+                {
+                    "id": "e2156ed7-1e94-4a14-90ca-3a59620ca205",
+                    "category": "Đi chợ siêu thị",
+                    "description": "Khẩu trang niva hộp 20 cái",
+                    "amount": 18000,
+                    "quantity": 1,
+                    "weekday": "Thứ Hai"
+                },
+                {
+                    "id": "f70f1a34-e7e7-44b7-80c3-1ba8e94b6cab",
+                    "category": "Đi chợ siêu thị",
+                    "description": "Dầu gội Tresemme Keratin smooth chai 480g",
+                    "amount": 162000,
+                    "quantity": 1,
+                    "weekday": "Thứ Hai"
+                },
+                {
+                    "id": "2bcddb7b-1a65-46cc-a0c4-d6e4d749e856",
+                    "category": "Đi chợ siêu thị",
+                    "description": "Sữa tắm Dove chai 530g",
+                    "amount": 147000,
+                    "quantity": 1,
+                    "weekday": "Thứ Hai"
+                },
+                {
+                    "id": "3c578f10-a047-4ef9-929a-c99f072ff83d",
+                    "category": "Đi chợ siêu thị",
+                    "description": "Giấy lao mặt Puri gói 250 tờ (133 x 190 mm)",
+                    "amount": 31600,
+                    "quantity": 2,
+                    "weekday": "Thứ Hai"
+                },
+                {
+                    "id": "41cacde3-ffbc-4a6d-a1ec-698865b4eb76",
+                    "category": "Đi chợ siêu thị",
+                    "description": "Nước uống",
+                    "amount": 25000,
+                    "quantity": 1,
+                    "weekday": "Thứ Hai"
+                },
+                {
+                    "id": "705f87ab-71b2-4805-830d-1db5113448bc",
+                    "category": "Khác",
+                    "description": "Hớt tóc",
+                    "amount": 60000,
+                    "quantity": 1,
+                    "weekday": "Thứ Hai"
+                },
+                {
+                    "id": "c6c909d8-0dbf-44f5-926b-ab9bfa71b198",
+                    "category": "Nhà hàng",
+                    "description": "Cơm gà mắm tỏi",
+                    "amount": 27000,
+                    "quantity": 1,
+                    "weekday": "Thứ Hai"
+                }
+            ],
+            "2024-08-21": [
+                {
+                    "id": "68d92181-fd11-49c5-ab85-f583ca8f011d",
+                    "category": "Đi chợ siêu thị",
+                    "description": "Cá viên gói 200g",
+                    "amount": 22900,
+                    "quantity": 1,
+                    "weekday": "Thứ Tư"
+                },
+                {
+                    "id": "2b990736-7d51-45fb-b171-b92ca1294cbc",
+                    "category": "Đi chợ siêu thị",
+                    "description": "Snack tôm cay OISHI",
+                    "amount": 10600,
+                    "quantity": 2,
+                    "weekday": "Thứ Tư"
+                },
+                {
+                    "id": "4848096e-9d14-478e-860c-05258623d876",
+                    "category": "Đi chợ siêu thị",
+                    "description": "VINAMILK SCU Probi chai có đường 65ml",
+                    "amount": 49800,
+                    "quantity": 2,
+                    "weekday": "Thứ Tư"
+                },
+                {
+                    "id": "7ca97555-c686-408b-a191-b291d1e5b907",
+                    "category": "Khác",
+                    "description": "Mua nước",
+                    "amount": 27000,
+                    "quantity": 1,
+                    "weekday": "Thứ Tư"
+                }
+            ],
+            "2024-08-23": [
+                {
+                    "id": "e5ffff44-f72b-48d8-9dd7-47b8dfa39f1e",
+                    "category": "Mua sắm",
+                    "description": "ICON bộ chổi quét nhà",
+                    "amount": 20000,
+                    "quantity": 1,
+                    "weekday": "Thứ Sáu"
+                },
+                {
+                    "id": "3f1cae49-304f-4be3-84a0-cd48f54cf879",
+                    "category": "Mua sắm",
+                    "description": "AIODIY thùng rác kim loại",
+                    "amount": 51000,
+                    "quantity": 1,
+                    "weekday": "Thứ Sáu"
+                },
+                {
+                    "id": "98d5bdf7-e8af-492e-b670-e4673783267a",
+                    "category": "Mua sắm",
+                    "description": "Hộp tăm chỉ nha khoa",
+                    "amount": 23000,
+                    "quantity": 1,
+                    "weekday": "Thứ Sáu"
+                },
+                {
+                    "id": "4100bc06-0ac5-4ce0-b19d-a0fb872ec181",
+                    "category": "Biếu tặng",
+                    "description": "Tip shipper",
+                    "amount": 6000,
+                    "quantity": 1,
+                    "weekday": "Thứ Sáu"
+                },
+                {
+                    "id": "a27d22fc-78d8-44be-8cbf-7d5106dd9f30",
+                    "category": "Mua sắm",
+                    "description": "Hộp đựng sách & Khăn trùm mặt ",
+                    "amount": 177000,
+                    "quantity": 1,
+                    "weekday": "Thứ Sáu"
+                },
+                {
+                    "id": "46c0ae66-df67-462e-9f89-92aaf5991ea6",
+                    "category": "Mua sắm",
+                    "description": "Găng tay chống tia UV Chulio",
+                    "amount": 93000,
+                    "quantity": 1,
+                    "weekday": "Thứ Sáu"
+                },
+                {
+                    "id": "d98049cd-8df7-4a51-8f74-cbb602c64170",
+                    "category": "Biếu tặng",
+                    "description": "Tip Shipper",
+                    "amount": 10000,
+                    "quantity": 1,
+                    "weekday": "Thứ Sáu"
+                }
+            ],
+            "2024-08-25": [
+                {
+                    "id": "54905af6-1cac-42bf-8dab-b073453129b8",
+                    "category": "Khác",
+                    "description": "Rửa xe",
+                    "amount": 30000,
+                    "quantity": 1,
+                    "weekday": "Chủ Nhật"
+                },
+                {
+                    "id": "76176ef5-d4f6-4796-a500-496d710a469a",
+                    "category": "Đi chợ siêu thị",
+                    "description": "Hộp trứng gà 6 quả",
+                    "amount": 20500,
+                    "quantity": 1,
+                    "weekday": "Chủ Nhật"
+                },
+                {
+                    "id": "c37576c7-d3b4-4a53-a781-3813d7a8ad49",
+                    "category": "Đi chợ siêu thị",
+                    "description": "7UP Lon 320ml",
+                    "amount": 10700,
+                    "quantity": 1,
+                    "weekday": "Chủ Nhật"
+                },
+                {
+                    "id": "91eb2068-c919-4ae5-b0bc-f4919f4cbb00",
+                    "category": "Đi chợ siêu thị",
+                    "description": "Cá viên gói 200g",
+                    "amount": 45800,
+                    "quantity": 2,
+                    "weekday": "Chủ Nhật"
+                },
+                {
+                    "id": "6db3e21d-3e7c-4592-9972-c79b4aad3b52",
+                    "category": "Đi chợ siêu thị",
+                    "description": "Sữa chua uống lên men YAKULT",
+                    "amount": 52400,
+                    "quantity": 2,
+                    "weekday": "Chủ Nhật"
+                },
+                {
+                    "id": "78855d3c-34a3-423b-9c29-06b0a6e50ab0",
+                    "category": "Mua sắm",
+                    "description": "Móc khóa quay tay",
+                    "amount": 20000,
+                    "quantity": 1,
+                    "weekday": "Chủ Nhật"
+                }
+            ],
+            "2024-08-27": [
+                {
+                    "id": "2b5df9f4-b760-420e-b0d4-9f74a0c591b1",
+                    "category": "Mua sắm",
+                    "description": "Đồng hồ dự báo thời tiết",
+                    "amount": 166000,
+                    "quantity": 1,
+                    "weekday": "Thứ Ba"
+                },
+                {
+                    "id": "8546af06-c20e-45d3-8e54-f271730a426f",
+                    "category": "Nhà hàng",
+                    "description": "Cơm ga mắm tỏi",
+                    "amount": 54000,
+                    "quantity": 2,
+                    "weekday": "Thứ Ba"
+                },
+                {
+                    "id": "8bc95532-aa65-4213-ad36-14e753bbed59",
+                    "category": "Đi chợ siêu thị",
+                    "description": "Tra Ô long",
+                    "amount": 20000,
+                    "quantity": 2,
+                    "weekday": "Thứ Ba"
+                },
+                {
+                    "id": "94caef5b-e3a3-4c39-a01d-1e9d0ba0c3b5",
+                    "category": "Biếu tặng",
+                    "description": "Tip shipper",
+                    "amount": 14000,
+                    "quantity": 1,
+                    "weekday": "Thứ Ba"
+                }
+            ],
+            "2024-08-28": [
+                {
+                    "id": "bd2698df-dc60-489c-a84d-1ad90fa8330c",
+                    "category": "Mua sắm",
+                    "description": "Hộp đựng sách cỡ lớn ",
+                    "amount": 155000,
+                    "quantity": 1,
+                    "weekday": "Thứ Tư"
+                },
+                {
+                    "id": "439d84ea-6e99-4f23-bb1a-f7ad900607fe",
+                    "category": "Biếu tặng",
+                    "description": "Tip shipper",
+                    "amount": 5000,
+                    "quantity": 1,
+                    "weekday": "Thứ Tư"
+                }
+            ],
+            "2024-08-29": [
+                {
+                    "id": "1f2cd0ce-0842-43e4-8774-9417c0bebfee",
+                    "category": "Đi chợ siêu thị",
+                    "description": "TEA tra olong chai 450ml x6",
+                    "amount": 45000,
+                    "quantity": 1,
+                    "weekday": "Thứ Năm"
+                },
+                {
+                    "id": "8098db92-3e06-417f-97d2-b08a33012ffd",
+                    "category": "Đi chợ siêu thị",
+                    "description": "Dầu ăn đậu nanh chai 1L",
+                    "amount": 53600,
+                    "quantity": 1,
+                    "weekday": "Thứ Năm"
+                },
+                {
+                    "id": "1d804374-54b3-4d2a-a2dc-20a6e5b10518",
+                    "category": "Đi chợ siêu thị",
+                    "description": "KARAMUCHO Snack cay 82g x2",
+                    "amount": 46200,
+                    "quantity": 2,
+                    "weekday": "Thứ Năm"
+                },
+                {
+                    "id": "80371994-15ea-42ae-a1a7-5dcf8fc83b82",
+                    "category": "Đi chợ siêu thị",
+                    "description": "Socola đen hạnh nhân 40G",
+                    "amount": 25900,
+                    "quantity": 1,
+                    "weekday": "Thứ Năm"
+                },
+                {
+                    "id": "f367d92a-3efe-4af8-b466-c81273b7f587",
+                    "category": "Đi chợ siêu thị",
+                    "description": "Kẹo socola 35g",
+                    "amount": 17200,
+                    "quantity": 1,
+                    "weekday": "Thứ Năm"
+                },
+                {
+                    "id": "5ab719e0-6ee4-48af-a6ad-47c3157ce032",
+                    "category": "Nhà hàng",
+                    "description": "Cơm ga mắm tỏi",
+                    "amount": 54000,
+                    "quantity": 2,
+                    "weekday": "Thứ Năm"
+                }
+            ],
+            "2024-08-30": [
+                {
+                    "id": "4bd7aabb-b16b-4d98-9470-e20e67fe77d9",
+                    "category": "Giáo dục",
+                    "description": "Khóa học pixel [Đã hoàn tiền trên udemy]",
+                    "amount": 299000.0,
+                    "quantity": 1,
+                    "weekday": "Thứ Sáu"
+                }
+            ],
+            "2024-08-31": [
+                {
+                    "id": "dd46c284-0558-4f4f-9c51-065c2bf56f96",
+                    "category": "Nhà hàng",
+                    "description": "Cơm ga mắm tỏi",
+                    "amount": 70000,
+                    "quantity": 2,
+                    "weekday": "Thứ Bảy"
+                }
+            ],
+            "2024-09-02": [
+                {
+                    "id": "0ae5985d-ce9e-46c1-b012-f6b79b1ecd61",
+                    "category": "Mua sắm",
+                    "description": "Truyện thanh gươm diệt quỷ",
+                    "amount": 50000,
+                    "quantity": 2,
+                    "weekday": "Thứ Hai"
+                },
+                {
+                    "id": "9a3c2caa-07b2-4b94-8bb7-2f68a6b46fbd",
+                    "category": "Nhà hàng",
+                    "description": "Cơm thịt kho",
+                    "amount": 35000,
+                    "quantity": 1,
+                    "weekday": "Thứ Hai"
+                },
+                {
+                    "id": "81d49147-73a4-4fd5-ab2c-fd13889a9310",
+                    "category": "Nhà hàng",
+                    "description": "Cafe sữa & tra sữa matcha lette",
+                    "amount": 65000,
+                    "quantity": 1,
+                    "weekday": "Thứ Hai"
+                }
+            ],
+            "2024-09-03": [
+                {
+                    "id": "cb141910-85cc-4364-a1c0-5815b293d4b0",
+                    "category": "Tiền nhà",
+                    "description": "Tiền trọ tháng 8",
+                    "amount": 2484000,
+                    "quantity": 1,
+                    "weekday": "Thứ Ba"
+                }
+            ],
+            "2024-09-04": [
+                {
+                    "id": "b316a38d-b0c9-4f8f-98e2-e03639e19138",
+                    "category": "Mua sắm",
+                    "description": "Truyện thanh gươm diệt quỷ x6 tập",
+                    "amount": 154000,
+                    "quantity": 1,
+                    "weekday": "Thứ Tư"
+                },
+                {
+                    "id": "1f936d2d-2dd1-48bd-b70e-7efd852f7e8d",
+                    "category": "Nhà hàng",
+                    "description": "Cafe sữa",
+                    "amount": 20000.0,
+                    "quantity": 1,
+                    "weekday": "Thứ Tư"
+                },
+                {
+                    "id": "a068d9b9-4a13-4bae-9089-a0369ed1e6e6",
+                    "category": "Biếu tặng",
+                    "description": "Tip shipper",
+                    "amount": 6000.0,
+                    "quantity": 1,
+                    "weekday": "Thứ Tư"
+                }
+            ],
+            "2024-09-05": [
+                {
+                    "id": "84703e03-70b5-4408-a7d0-f09c654ee1f0",
+                    "category": "Đi chợ siêu thị",
+                    "description": "Tra Olong x6",
+                    "amount": 45000,
+                    "quantity": 1,
+                    "weekday": "Thứ Năm"
+                },
+                {
+                    "id": "72a4b551-8154-46d8-90b4-ede3b817737c",
+                    "category": "Đi chợ siêu thị",
+                    "description": "Snack khoai tây PRINGLES x2",
+                    "amount": 83800,
+                    "quantity": 2,
+                    "weekday": "Thứ Năm"
+                },
+                {
+                    "id": "be16fd9f-d1d1-47ab-ae59-82a5a436b632",
+                    "category": "Đi chợ siêu thị",
+                    "description": "Tra sữa trân châu 22ml",
+                    "amount": 18200.0,
+                    "quantity": 1,
+                    "weekday": "Thứ Năm"
+                }
+            ],
+            "2024-09-06": [
+                {
+                    "id": "ecf4c470-ed70-492f-8b01-49b09b5ea469",
+                    "category": "Mua sắm",
+                    "description": "Sách x2 [quản lý thời gian bí kíp thăng tiến] bút bi & note",
+                    "amount": 299000,
+                    "quantity": 1,
+                    "weekday": "Thứ Sáu"
+                },
+                {
+                    "id": "873cb99f-91d9-4f50-887b-b286aeec92f1",
+                    "category": "Đi chợ siêu thị",
+                    "description": "Thùng mì 30 gói hảo hảo",
+                    "amount": 125000,
+                    "quantity": 1,
+                    "weekday": "Thứ Sáu"
+                },
+                {
+                    "id": "ece3c4b8-8c66-4c39-a75d-336e3f51324c",
+                    "category": "Đi chợ siêu thị",
+                    "description": "Bịch ca phê chữ I",
+                    "amount": 80000,
+                    "quantity": 1,
+                    "weekday": "Thứ Sáu"
+                }
+            ],
+            "2024-09-07": [
+                {
+                    "id": "6424146a-373e-4dce-9f5d-c19009be11b1",
+                    "category": "Đi chợ siêu thị",
+                    "description": "Nước ngọt 7 UP X2",
+                    "amount": 21400,
+                    "quantity": 2,
+                    "weekday": "Thứ Bảy"
+                },
+                {
+                    "id": "c47e4148-4bf5-4418-936f-e087e8877e8e",
+                    "category": "Đi chợ siêu thị",
+                    "description": "Tra sữa trân châu chai",
+                    "amount": 18200,
+                    "quantity": 1,
+                    "weekday": "Thứ Bảy"
+                },
+                {
+                    "id": "84d75b46-be08-46e9-99ed-f7c59f656146",
+                    "category": "Khác",
+                    "description": "Tiền gửi xe",
+                    "amount": 3000,
+                    "quantity": 1,
+                    "weekday": "Thứ bảy"
+                }
+            ],
+            "2024-09-08": [
+                {
+                    "id": "5fd0f643-5c48-474b-b2b6-158869814e30",
+                    "category": "Mua sắm",
+                    "description": "Truyện diệt quỷ tập 23",
+                    "amount": 25000,
+                    "quantity": 1,
+                    "weekday": "Chủ Nhật"
+                },
+                {
+                    "id": "d1005643-688f-42bc-a78e-badde617aed8",
+                    "category": "Biếu tặng",
+                    "description": "Tip shipper",
+                    "amount": 9000,
+                    "quantity": 1,
+                    "weekday": "Chủ Nhật"
+                }
+            ],
+            "2024-09-09": [
+                {
+                    "id": "503f7cb2-313d-4085-a119-c8b59acb72ec",
+                    "category": "Mua sắm",
+                    "description": "Truyện thanh gươm diệt quỷ tập 12",
+                    "amount": 42500,
+                    "quantity": 1,
+                    "weekday": "Thứ Hai"
+                },
+                {
+                    "id": "baeb7e1f-f695-4819-ad4b-a195568e782f",
+                    "category": "Biếu tặng",
+                    "description": "Tip Shipper",
+                    "amount": 17500,
+                    "quantity": 1,
+                    "weekday": "Thứ Hai"
+                }
+            ],
+            "2024-09-10": [
+                {
+                    "id": "38be244e-53cb-4d3e-9501-194d8cada36a",
+                    "category": "Mua sắm",
+                    "description": "Cafe sữa",
+                    "amount": 20000,
+                    "quantity": 1,
+                    "weekday": "Thứ Ba"
+                },
+                {
+                    "id": "adff4c03-529d-425c-bf7d-5f10986d83e9",
+                    "category": "Mua sắm",
+                    "description": "SSD 1TB Kingston",
+                    "amount": 1656000.0,
+                    "quantity": 1,
+                    "weekday": "Thứ Ba"
+                },
+                {
+                    "id": "a7bec6b8-7f4c-4f69-b93f-1f5ae39ee4c6",
+                    "category": "Mua sắm",
+                    "description": "Thanh gươm diệt quỷ tập 16",
+                    "amount": 33000,
+                    "quantity": 1,
+                    "weekday": "Thứ Ba"
+                },
+                {
+                    "id": "3e651b74-7649-428b-8511-795764f9850a",
+                    "category": "Mua sắm",
+                    "description": "Thanh gươm diệt quỷ tập 13 & 15",
+                    "amount": 62000,
+                    "quantity": 1,
+                    "weekday": "Thứ Ba"
+                },
+                {
+                    "id": "20c46634-3a40-484e-a61e-7c4a3fe1ac6e",
+                    "category": "Biếu tặng",
+                    "description": "Tip shipper",
+                    "amount": 5000,
+                    "quantity": 1,
+                    "weekday": "Thứ Ba"
+                },
+                {
+                    "id": "4c663539-1f12-4f7a-b65f-6a29c01056be",
+                    "category": "Khác",
+                    "description": "Tiền gửi xe ",
+                    "amount": 3000,
+                    "quantity": 1,
+                    "weekday": "Thứ ba"
+                }
+            ],
+            "2024-09-11": [
+                {
+                    "id": "a4677316-e33c-4f20-9fa7-7db0a384e6c7",
+                    "category": "Khác",
+                    "description": "Xem lượt CV topcv",
+                    "amount": 10000,
+                    "quantity": 1,
+                    "weekday": "Thứ Tư"
+                },
+                {
+                    "id": "fd5bae0f-3c02-4d43-b5dd-2853afa57d25",
+                    "category": "Đi chợ siêu thị",
+                    "description": "Sữa chua 100g",
+                    "amount": 47200,
+                    "quantity": 8,
+                    "weekday": "Thứ Tư"
+                },
+                {
+                    "id": "d451e29b-e931-4540-9a21-12fd381024b6",
+                    "category": "Đi chợ siêu thị",
+                    "description": "Đậu hũ non hộp 280g",
+                    "amount": 25400,
+                    "quantity": 2,
+                    "weekday": "Thứ Tư"
+                },
+                {
+                    "id": "bf49c047-1727-4f1a-b900-85f5ccd7dfe1",
+                    "category": "Đi chợ siêu thị",
+                    "description": "Đậu hũ chiên miếng 500g",
+                    "amount": 23200,
+                    "quantity": 1,
+                    "weekday": "Thứ Tư"
+                },
+                {
+                    "id": "1c6e90f8-9979-4fb4-8638-18579159e054",
+                    "category": "Đi chợ siêu thị",
+                    "description": "TS trân châu chai ",
+                    "amount": 36400,
+                    "quantity": 2,
+                    "weekday": "Thứ Tư"
+                },
+                {
+                    "id": "2d8ccd0f-66a3-4c19-a8ea-008243f7f427",
+                    "category": "Đi chợ siêu thị",
+                    "description": "Socola Chunky",
+                    "amount": 36800,
+                    "quantity": 2,
+                    "weekday": "Thứ Tư"
+                }
+            ],
+            "2024-09-12": [
+                {
+                    "id": "39c9f972-7c03-41e1-81db-6d973f779ff6",
+                    "category": "Biếu tặng",
+                    "description": "Ủng hộ đồng bao miền Bắc ảnh hưởng bởi bão số 3",
+                    "amount": 200000,
+                    "quantity": 1,
+                    "weekday": "Thứ Năm"
+                }
+            ],
+            "2024-09-14": [
+                {
+                    "id": "c9d68fcd-0861-4244-a1c8-0360bfdbe3a6",
+                    "category": "Đi chợ siêu thị",
+                    "description": "Tra Olong",
+                    "amount": 10000,
+                    "quantity": 1,
+                    "weekday": "Thứ Bảy"
+                },
+                {
+                    "id": "08453fc5-dace-4ed0-8a6e-657ec025cd21",
+                    "category": "Biếu tặng",
+                    "description": "Tip chuyen du lieu SSD",
+                    "amount": 20000,
+                    "quantity": 1,
+                    "weekday": "Thứ Bảy"
+                }
+            ]
+        }
+    },
+    "savings": {
+        "2024-09-04": [
+            {
+                "amount": 17050000,
+                "description": "Tiền học phí",
+                "weekday": "Thứ Tư"
+            }
+        ]
+    }
+}

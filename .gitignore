@@ -1,0 +1,16 @@
+# Bỏ qua các file JSON
+*.json
+
+json/Chitieu.json
+
+# Bỏ qua thư mục chứa file bytecode Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Bỏ qua file cấu hình IDE
+*.idea/
+*.vscode/
+
+# Bỏ qua các file log
+*.log
