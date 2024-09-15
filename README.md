@@ -117,31 +117,30 @@ Start the python project
 
 ## Screenshots
 
-<div style = 'display:flex; padding: 10px;' >
-
-<kbd><img src="./screenShot/Screenshot 2024-09-03 143550.png" width='100px' height='50px'></kbd>
-
-<kbd><img src="./screenShot/Screenshot 2024-09-03 143557.png" width='100px' height='50px' ></kbd>
-
-<kbd><img src="./screenShot/Screenshot 2024-09-03 143622.png" width='100px' height='50px'></kbd>
-
-<kbd><img src="./screenShot/Screenshot 2024-09-03 143629.png " width='100px' height='50px'></kbd>
-
+<div align="center">
+  <kbd><img src="./screenShot/Screenshot 2024-09-03 143550.png" width="120px" height="50px"></kbd>
+  <kbd><img src="./screenShot/Screenshot 2024-09-03 143557.png" width="120px" height="50px"></kbd>
+  <kbd><img src="./screenShot/Screenshot 2024-09-03 143622.png" width="120px" height="50px"></kbd>
+  <kbd><img src="./screenShot/Screenshot 2024-09-03 143629.png" width="120px" height="50px"></kbd>
 </div>
 
 <kbd><img src="./screenShot/Screenshot 2024-09-03 143537.png"></kbd>
 
 ## News! - Themes
 
-<kbd><img src="./screenShot/themeScreenshots/Screenshot 2024-09-15 212020.png"></kbd>
+<div  align='center' >
+ 
+<kbd><img src="./screenShot/themeScreenshots/Screenshot 2024-09-15 212020.png" width='550px'></kbd>
 
-<kbd><img src="./screenShot/themeScreenshots/Screenshot 2024-09-15 212039.png"></kbd>
+<kbd><img src="./screenShot/themeScreenshots/Screenshot 2024-09-15 212039.png" width='550px'></kbd>
 
-<kbd><img src="./screenShot/themeScreenshots/Screenshot 2024-09-15 212104.png"></kbd>
+<kbd><img src="./screenShot/themeScreenshots/Screenshot 2024-09-15 212104.png" width='550px'></kbd>
 
-<kbd><img src="./screenShot/themeScreenshots/Screenshot 2024-09-15 212137.png"></kbd>
+<kbd><img src="./screenShot/themeScreenshots/Screenshot 2024-09-15 212137.png" width='550px'></kbd>
 
-<kbd><img src="./screenShot/themeScreenshots/Screenshot 2024-09-15 212258.png"></kbd>
+<kbd><img src="./screenShot/themeScreenshots/Screenshot 2024-09-15 212258.png" width='550px'></kbd>
+ 
+</div>
 
 ## Font & terminal
 
