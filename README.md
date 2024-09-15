@@ -111,17 +111,13 @@ Start the python project
 
 ## Tài liệu cách sử dụng thư viện
 
-[termcharts](https://pypi.org/project/termcharts/) |
-[rich](https://rich.readthedocs.io/en/stable/introduction.html) |
-[tabulate](https://pypi.org/project/tabulate/) |
-[colorama](https://pypi.org/project/colorama/) |
-[inquirer](https://python-inquirer.readthedocs.io/en/latest/installation.html) |
-
-[pyfiglet](https://pypi.org/project/pyfiglet/) ~ Font example :
-
-```bash
-http://www.figlet.org/examples.html
-```
+[Termcharts](https://pypi.org/project/termcharts/) |
+[Rich](https://rich.readthedocs.io/en/stable/introduction.html) |
+[Tabulate](https://pypi.org/project/tabulate/) |
+[Colorama](https://pypi.org/project/colorama/) |
+[Inquirer](https://python-inquirer.readthedocs.io/en/latest/installation.html) |
+[Pyfiglet](https://pypi.org/project/pyfiglet/) & [Font Pyfiglet](http://www.figlet.org/examples.html) |
+[Unicode](https://pypi.org/project/Unidecode/)
 
 ## Screenshots
 
