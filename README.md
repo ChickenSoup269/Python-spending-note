@@ -98,14 +98,14 @@ Clone the project
 Go to the project directory
 
 ```bash
-  cd to project
+  cd Python-spending-note
 ```
 
 Start the python project
 
 ```bash
-  python main.py
-  or
+  python main.py | python3 main.py
+   ==== or ====
   run in terminal on vs code
 ```
 
