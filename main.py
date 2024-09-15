@@ -1,7 +1,7 @@
 from imports import *
 from utils import *
 # -*- coding: utf-8 -*-
-from business.business_menu import business_menu
+# from business.business_menu import business_menu
 from expenses.expense_menu import expense_menu
 from savings.savings_menu import savings_menu
 from settings.setting_menu import settings_menu
@@ -21,7 +21,7 @@ def get_greeting():
 
 # In ra lời chào
 # print('Ngày: ' + current_date + '\n')
-print(get_greeting(), Fore.CYAN + dt_string + '\n')
+print(selected_color + get_greeting(), Fore.CYAN + dt_string + '\n')
 
 # Dự báo thời tiết hoặc cái gì đó đại loại vậy 
 # ==============================

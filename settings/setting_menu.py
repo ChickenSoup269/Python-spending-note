@@ -14,7 +14,7 @@ def settings_menu():
     settings_question = [
         inquirer.List(
             'settings_choice',
-            message="Chọn cài đặt:",
+            message="Chọn cài đặt",
             choices=settings_options
         )
     ]

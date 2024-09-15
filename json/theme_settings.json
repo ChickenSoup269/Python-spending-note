@@ -1,0 +1,12 @@
+{
+    "color": "Fore.LIGHTGREEN_EX",
+    "art_style": "standard",
+    "width": "120",
+    "use_random_colors": true,
+    "program_name": "Zero Spending",
+    "show_time": true,
+    "time_font_style": "slant",
+    "change_title_color": true,
+    "title_color_choice": "S\u1eed d\u1ee5ng m\u00e0u \u0111\u1ea1i di\u1ec7n",
+    "time_format": "date"
+}

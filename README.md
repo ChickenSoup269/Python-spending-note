@@ -1,6 +1,6 @@
 # Python Quản Lý Chi Tiêu Cá Nhân [![My Skills](https://skillicons.dev/icons?i=python)](https://skillicons.dev)
 
-[![Generic badge](https://img.shields.io/badge/StatusProject-OK-green.svg)](https://shields.io/) [![1.1.1!](https://img.shields.io/badge/Version-1.1.1-1abc9c.svg)](https://GitHub.com/Naereen/ama) ![Maintainer](https://img.shields.io/badge/Python-3.12-blue)
+[![Generic badge](https://img.shields.io/badge/StatusProject-OK-green.svg)](https://shields.io/) [![1.1.2!](https://img.shields.io/badge/Version-1.1.2-1abc9c.svg)](https://GitHub.com/Naereen/ama) ![Maintainer](https://img.shields.io/badge/Python-3.12-blue)
 
 **Tech & version:**  
 [![Generic badge](https://img.shields.io/badge/pyfiglet-1.0.2-green.svg)](https://shields.io/) [![Generic badge](https://img.shields.io/badge/termcharts-1.1.2-blue.svg)](https://shields.io/) [![1.0.1!](https://img.shields.io/badge/inquirer-3.4.0-1abc9c.svg)](https://GitHub.com/Naereen/ama) [![Generic badge](https://img.shields.io/badge/tabulate-0.9.0-red.svg)](https://shields.io/) [![Generic badge](https://img.shields.io/badge/rich-13.7.1-yellow.svg)](https://shields.io/) ![Generic badge](https://img.shields.io/badge/colorama-0.4.6-white.svg)
@@ -117,25 +117,46 @@ Start the python project
 
 ## Screenshots
 
+<div style = 'display:flex; padding: 10px;' >
+
+<kbd><img src="./screenShot/Screenshot 2024-09-03 143550.png" width='100px' height='50px'></kbd>
+
+<kbd><img src="./screenShot/Screenshot 2024-09-03 143557.png" width='100px' height='50px' ></kbd>
+
+<kbd><img src="./screenShot/Screenshot 2024-09-03 143622.png" width='100px' height='50px'></kbd>
+
+<kbd><img src="./screenShot/Screenshot 2024-09-03 143629.png " width='100px' height='50px'></kbd>
+
+</div>
+
 <kbd><img src="./screenShot/Screenshot 2024-09-03 143537.png"></kbd>
 
-<kbd><img src="./screenShot/Screenshot 2024-09-03 143550.png"></kbd>
+## News! - Themes
 
-<kbd><img src="./screenShot/Screenshot 2024-09-03 143557.png"></kbd>
+<kbd><img src="./screenShot/themeScreenshots/Screenshot 2024-09-15 212020.png"></kbd>
 
-<kbd><img src="./screenShot/Screenshot 2024-09-03 143622.png"></kbd>
+<kbd><img src="./screenShot/themeScreenshots/Screenshot 2024-09-15 212039.png"></kbd>
 
-<kbd><img src="./screenShot/Screenshot 2024-09-03 143629.png"></kbd>
+<kbd><img src="./screenShot/themeScreenshots/Screenshot 2024-09-15 212104.png"></kbd>
 
-<kbd><img src="./screenShot/image.png"></kbd>
+<kbd><img src="./screenShot/themeScreenshots/Screenshot 2024-09-15 212137.png"></kbd>
 
-## Font sử dụng trong terminal
+<kbd><img src="./screenShot/themeScreenshots/Screenshot 2024-09-15 212258.png"></kbd>
+
+## Font & terminal
 
 ### - Sử dụng oh-my-posh để custom giao diện terminal
 
 `link:` https://ohmyposh.dev/docs
 
->
+### Font sử dụng
+
+- <h3> JetBrainsMono Nerd Font </h3>
+- `Ctrl + f` = "jetbrain" | để tìm
+
+  > `Link` https://www.nerdfonts.com/font-downloads |
+
+  > `review` https://www.programmingfonts.org/#jetbrainsmono
 
 ## Video demo
 

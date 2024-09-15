@@ -1,7 +1,7 @@
 from imports import *
 
 # Hàm tính số ngày còn lại đến sự kiện
-def days_until_event(event_date):
+def days_until_tet(event_date):
     today = datetime.now()
     this_year_event_date = datetime(today.year, event_date.month, event_date.day)
     
@@ -13,40 +13,43 @@ def days_until_event(event_date):
         next_event_date = this_year_event_date
     
     days_left = (next_event_date - today).days
-    return days_left, next_event_date.year
+    return days_left, next_event_date.year, this_year_event_date.strftime('%d/%m/%Y')
 
-# Ngày Tết Âm Lịch (ví dụ, 10/2/2024, bạn cần thay đổi tùy theo năm)
-tet_date = datetime(2024, 2, 10)  # Ngày mồng 1 Tết Âm Lịch của năm 2024
 
 # Hàm tính số ngày còn lại đến Giáng Sinh
 def days_until_christmas():
     today = datetime.now()
     christmas_date = datetime(today.year, 12, 25)  # Ngày Giáng Sinh
+
     if today > christmas_date:
         christmas_date = datetime(today.year + 1, 12, 25)  # Nếu đã qua Giáng Sinh, tính năm sau
+
     days_left = (christmas_date - today).days
-    return days_left, christmas_date.year
+    return days_left, christmas_date.year, christmas_date.strftime('%d/%m/%Y')
 
 # Hàm tính số ngày còn lại đến Quốc Khánh
 def days_until_independence_day():
     today = datetime.now()
     independence_day_date = datetime(today.year, 9, 2)  # Ngày Quốc Khánh
+
     if today > independence_day_date:
         independence_day_date = datetime(today.year + 1, 9, 2)  # Nếu đã qua Quốc Khánh, tính năm sau
     days_left = (independence_day_date - today).days
-    return days_left, independence_day_date.year
-
-# Ngày Halloween
-halloween_date = datetime(2024, 10, 31)  # Ngày Halloween của năm 2024
+    
+    return days_left, independence_day_date.year, independence_day_date.strftime('%d/%m/%Y')
 
 # Hàm tính số ngày còn lại đến Halloween
 def days_until_halloween():
     today = datetime.now()
     halloween_date = datetime(today.year, 10, 31)  # Ngày Halloween
+
+    # Nếu hôm nay đã qua ngày 31 tháng 10, tính ngày Halloween của năm sau
     if today > halloween_date:
-        halloween_date = datetime(today.year + 1, 10, 31)  # Nếu đã qua Halloween, tính năm sau
+        halloween_date = datetime(today.year + 1, 10, 31)
     days_left = (halloween_date - today).days
-    return days_left, halloween_date.year
+
+    return days_left, halloween_date.year, halloween_date.strftime('%d/%m/%Y')
+
 
 
 # Load cài đặt theme
@@ -63,6 +66,7 @@ time_format = theme_settings.get("time_format", "both")
 
 # Tạo chữ ACII từ tên chương trình
 art = pyfiglet.figlet_format(program_name, font=selected_font)
+colored_message = ""
 
 # Hàm để lấy định dạng thời gian dựa trên cài đặt
 def get_formatted_time():
@@ -76,31 +80,85 @@ def get_formatted_time():
     return ""
 
 dateTimes = get_formatted_time() if show_time else ""
+# ====================
+
+
+#  Ngày Tết Âm Lịch (ví dụ, 10/2/2024, bạn cần thay đổi tùy theo năm)
+tet_date = datetime(2024, 2, 10)  
+
+
+# ====================
 
 days_left_display = ""
-
 # Kiểm tra theme và tính số ngày còn lại đến sự kiện
-if theme_settings.get("program_name") == "Tết": 
-    days_left, year = days_until_event(tet_date)
-    days_left_display = f"Ngày Tết: {tet_date.strftime('%d/%m/%Y')}\nCòn {days_left} ngày nữa đến Tết Âm Lịch năm {year}!"
+if theme_settings.get("program_name") == "Tet": 
+    days_left, year,next_event = days_until_tet(tet_date)  # Tính số ngày còn lại đến Tết
+    days_left_display = f"Ngày Tết: {tet_date.strftime('%d/%m/%Y')}\nCòn {days_left} ngày nữa đến Tết Âm Lịch năm {year}! 🧧"
     new_year_message = pyfiglet.figlet_format("Nam Moi Binh An!", font="digital")  
-    print(new_year_message)
+    next_event_display = f"\nTết Nguyên Đán sẽ diễn ra vào ngày: {next_event}! 🎇"
 
-elif theme_settings.get("program_name") == "Giáng Sinh":  
-    days_left, year = days_until_christmas()
-    days_left_display = f"Hôm nay là: {datetime.now().strftime('%d/%m/%Y')}\nCòn {days_left} ngày nữa đến Giáng Sinh năm {year}!"
-    christmas_message = pyfiglet.figlet_format("Merry Christmark!", font="slant")  
-    print(christmas_message)
+    colors = [Fore.LIGHTRED_EX, Fore.LIGHTYELLOW_EX]  # Đỏ và Vàng
 
-elif theme_settings.get("program_name") == "Quốc Khánh":  
-    days_left, year = days_until_independence_day()
-    days_left_display = f"Hôm nay là: {datetime.now().strftime('%d/%m/%Y')}\nCòn {days_left} ngày nữa đến Quốc Khánh năm {year}!"
+    for i, char in enumerate(new_year_message):
+        # Xen kẽ giữa hai màu
+        colored_message += colors[i % 2] + char
 
+    # Reset màu sau khi in
+    colored_message += Style.RESET_ALL
+    print(colored_message)
+
+# Tính số ngày còn lại đến Giáng Sinh
+elif theme_settings.get("program_name") == "Christmas":  
+    days_left, year, next_event = days_until_christmas()  # Tính số ngày còn lại đến Giáng Sinh
+    days_left_display = f"Hôm nay là: {datetime.now().strftime('%d/%m/%Y')}\nCòn {days_left} ngày nữa đến Giáng Sinh năm {year}! 🎄"
+    christmas_message = pyfiglet.figlet_format("merry Chirsmarrk!", font="pyramid", width = 120 )  
+    next_event_display = f"\nGiánh Sinh sẽ diễn ra vào ngày: {next_event}! ❄️"
+
+    colors = [Fore.LIGHTCYAN_EX, Fore.LIGHTWHITE_EX]  # xanh và trắng
+    
+    for i, char in enumerate(christmas_message):
+        # Xen kẽ giữa hai màu
+        colored_message += colors[i % 2] + char
+
+    # Reset màu sau khi in
+    colored_message += Style.RESET_ALL
+    print(colored_message)
+
+
+# Tính số ngày còn lại đến Quốc Khánh
+elif theme_settings.get("program_name") == "Quoc Khanh":  
+    days_left, year, next_event = days_until_independence_day()  # Tính số ngày còn lại đến Quốc Khánh
+    days_left_display = f"Hôm nay là: {datetime.now().strftime('%d/%m/%Y')}\nCòn {days_left} ngày nữa đến Quốc Khánh năm {year}! 🎊"
+    independence_day = pyfiglet.figlet_format("02/09/1945", font="larry3d", width = 120 )  
+    next_event_display = f"\nQuốc Khánh sẽ diễn ra vào ngày: {next_event}! 🎉"
+
+    colors = [Fore.LIGHTRED_EX, Fore.LIGHTYELLOW_EX]  # Đỏ và Vàng
+
+    for i, char in enumerate(independence_day):
+        # Xen kẽ giữa hai màu
+        colored_message += colors[i % 2] + char
+
+    # Reset màu sau khi in
+    colored_message += Style.RESET_ALL
+    print(colored_message)
+
+# Tính số ngày còn lại đến Halloween
 elif theme_settings.get("program_name") == "Halloween":  
-    days_left, year = days_until_halloween()
-    days_left_display = f"Hôm nay là: {datetime.now().strftime('%d/%m/%Y')}\nCòn {days_left} ngày nữa đến Halloween năm {year}!"
-    halloween_message = pyfiglet.figlet_format("Happy Halloween!", font="slant")  
-    print(halloween_message)
+    days_left, year, next_event = days_until_halloween()
+    days_left_display = f"Hôm nay là: {datetime.now().strftime('%d/%m/%Y')}\nCòn {days_left} ngày nữa đến Halloween năm {year}! 👻"
+    halloween_message = pyfiglet.figlet_format("Happy Halloween", font="poison" , width = 120)  
+    next_event_display = f"\nHalloween sẽ diễn ra vào ngày: {next_event}! 🎃"
+
+    colored_message = ""
+    colors = [Fore.LIGHTMAGENTA_EX, Fore.LIGHTYELLOW_EX]  # tím và Vàng
+
+    for i, char in enumerate(halloween_message):
+        # Xen kẽ giữa hai màu
+        colored_message += colors[i % 2] + char
+
+    # Reset màu sau khi in
+    colored_message += Style.RESET_ALL
+    print(colored_message)
 
 
 # Nếu sử dụng màu ngẫu nhiên, chọn ngẫu nhiên từ danh sách
@@ -108,14 +166,21 @@ if use_random_colors:
     colors = [Fore.LIGHTRED_EX, Fore.LIGHTGREEN_EX, Fore.LIGHTYELLOW_EX, Fore.LIGHTBLUE_EX, Fore.LIGHTMAGENTA_EX, Fore.LIGHTCYAN_EX, Fore.LIGHTWHITE_EX]
     colored_line = ''.join(random.choice(colors) + '=' for _ in range(68))
     end_line = ''.join(random.choice(colors) + '*' for _ in range(68))
+
+# theme theo mùa 
+elif len(colored_message) > 1:
+    colored_line = ''.join(random.choice(colors)  + '=' for _ in range(68))
+    end_line = ''.join(random.choice(colors) + '*' for _ in range(68))
+
+# theme custom
 else:
-    colored_line = ''.join(selected_color + '=' for _ in range(68))
-    end_line = ''.join(selected_color + '*' for _ in range(68))
+    colored_line = ''.join(selected_color  + '=' for _ in range(68))
+    end_line = ''.join(selected_color  + '*' for _ in range(68))
 
 
 print(colored_line)
 
-# Kiểm tra xem người dùng có chọn đổi màu tiêu đề không và thực hiện theo lựa chọn
+# Kiểm tra user có chọn đổi màu tiêu đề không và thực hiện theo lựa chọn
 if change_title_color:
     if title_color_choice == "Không đổi màu (trắng)":
         print(Fore.LIGHTWHITE_EX + art)
@@ -131,6 +196,7 @@ if show_time:
     print(dateTimes)
 
 if days_left_display:
-    print(days_left_display)
+    print(selected_color + days_left_display + next_event_display + Style.RESET_ALL)
+    
 
 print(colored_line)
