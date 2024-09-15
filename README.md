@@ -103,11 +103,7 @@ Go to the project directory
 
 Start the python project
 
-```bash
-  python main.py | python3 main.py
-   ==== or ====
-  run in terminal on vs code
-```
+` python main.py` | `python3 main.py` | `run in terminal in vs code`
 
 ## Tài liệu cách sử dụng thư viện
 
