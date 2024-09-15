@@ -7,12 +7,15 @@ import termcharts #
 import pyfiglet #
 import random #
 import re #
+import sys #
 import termcharts.bar_chart
+
 # =================================
 from datetime import datetime, timedelta
 from tabulate import tabulate
 from collections import defaultdict
 from colorama import Fore, Back, Style, init
+from unidecode import unidecode 
 # ================================
 from rich.console import Console
 from rich.table import Table

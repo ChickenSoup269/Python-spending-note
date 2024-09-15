@@ -5,3 +5,4 @@ pyfiglet
 tabulate
 colorama
 rich
+unidecode

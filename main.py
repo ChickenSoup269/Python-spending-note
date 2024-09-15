@@ -4,11 +4,10 @@ from utils import *
 from business.business_menu import business_menu
 from expenses.expense_menu import expense_menu
 from savings.savings_menu import savings_menu
+from settings.setting_menu import settings_menu
 # =================================THEME===============================================
-from theme.Other.themeDefault import theme_menu
 from theme.changeThemes import *
 # ================================================================================
-
 
 # Check giờ để in lời chào sáng, chiều, tối
 def get_greeting():
@@ -19,11 +18,9 @@ def get_greeting():
     else:
         return 'Chào buổi tối, chúc bạn buổi tối thư giãn! 🌝'
 
-if days_left_display:
-    print(days_left_display)
 
 # In ra lời chào
-print('Ngày: ' + current_date + '\n')
+# print('Ngày: ' + current_date + '\n')
 print(get_greeting(), Fore.CYAN + dt_string + '\n')
 
 # Dự báo thời tiết hoặc cái gì đó đại loại vậy 
@@ -64,7 +61,7 @@ def main_menu():
             expenses = load_expenses()
             give_spending_advice(expenses) 
         elif main_answer['main_choice'] == "Cài đặt":  # Gọi hàm thay đổi theme
-            theme_menu()
+            settings_menu()
         elif main_answer['main_choice'] == "❌ Thoát":
             print(end_line)
             print(10*'=' + " | Cảm ơn bạn đã sử dụng chương trình! | " + 10*'=')

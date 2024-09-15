@@ -1,6 +1,6 @@
 # Python Quản Lý Chi Tiêu Cá Nhân [![My Skills](https://skillicons.dev/icons?i=python)](https://skillicons.dev)
 
-[![Generic badge](https://img.shields.io/badge/StatusProject-OK-green.svg)](https://shields.io/) [![1.1.0!](https://img.shields.io/badge/Version-1.1.0-1abc9c.svg)](https://GitHub.com/Naereen/ama) ![Maintainer](https://img.shields.io/badge/Python-3.12-blue)
+[![Generic badge](https://img.shields.io/badge/StatusProject-OK-green.svg)](https://shields.io/) [![1.1.1!](https://img.shields.io/badge/Version-1.1.1-1abc9c.svg)](https://GitHub.com/Naereen/ama) ![Maintainer](https://img.shields.io/badge/Python-3.12-blue)
 
 **Tech & version:**  
 [![Generic badge](https://img.shields.io/badge/pyfiglet-1.0.2-green.svg)](https://shields.io/) [![Generic badge](https://img.shields.io/badge/termcharts-1.1.2-blue.svg)](https://shields.io/) [![1.0.1!](https://img.shields.io/badge/inquirer-3.4.0-1abc9c.svg)](https://GitHub.com/Naereen/ama) [![Generic badge](https://img.shields.io/badge/tabulate-0.9.0-red.svg)](https://shields.io/) [![Generic badge](https://img.shields.io/badge/rich-13.7.1-yellow.svg)](https://shields.io/) ![Generic badge](https://img.shields.io/badge/colorama-0.4.6-white.svg)
@@ -66,6 +66,14 @@ pip install pyfiglet
 | :--------- | :------------------------------------------- |
 | `pyfiglet` | **Được** sử dụng vẽ mấy cái chữ pixel ASCII. |
 
+```bash
+pip install unidecode
+```
+
+| Type        | Description                                  |
+| :---------- | :------------------------------------------- |
+| `unidecode` | ở đây mình dùng để đọc ASCII bỏ dấu unicode. |
+
 ## Install one for all pip [UPDATE]
 
 ```bash
@@ -128,6 +136,14 @@ http://www.figlet.org/examples.html
 <kbd><img src="./screenShot/Screenshot 2024-09-03 143629.png"></kbd>
 
 <kbd><img src="./screenShot/image.png"></kbd>
+
+## Font sử dụng trong terminal
+
+### - Sử dụng oh-my-posh để custom giao diện terminal
+
+`link:` https://ohmyposh.dev/docs
+
+>
 
 ## Video demo
 

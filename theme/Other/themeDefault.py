@@ -1,22 +1,6 @@
 # In ra lời chào đầu 
 from imports import *
 
-# Hàm tính số ngày còn lại đến ngày Quốc Khánh
-def days_until_september_2():
-    today = datetime.now()
-    this_year_september_2 = datetime(today.year, 9, 2)
-    
-    if today > this_year_september_2:
-        # Nếu hôm nay đã qua 2/9 của năm nay, tính đến 2/9 năm sau
-        next_september_2 = datetime(today.year + 1, 9, 2)
-    else:
-        # Nếu chưa đến 2/9 của năm nay, tính đến 2/9 năm nay
-        next_september_2 = this_year_september_2
-    
-    days_left = (next_september_2 - today).days
-    return days_left
-
-# Hàm menu theme
 def theme_menu():
     # Các màu từ colorama
     theme_choices = [
@@ -41,14 +25,25 @@ def theme_menu():
 
     # Các theme theo mùa (predefined themes)
     predefined_themes = {
-        "Giáng Sinh": {"color": "Fore.LIGHTCYAN_EX", "font": "slant"},
-        "Quốc Khánh": {"color": "Fore.LIGHTRED_EX", "font": "standard", "date_display": True},  # Thêm date_display
-        "Tết": {"color": "Fore.LIGHTYELLOW_EX", "font": "bubble"},
-        "Halloween": {"color": "Fore.LIGHTMAGENTA_EX", "font": "barbwire"},
+        "Giáng Sinh": {"color": "Fore.LIGHTCYAN_EX", "font": "slant", "program_name": "Giáng Sinh"},
+        "Quốc Khánh": {"color": "Fore.LIGHTRED_EX", "font": "standard", "program_name": "Quốc Khánh"},
+        "Tết": {"color": "Fore.LIGHTYELLOW_EX", "font": "bubble", "program_name": "Tết"},
+        "Halloween": {"color": "Fore.LIGHTMAGENTA_EX", "font": "block", "program_name": "Halloween"},
+        "Mặc định": {
+            "color": "Fore.LIGHTWHITE_EX",
+            "font": "standard",
+            "program_name": "Zero Spending",
+            "use_random_colors": True,
+            "show_time": True,
+            "time_font_style": "banner3",
+            "change_title_color": False,
+            "title_color_choice": "Không đổi màu (trắng)",
+            "time_format": "time"
+        }
     }
 
     # Thêm các lựa chọn theme
-    theme_type_choices = ["Theme tùy chỉnh", "Giáng Sinh", "Quốc Khánh", "Tết", "Halloween", "Quay lại"]
+    theme_type_choices = ["Theme tùy chỉnh", "Giáng Sinh", "Quốc Khánh", "Tết", "Halloween", "Mặc định", "Quay lại"]
 
     # Câu hỏi về lựa chọn loại theme
     theme_type_question = [
@@ -67,32 +62,25 @@ def theme_menu():
         print("Đã quay lại menu chính.")
         return  # Thoát khỏi hàm, quay lại menu chính
 
-    # Nếu người dùng chọn theme theo mùa
-    if theme_type_answer['theme_type'] != "Theme tùy chỉnh":
+    # Nếu người dùng chọn theme theo mùa hoặc theme mặc định
+    if theme_type_answer['theme_type'] in predefined_themes:
         selected_theme = predefined_themes[theme_type_answer['theme_type']]
 
         # Lưu theme vào file JSON
         settings = {
             "color": selected_theme['color'],
             "art_style": selected_theme['font'],
-            "use_random_colors": False,
-            "program_name": "Zero Spending",
-            "show_time": False,
-            "time_font_style": "banner3",
-            "change_title_color": False,
-            "title_color_choice": "Không đổi màu (trắng)"
+            "use_random_colors": selected_theme.get('use_random_colors', False),
+            "program_name": unidecode(selected_theme['program_name']),  # Bỏ dấu cho tên chương trình
+            "show_time": selected_theme.get('show_time', False),
+            "time_font_style": selected_theme.get('time_font_style', "banner3"),
+            "change_title_color": selected_theme.get('change_title_color', False),
+            "title_color_choice": selected_theme.get('title_color_choice', "Không đổi màu (trắng)"),
+            "time_format": selected_theme.get('time_format', "none")  # Không hiển thị thời gian
         }
         save_theme_settings(settings)
-
-        # Nếu là theme Quốc Khánh, hiển thị ngày 2/9/1945 và số ngày còn lại
-        if theme_type_answer['theme_type'] == "Quốc Khánh" and selected_theme.get("date_display"):
-            print("Ngày Quốc Khánh: 2/9/1945")
-            days_left = days_until_september_2()
-            print(f"Còn {days_left} ngày nữa đến ngày Quốc Khánh.")
-
-        print(f"Theme {theme_type_answer['theme_type']} đã được áp dụng.")
-        return  # Thoát ngay sau khi áp dụng theme
-
+        print(f"Theme '{theme_type_answer['theme_type']}' đã được lưu.")
+      
     # Nếu người dùng chọn theme tùy chỉnh
     elif theme_type_answer['theme_type'] == "Theme tùy chỉnh":
         # Các câu hỏi về cài đặt theme
@@ -132,13 +120,27 @@ def theme_menu():
         # Lấy câu trả lời từ người dùng
         theme_answer = inquirer.prompt(theme_questions)
 
-        # Kiểm tra nếu người dùng chọn "Quay lại" ở câu hỏi về màu
-        if theme_answer['color_choice'] == "Quay lại" or theme_answer['font_choice'] == "quay lại":
+        # Kiểm tra nếu người dùng chọn "Quay lại" ở câu hỏi về màu hoặc font
+        if theme_answer['color_choice'] == "Ngẫu nhiên" or theme_answer['font_choice'] == "quay lại":
             print("Đã quay lại menu chính.")
             return  # Thoát khỏi hàm, quay lại menu chính
 
-        # Kiểm tra nếu người dùng chọn hiển thị thời gian, hỏi thêm về font cho thời gian
+        # Kiểm tra nếu người dùng chọn hiển thị thời gian, hỏi thêm về kiểu hiển thị thời gian
         if theme_answer['show_time']:
+            time_display_choice = [
+                inquirer.List(
+                    'time_format',
+                    message="Bạn muốn hiển thị gì?",
+                    choices=[
+                        ('Chỉ giờ (HH:MM:SS)', 'time'),
+                        ('Chỉ ngày (dd/mm/yyyy)', 'date'),
+                        ('Cả ngày và giờ (dd/mm/yyyy HH:MM:SS)', 'both')
+                    ]
+                )
+            ]
+            time_display_answer = inquirer.prompt(time_display_choice)
+
+            # Sau khi người dùng chọn kiểu hiển thị, tiếp tục hỏi về font thời gian
             time_font_question = inquirer.List(
                 'time_font_choice',
                 message="Chọn style cho font chữ hiển thị thời gian:",
@@ -146,16 +148,18 @@ def theme_menu():
                 default="banner3"  # Mặc định 'banner3' như ban đầu
             )
             time_font_answer = inquirer.prompt([time_font_question])
+
             if time_font_answer['time_font_choice'] == "quay lại":
                 print("Đã quay lại menu chính.")
                 return  # Thoát khỏi hàm, quay lại menu chính
             time_font_choice = time_font_answer['time_font_choice']
         else:
             time_font_choice = 'banner3'  # Mặc định là 'banner3' nếu không chọn hiển thị thời gian
+            time_display_answer = {'time_format': 'none'}
 
         selected_color = theme_colors.get(theme_answer['color_choice'], "Fore.LIGHTRED_EX")
         selected_font = theme_answer['font_choice']
-        program_name = theme_answer['program_name'] if theme_answer['program_name'] else "Zero Spending"
+        program_name = unidecode(theme_answer['program_name']) if theme_answer['program_name'] else "Zero Spending"
         use_random_colors = theme_answer['use_random_colors']
         show_time = theme_answer['show_time']
         change_title_color = theme_answer['change_title_color']
@@ -181,16 +185,15 @@ def theme_menu():
             "color": selected_color,
             "art_style": selected_font,
             "use_random_colors": use_random_colors,
-            "program_name": program_name,
+            "program_name": program_name,  # Tên chương trình do người dùng tùy chỉnh
             "show_time": show_time,
             "time_font_style": time_font_choice,  # Lưu font chữ thời gian
             "change_title_color": change_title_color,
-            "title_color_choice": title_color_answer['title_color_choice']  # Lưu lựa chọn màu tiêu đề
+            "title_color_choice": title_color_answer['title_color_choice'],  # Lưu lựa chọn màu tiêu đề
+            "time_format": time_display_answer['time_format']  # Lưu lựa chọn hiển thị giờ/ngày/cả hai
         }
         save_theme_settings(settings)
 
         print(f"Theme đã được lưu với màu {theme_answer['color_choice']}, kiểu chữ {theme_answer['font_choice']}.")
     else:
         print("Đã quay lại menu chính.")
-
-
