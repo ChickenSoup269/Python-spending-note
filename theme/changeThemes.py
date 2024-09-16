@@ -3,6 +3,19 @@ from imports import *
 # from theme.Halloween import *
 # from theme.QuocKhanh import *
 # from theme.Christmas import *
+from terminaltexteffects.effects.effect_rain import Rain
+from terminaltexteffects.effects.effect_blackhole import Blackhole
+from terminaltexteffects.effects.effect_beams import Beams
+from terminaltexteffects.effects.effect_print import Print
+from terminaltexteffects.effects.effect_scattered import Scattered
+from terminaltexteffects.effects.effect_burn import Burn
+from terminaltexteffects.effects.effect_decrypt import Decrypt
+from terminaltexteffects.effects.effect_binarypath import BinaryPath
+
+
+
+next_year = datetime.now().year + 1
+
 
 
 # Hàm tính số ngày còn lại đến sự kiện
@@ -56,6 +69,14 @@ def days_until_halloween():
     return days_left, halloween_date.year, halloween_date.strftime('%d/%m/%Y')
 
 
+# Hàm tính số ngày còn lại đến Giáng Sinh
+def days_until_new_year():
+    today = datetime.now()
+    new_year_date = datetime(today.year + 1, 1, 1)  # Ngày Tết Dương lịch của năm sau
+
+    days_left = (new_year_date - today).days
+    return days_left, new_year_date.year, new_year_date.strftime('%d/%m/%Y')
+
 # Load cài đặt theme
 theme_settings = load_theme_settings()
 selected_color = eval(theme_settings.get("color", "Fore.LIGHTRED_EX"))  
@@ -100,14 +121,18 @@ tet_date = datetime(2024, 2, 10)
 # Hiệu ứng nhập chữ (typing effect) với điều kiện theo theme
 def typing_effect(message):
     # Tùy thuộc vào chương trình, cài đặt thời gian trễ
-    if theme_settings.get("program_name") == "Tet":
+    if theme_settings.get("program_name") == f"Lunar New Year {next_year}":
         delay = 0.015  
     elif theme_settings.get("program_name") == "Christmas":
-        delay = 0.015  
+        delay = 0.015 
     elif theme_settings.get("program_name") == "Quoc Khanh":
         delay = 0.005  
     elif theme_settings.get("program_name") == "Halloween":
         delay = 0.005  
+    elif theme_settings.get("program_name") == "Zero Hacker":
+        delay = 0.001  
+    elif theme_settings.get("program_name") == f"New Year {next_year}":
+        delay = 0.015  
     else:
         delay = 0    # Các theme khác - không có hiệu ứng nhập chữ
 
@@ -135,44 +160,44 @@ def typing_effect(message):
 
 
 #  Cầu vòng typing
-def rainbow_typing_effect(message, delay=0.005):
-    colors = [Fore.RED, Fore.YELLOW, Fore.GREEN, Fore.CYAN, Fore.BLUE, Fore.MAGENTA]
-    skip_effect = False
+# def rainbow_typing_effect(message, delay=0.005):
+#     colors = [Fore.RED, Fore.YELLOW, Fore.GREEN, Fore.CYAN, Fore.BLUE, Fore.MAGENTA]
+#     skip_effect = False
 
-    for i, char in enumerate(message):
-        if keyboard.is_pressed('enter'):  # Nhấn Enter để bỏ qua hiệu ứng
-            skip_effect = True
-            break
+#     for i, char in enumerate(message):
+#         if keyboard.is_pressed('enter'):  # Nhấn Enter để bỏ qua hiệu ứng
+#             skip_effect = True
+#             break
 
-        print(colors[i % len(colors)] + char, end='', flush=True)
-        time.sleep(delay)
+#         print(colors[i % len(colors)] + char, end='', flush=True)
+#         time.sleep(delay)
 
-    if skip_effect:
-        # In ra toàn bộ thông điệp nếu nhấn Enter
-        print(Fore.RESET + message)
+#     if skip_effect:
+#         # In ra toàn bộ thông điệp nếu nhấn Enter
+#         print(Fore.RESET + message)
 
-    # Reset lại màu sau khi in
-    print(Style.RESET_ALL)
+#     # Reset lại màu sau khi in
+#     print(Style.RESET_ALL)
 
 
 # =========================
 
 days_left_display = ""
 
+
 #  ==========================================
 
 # Kiểm tra theme và tính số ngày còn lại đến sự kiện
-if theme_settings.get("program_name") == "Tet": 
+if theme_settings.get("program_name") == f"Lunar New Year {next_year}": 
     days_left, year,next_event = days_until_tet(tet_date)  # Tính số ngày còn lại đến Tết
     days_left_display = f"Ngày Tết: {tet_date.strftime('%d/%m/%Y')}\nCòn {days_left} ngày nữa đến Tết Âm Lịch năm {year}! 🧧"
-    new_year_message = pyfiglet.figlet_format("Nam Moi Binh An!", font="digital")  
+    new_year_message = pyfiglet.figlet_format("Nam Moi Binh An!\n Phat Tai Phat Loc", font="digital")  
     next_event_display = f"\nTết Nguyên Đán sẽ diễn ra vào ngày: {next_event}! 🎇"
 
     colors = [Fore.LIGHTRED_EX, Fore.LIGHTYELLOW_EX]  # Đỏ và Vàng
-    # Gọi hàm với hiệu ứng nhập chữ
     typing_effect(new_year_message)
 
-
+ 
 # Tính số ngày còn lại đến Giáng Sinh
 elif theme_settings.get("program_name") == "Christmas":  
     days_left, year, next_event = days_until_christmas()  # Tính số ngày còn lại đến Giáng Sinh
@@ -181,7 +206,11 @@ elif theme_settings.get("program_name") == "Christmas":
     next_event_display = f"\nGiánh Sinh sẽ diễn ra vào ngày: {next_event}! ❄️"
 
     colors = [Fore.LIGHTCYAN_EX, Fore.LIGHTWHITE_EX]  # xanh và trắng
-    typing_effect(christmas_message)
+    effect = Rain(christmas_message)
+
+    with effect.terminal_output() as terminal:
+        for frame in effect:
+            terminal.print(frame)
 
 
 # Tính số ngày còn lại đến Quốc Khánh
@@ -194,6 +223,7 @@ elif theme_settings.get("program_name") == "Quoc Khanh":
     colors = [Fore.LIGHTRED_EX, Fore.LIGHTYELLOW_EX]  # Đỏ và Vàng
     typing_effect(independence_day)
 
+
 # Tính số ngày còn lại đến Halloween
 elif theme_settings.get("program_name") == "Halloween":  
     days_left, year, next_event = days_until_halloween()
@@ -202,7 +232,39 @@ elif theme_settings.get("program_name") == "Halloween":
     next_event_display = f"\nHalloween sẽ diễn ra vào ngày: {next_event}! 🎃"
 
     colors = [Fore.LIGHTMAGENTA_EX, Fore.LIGHTYELLOW_EX]  # tím và Vàng
-    typing_effect(halloween_message)
+    effect = Scattered(halloween_message)
+    with effect.terminal_output() as terminal:
+        for frame in effect:
+            terminal.print(frame)
+
+# Tính ngày còn lại đến năm mới
+elif theme_settings.get("program_name") == f"New Year {next_year}":  
+    days_left, year, next_event = days_until_new_year()
+    days_left_display = f"Hôm nay là: {datetime.now().strftime('%d/%m/%Y')}\nCòn {days_left} ngày nữa đến năm mới {year}! 🎇"
+    new_year_message = pyfiglet.figlet_format("Happy New Year", font="big" , width = 120)  
+    next_event_display = f"\nTết tây sẽ diễn ra vào ngày: {next_event}! 🎉"
+
+    colors = [Fore.LIGHTCYAN_EX, Fore.LIGHTBLUE_EX]  # xanh và xanh trời
+    effect = Scattered(new_year_message)
+    with effect.terminal_output() as terminal:
+        for frame in effect:
+            terminal.print(frame)
+
+
+
+#  =====================================================
+
+
+elif theme_settings.get("program_name") == "Zero Hacker":  
+    colors = [Fore.LIGHTGREEN_EX, Fore.GREEN] # trắng và xanh lá
+
+
+# elif theme_settings.get("program_name") == "DOOM 1993":  
+#     colors = [Fore.LIGHTGREEN_EX, Fore.GREEN] # trắng và xanh lá
+
+
+
+#  =====================================================
 
 
 # Nếu sử dụng màu ngẫu nhiên, chọn ngẫu nhiên từ danh sách
@@ -218,12 +280,41 @@ else:
 
 plain_colored_line = colored_line.replace(selected_color, "")
 
+
 # Các theme theo mùa
-seasonal_themes = ["Tet", "Christmas", "Quoc Khanh", "Halloween"]
+seasonal_themes = [f"Lunar New Year {next_year}", "Christmas", "Quoc Khanh", "Halloween", "Zero Hacker", f"New Year {next_year}","DOOM 1993"]
 
 # In dòng kẻ với hiệu ứng hoặc không, tùy thuộc vào theme
 if theme_settings.get("program_name") in seasonal_themes: 
-    typing_effect(plain_colored_line)  
+    if theme_settings.get("program_name") == f"Lunar New Year {next_year}":
+        typing_effect(plain_colored_line)    
+
+    if theme_settings.get("program_name") == 'Christmas':
+         typing_effect(plain_colored_line)  
+
+    if theme_settings.get("program_name") == 'Quoc Khanh':
+        typing_effect(plain_colored_line)  
+
+    if theme_settings.get("program_name") == 'Halloween':
+        typing_effect(plain_colored_line)  
+
+    if theme_settings.get("program_name") == 'Zero Hacker':
+        effect = Print(plain_colored_line)
+        with effect.terminal_output() as terminal:
+            for frame in effect:
+                terminal.print(frame) 
+
+    if theme_settings.get("program_name") == f"New Year {next_year}": 
+        effect = Beams(plain_colored_line)
+        with effect.terminal_output() as terminal:
+            for frame in effect:
+                terminal.print(frame)
+
+    if theme_settings.get("program_name") == "DOOM 1993":
+        effect = Print(plain_colored_line)
+        with effect.terminal_output() as terminal:
+            for frame in effect:
+                terminal.print(frame)  
 else:
     print(colored_line)  
 
@@ -237,9 +328,44 @@ if change_title_color:
         random_title_color = ''.join(random.choice(colors) + letter for letter in art)
         print(random_title_color)
 
+# ======================================================
+
 # In tiêu đề với hiệu ứng typing hoặc không, tùy thuộc vào theme
 if theme_settings.get("program_name") in seasonal_themes: 
-    typing_effect(art)  # Chỉ áp dụng hiệu ứng cho theme theo mùa
+    if theme_settings.get("program_name") == f"Lunar New Year {next_year}":
+        typing_effect(art)  
+
+    if theme_settings.get("program_name") == 'Christmas':
+        effect = Rain(art)
+        with effect.terminal_output() as terminal:
+            for frame in effect:
+                terminal.print(frame)  
+
+    if theme_settings.get("program_name") == 'Quoc Khanh': 
+         typing_effect(art)    
+
+    if theme_settings.get("program_name") == 'Halloween':
+        effect = Scattered(art)
+        with effect.terminal_output() as terminal:
+            for frame in effect:
+                terminal.print(frame)       
+
+    if theme_settings.get("program_name") == 'Zero Hacker':
+        typing_effect(art)
+
+    if theme_settings.get("program_name") == f"New Year {next_year}": 
+        effect = Blackhole(art)
+        with effect.terminal_output() as terminal:
+            for frame in effect:
+                terminal.print(frame) 
+
+    if theme_settings.get("program_name") == "DOOM 1993":
+        effect = Burn(art)
+        with effect.terminal_output() as terminal:
+            for frame in effect:
+                terminal.print(frame)  
+
+                          
 else:
     print(selected_color + art)  # Custom hoặc mặc định sẽ in ra bình thường
 
@@ -253,7 +379,37 @@ if days_left_display:
     print(selected_color + days_left_display + next_event_display + Style.RESET_ALL)
 
 
+# In dòng kẻ với hiệu ứng hoặc không, tùy thuộc vào theme
 if theme_settings.get("program_name") in seasonal_themes: 
-    typing_effect(plain_colored_line)  # Áp dụng lại hiệu ứng cho theme theo mùa
+    if theme_settings.get("program_name") == f"Lunar New Year {next_year}":
+        typing_effect(plain_colored_line)  
+
+    if theme_settings.get("program_name") == 'Christmas':
+        typing_effect(plain_colored_line)  
+
+    if theme_settings.get("program_name") == 'Quoc Khanh':
+        typing_effect(plain_colored_line)  
+
+    if theme_settings.get("program_name") == 'Halloween':
+        typing_effect(plain_colored_line)  
+
+    if theme_settings.get("program_name") == 'Zero Hacker':
+        effect = Print(plain_colored_line)
+        with effect.terminal_output() as terminal:
+            for frame in effect:
+                terminal.print(frame) 
+
+    if theme_settings.get("program_name") == f"New Year {next_year}": 
+        effect = Beams(plain_colored_line)
+        with effect.terminal_output() as terminal:
+            for frame in effect:
+                terminal.print(frame) 
+
+    if theme_settings.get("program_name") == "DOOM 1993":
+        effect = Print(plain_colored_line)
+        with effect.terminal_output() as terminal:
+            for frame in effect:
+                terminal.print(frame)  
 else:
-    print(colored_line)  # Custom hoặc mặc định, chỉ in bình thường
+    print(colored_line)  
+

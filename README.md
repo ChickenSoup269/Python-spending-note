@@ -1,6 +1,6 @@
 # Python Quản Lý Chi Tiêu Cá Nhân [![My Skills](https://skillicons.dev/icons?i=python)](https://skillicons.dev)
 
-[![Generic badge](https://img.shields.io/badge/StatusProject-OK-green.svg)](https://shields.io/) [![1.1.3!](https://img.shields.io/badge/Version-1.1.3-1abc9c.svg)](https://GitHub.com/Naereen/ama) ![Maintainer](https://img.shields.io/badge/Python-3.12-blue)
+[![Generic badge](https://img.shields.io/badge/StatusProject-OK-green.svg)](https://shields.io/) [![1.1.4!](https://img.shields.io/badge/Version-1.1.4-1abc9c.svg)](https://GitHub.com/Naereen/ama) ![Maintainer](https://img.shields.io/badge/Python-3.12-blue)
 
 **Tech & version:**  
 [![Generic badge](https://img.shields.io/badge/pyfiglet-1.0.2-green.svg)](https://shields.io/) [![Generic badge](https://img.shields.io/badge/termcharts-1.1.2-blue.svg)](https://shields.io/) [![1.0.1!](https://img.shields.io/badge/inquirer-3.4.0-1abc9c.svg)](https://GitHub.com/Naereen/ama) [![Generic badge](https://img.shields.io/badge/tabulate-0.9.0-red.svg)](https://shields.io/) [![Generic badge](https://img.shields.io/badge/rich-13.7.1-yellow.svg)](https://shields.io/) ![Generic badge](https://img.shields.io/badge/colorama-0.4.6-white.svg)
@@ -78,9 +78,17 @@ pip install unidecode
 pip install keyboard
 ```
 
-| Type       | Description                               |
-| :--------- | :---------------------------------------- |
-| `keyboard` | **Được** sử dụng để skip intro theme mùa. |
+| Type       | Description                                     |
+| :--------- | :---------------------------------------------- |
+| `keyboard` | **Được** sử dụng để skip intro theme mùa [Tết]. |
+
+```bash
+pip install terminaltexteffects
+```
+
+| Type                  | Description                          |
+| :-------------------- | :----------------------------------- |
+| `terminaltexteffects` | **Được** sử dụng để làm intro theme. |
 
 ## Install one for all pip [UPDATE]
 
@@ -116,16 +124,17 @@ Start the python project
 
 ## Tài liệu cách sử dụng thư viện
 
-| Name         | Link                                                                                                  |
-| :----------- | :---------------------------------------------------------------------------------------------------- |
-| `Termcharts` | [Termcharts](https://pypi.org/project/termcharts/)                                                    |
-| `Rich`       | [Rich](https://rich.readthedocs.io/en/stable/introduction.html)                                       |
-| `Tabulate`   | [Tabulate](https://pypi.org/project/tabulate/)                                                        |
-| `Colorama`   | [Colorama](https://pypi.org/project/colorama/)                                                        |
-| `Inquirer`   | [Inquirer](https://python-inquirer.readthedocs.io/en/latest/installation.html)                        |
-| `Pyfiglet`   | [Pyfiglet](https://pypi.org/project/pyfiglet/) & [Font Pyfiglet](http://www.figlet.org/examples.html) |
-| `Unicode`    | [Unicode](https://pypi.org/project/Unidecode/)                                                        |
-| `Keyboard`   | [Keyboard](https://pypi.org/project/keyboard/)                                                        |
+| Name                  | Link                                                                                                               |
+| :-------------------- | :----------------------------------------------------------------------------------------------------------------- |
+| `Termcharts`          | [Termcharts](https://pypi.org/project/termcharts/)                                                                 |
+| `Rich`                | [Rich](https://rich.readthedocs.io/en/stable/introduction.html)                                                    |
+| `Tabulate`            | [Tabulate](https://pypi.org/project/tabulate/)                                                                     |
+| `Colorama`            | [Colorama](https://pypi.org/project/colorama/)                                                                     |
+| `Inquirer`            | [Inquirer](https://python-inquirer.readthedocs.io/en/latest/installation.html)                                     |
+| `Pyfiglet`            | [Pyfiglet](https://pypi.org/project/pyfiglet/) & [Font Pyfiglet](http://www.figlet.org/examples.html)              |
+| `Unicode`             | [Unicode](https://pypi.org/project/Unidecode/)                                                                     |
+| `Keyboard`            | [Keyboard](https://pypi.org/project/keyboard/)                                                                     |
+| `terminaltexteffects` | [terminaltexteffects](https://github.com/ChrisBuilds/terminaltexteffects?tab=readme-ov-file#installationkeyboard/) |
 
 ## Screenshots
 

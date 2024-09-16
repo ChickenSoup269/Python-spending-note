@@ -8,20 +8,30 @@ from settings.setting_menu import settings_menu
 # =================================THEME===============================================
 from theme.changeThemes import *
 # ================================================================================
+from terminaltexteffects.effects.effect_wipe import Wipe
+
 
 # Check giờ để in lời chào sáng, chiều, tối
 def get_greeting():
     if 5 <= current_hour < 12:
-        return 'Chào buổi sáng, chúc bạn buổi sáng tốt lành! ⛅'
+        return 'Chào buổi sáng, chúc bạn buổi sáng tốt lành! ⛅ '
     elif 12 <= current_hour < 18:
-        return 'Chào buổi chiều, chúc bạn buổi chiều vui vẻ! 🌄'
+        return 'Chào buổi chiều, chúc bạn buổi chiều vui vẻ! 🌄 '
     else:
-        return 'Chào buổi tối, chúc bạn buổi tối thư giãn! 🌝'
+        return 'Chào buổi tối, chúc bạn buổi tối thư giãn! 🌝 '
 
 
 # In ra lời chào
 # print('Ngày: ' + current_date + '\n')
-print(selected_color + get_greeting(), Fore.CYAN + dt_string + '\n')
+if theme_settings.get("program_name") in seasonal_themes: 
+    print(selected_color + get_greeting(), Fore.CYAN + dt_string + '\n')
+else: 
+    effect = Wipe(get_greeting() + dt_string )
+    with effect.terminal_output() as terminal:
+        for frame in effect:
+            terminal.print(frame + "\n")
+  
+
 
 # Dự báo thời tiết hoặc cái gì đó đại loại vậy 
 # ==============================

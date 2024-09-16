@@ -1,5 +1,6 @@
 from imports import *
 
+next_year = datetime.now().year + 1
 # Seeting chọn theme
 def theme_menu():
     # Các màu từ colorama
@@ -27,11 +28,14 @@ def theme_menu():
     predefined_themes = {
         "Quốc Khánh": {"color": "Fore.LIGHTRED_EX", "font": "starwars", "width": "120", "program_name": "Quốc Khánh"},
         "Christmas": {"color": "Fore.LIGHTCYAN_EX", "font": "isometric1", "width": "250", "program_name": "Christmas"},
-        "Tết": {"color": "Fore.LIGHTYELLOW_EX", "font": "epic", "width": "120", "program_name": "Tết"},
         "Halloween": {"color": "Fore.LIGHTMAGENTA_EX", "font": "doom", "width": "120", "program_name": "Halloween"},
+        f"Tết {next_year}": {"color": "Fore.LIGHTYELLOW_EX", "font": "doom", "width": "120", "program_name": f"Lunar New Year {next_year}"},
+        f"New Year {next_year}": {"color": "Fore.LIGHTCYAN_EX", "font": "larry3d", "width": "120", "program_name": f"New Year {next_year}"},
+        "DOOM Game": {"color": "Fore.LIGHTCYAN_EX", "font": "epic", "width": "120", "program_name": "DOOM 1993"},
+        
         "Hacker": {
             "color": "Fore.LIGHTGREEN_EX",
-            "font": "smslant",
+            "font": "standard",
             "width": "120",
             "program_name": "Zero Hacker",
             "use_random_colors": False,
@@ -55,7 +59,7 @@ def theme_menu():
     }
 
     # Thêm các lựa chọn theme
-    theme_type_choices = ["Theme tùy chỉnh", "Quốc Khánh", "Christmas", "Tết", "Halloween", "Hacker", "Mặc định", "Quay lại"]
+    theme_type_choices = ["Theme tùy chỉnh", "Quốc Khánh", "Christmas", f"Tết {next_year}", "Halloween", f"New Year {next_year}", "DOOM Game" ,"Hacker", "Mặc định", "Quay lại"]
 
     # Câu hỏi về lựa chọn loại theme
     theme_type_question = [
