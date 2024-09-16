@@ -1,6 +1,6 @@
-# In ra lời chào đầu 
 from imports import *
 
+# Seeting chọn theme
 def theme_menu():
     # Các màu từ colorama
     theme_choices = [
@@ -22,30 +22,40 @@ def theme_menu():
     font_choices = [
         "standard", "slant", "banner3", "block", "bubble", "digital", "quay lại"
     ]
-# bigchief
-    # Các theme theo mùa (predefined themes)
     
+    # Các theme theo mùa (predefined themes)
     predefined_themes = {
-        "Quốc Khánh": {"color": "Fore.LIGHTRED_EX", "font": "starwars", "width" : "120", "program_name": "Quốc Khánh"},
-        "Christmas": {"color": "Fore.LIGHTCYAN_EX", "font": "isometric1","width": "250", "program_name": "Christmas"},
-        "Tết": {"color": "Fore.LIGHTYELLOW_EX", "font": "epic","width" : "120",  "program_name": "Tết"},
-        "Halloween": {"color": "Fore.LIGHTMAGENTA_EX", "font": "doom", "width" : "120", "program_name": "Halloween"},
+        "Quốc Khánh": {"color": "Fore.LIGHTRED_EX", "font": "starwars", "width": "120", "program_name": "Quốc Khánh"},
+        "Christmas": {"color": "Fore.LIGHTCYAN_EX", "font": "isometric1", "width": "250", "program_name": "Christmas"},
+        "Tết": {"color": "Fore.LIGHTYELLOW_EX", "font": "epic", "width": "120", "program_name": "Tết"},
+        "Halloween": {"color": "Fore.LIGHTMAGENTA_EX", "font": "doom", "width": "120", "program_name": "Halloween"},
+        "Hacker": {
+            "color": "Fore.LIGHTGREEN_EX",
+            "font": "smslant",
+            "width": "120",
+            "program_name": "Zero Hacker",
+            "use_random_colors": False,
+            "show_time": False,
+            "time_font_style": "alligator",
+            "time_format": "time"
+        },
         "Mặc định": {
             "color": "Fore.LIGHTWHITE_EX",
             "font": "standard",
-            "width" : "120",
+            "width": "120",
             "program_name": "Zero Spending",
             "use_random_colors": True,
             "show_time": True,
             "time_font_style": "banner3",
             "change_title_color": False,
             "title_color_choice": "Không đổi màu (trắng)",
-            "time_format": "time"
+            "time_format": "time",
+            "time_color": "Fore.LIGHTWHITE_EX"
         }
     }
 
     # Thêm các lựa chọn theme
-    theme_type_choices = ["Theme tùy chỉnh","Quốc Khánh", "Christmas", "Tết", "Halloween", "Mặc định", "Quay lại"]
+    theme_type_choices = ["Theme tùy chỉnh", "Quốc Khánh", "Christmas", "Tết", "Halloween", "Hacker", "Mặc định", "Quay lại"]
 
     # Câu hỏi về lựa chọn loại theme
     theme_type_question = [
@@ -72,14 +82,14 @@ def theme_menu():
         settings = {
             "color": selected_theme['color'],
             "art_style": selected_theme['font'],
-            "width" : selected_theme['width'],
+            "width": selected_theme['width'],
             "use_random_colors": selected_theme.get('use_random_colors', False),
-            "program_name": unidecode(selected_theme['program_name']),  
+            "program_name": unidecode(selected_theme['program_name']),
             "show_time": selected_theme.get('show_time', False),
             "time_font_style": selected_theme.get('time_font_style', "banner3"),
             "change_title_color": selected_theme.get('change_title_color', False),
             "title_color_choice": selected_theme.get('title_color_choice', "Không đổi màu (trắng)"),
-            "time_format": selected_theme.get('time_format', "none")  
+            "time_format": selected_theme.get('time_format', "none")
         }
         save_theme_settings(settings)
         print(f"Theme '{theme_type_answer['theme_type']}' đã được lưu.")
@@ -159,9 +169,21 @@ def theme_menu():
                 print("Đã quay lại menu chính.")
                 return  
             time_font_choice = time_font_answer['time_font_choice']
+
+            # Thêm tùy chọn màu cho đồng hồ/ngày tháng
+            time_color_question = [
+                inquirer.List(
+                    'time_color_choice',
+                    message="Chọn màu cho đồng hồ và ngày tháng:",
+                    choices=theme_choices
+                )
+            ]
+            time_color_answer = inquirer.prompt(time_color_question)
+            selected_time_color = theme_colors.get(time_color_answer['time_color_choice'], "Fore.LIGHTWHITE_EX")
         else:
-            time_font_choice = 'banner3' 
+            time_font_choice = 'banner3'
             time_display_answer = {'time_format': 'none'}
+            selected_time_color = "Fore.LIGHTWHITE_EX"
 
         selected_color = theme_colors.get(theme_answer['color_choice'], "Fore.LIGHTRED_EX")
         selected_font = theme_answer['font_choice']
@@ -198,7 +220,8 @@ def theme_menu():
             "time_font_style": time_font_choice,  # Lưu font chữ thời gian
             "change_title_color": change_title_color,
             "title_color_choice": title_color_answer['title_color_choice'],  # Lưu lựa chọn màu tiêu đề
-            "time_format": time_display_answer['time_format']  # Lưu lựa chọn hiển thị giờ/ngày/cả hai
+            "time_format": time_display_answer['time_format'],  # Lưu lựa chọn hiển thị giờ/ngày/cả hai
+            "time_color": selected_time_color  # Lưu màu đồng hồ/ngày tháng
         }
         save_theme_settings(settings)
 

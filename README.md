@@ -1,6 +1,6 @@
 # Python Quản Lý Chi Tiêu Cá Nhân [![My Skills](https://skillicons.dev/icons?i=python)](https://skillicons.dev)
 
-[![Generic badge](https://img.shields.io/badge/StatusProject-OK-green.svg)](https://shields.io/) [![1.1.2!](https://img.shields.io/badge/Version-1.1.2-1abc9c.svg)](https://GitHub.com/Naereen/ama) ![Maintainer](https://img.shields.io/badge/Python-3.12-blue)
+[![Generic badge](https://img.shields.io/badge/StatusProject-OK-green.svg)](https://shields.io/) [![1.1.3!](https://img.shields.io/badge/Version-1.1.3-1abc9c.svg)](https://GitHub.com/Naereen/ama) ![Maintainer](https://img.shields.io/badge/Python-3.12-blue)
 
 **Tech & version:**  
 [![Generic badge](https://img.shields.io/badge/pyfiglet-1.0.2-green.svg)](https://shields.io/) [![Generic badge](https://img.shields.io/badge/termcharts-1.1.2-blue.svg)](https://shields.io/) [![1.0.1!](https://img.shields.io/badge/inquirer-3.4.0-1abc9c.svg)](https://GitHub.com/Naereen/ama) [![Generic badge](https://img.shields.io/badge/tabulate-0.9.0-red.svg)](https://shields.io/) [![Generic badge](https://img.shields.io/badge/rich-13.7.1-yellow.svg)](https://shields.io/) ![Generic badge](https://img.shields.io/badge/colorama-0.4.6-white.svg)
@@ -74,6 +74,14 @@ pip install unidecode
 | :---------- | :------------------------------------------- |
 | `unidecode` | ở đây mình dùng để đọc ASCII bỏ dấu unicode. |
 
+```bash
+pip install keyboard
+```
+
+| Type       | Description                               |
+| :--------- | :---------------------------------------- |
+| `keyboard` | **Được** sử dụng để skip intro theme mùa. |
+
 ## Install one for all pip [UPDATE]
 
 ```bash
@@ -85,6 +93,7 @@ pip install unidecode
 `uuid`
 `json`
 `datetime`
+`time`
 `collections`
 
 ## Run Locally
@@ -107,13 +116,16 @@ Start the python project
 
 ## Tài liệu cách sử dụng thư viện
 
-[Termcharts](https://pypi.org/project/termcharts/) |
-[Rich](https://rich.readthedocs.io/en/stable/introduction.html) |
-[Tabulate](https://pypi.org/project/tabulate/) |
-[Colorama](https://pypi.org/project/colorama/) |
-[Inquirer](https://python-inquirer.readthedocs.io/en/latest/installation.html) |
-[Pyfiglet](https://pypi.org/project/pyfiglet/) & [Font Pyfiglet](http://www.figlet.org/examples.html) |
-[Unicode](https://pypi.org/project/Unidecode/)
+| Name         | Link                                                                                                  |
+| :----------- | :---------------------------------------------------------------------------------------------------- |
+| `Termcharts` | [Termcharts](https://pypi.org/project/termcharts/)                                                    |
+| `Rich`       | [Rich](https://rich.readthedocs.io/en/stable/introduction.html)                                       |
+| `Tabulate`   | [Tabulate](https://pypi.org/project/tabulate/)                                                        |
+| `Colorama`   | [Colorama](https://pypi.org/project/colorama/)                                                        |
+| `Inquirer`   | [Inquirer](https://python-inquirer.readthedocs.io/en/latest/installation.html)                        |
+| `Pyfiglet`   | [Pyfiglet](https://pypi.org/project/pyfiglet/) & [Font Pyfiglet](http://www.figlet.org/examples.html) |
+| `Unicode`    | [Unicode](https://pypi.org/project/Unidecode/)                                                        |
+| `Keyboard`   | [Keyboard](https://pypi.org/project/keyboard/)                                                        |
 
 ## Screenshots
 
@@ -139,7 +151,7 @@ Start the python project
 <kbd><img src="./screenShot/themeScreenshots/Screenshot 2024-09-15 212137.png" width='550px'></kbd>
 
 <kbd><img src="./screenShot/themeScreenshots/Screenshot 2024-09-15 212258.png" width='550px'></kbd>
- 
+
 </div>
 
 ## Font & terminal

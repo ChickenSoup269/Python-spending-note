@@ -8,8 +8,9 @@ import pyfiglet #
 import random #
 import re #
 import sys #
+import time #
+import keyboard #
 import termcharts.bar_chart
-
 # =================================
 from datetime import datetime, timedelta
 from tabulate import tabulate

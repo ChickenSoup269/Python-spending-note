@@ -6,3 +6,4 @@ tabulate
 colorama
 rich
 unidecode
+keyboard
