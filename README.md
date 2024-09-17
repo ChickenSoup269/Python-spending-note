@@ -7,88 +7,43 @@
 
 <strong>\* Mô tả dự án:</strong >
 
-Dự án Quản Lý Chi Tiêu Cá Nhân là một ứng dụng Python đơn giản giúp bạn theo dõi và quản lý chi tiêu hàng ngày, hàng tuần, hàng tháng và hàng năm của mình. Với giao diện dòng lệnh thân thiện, dự án này cung cấp các tính năng cơ bản như thêm chi tiêu, xem báo cáo chi tiêu, và trực quan hóa dữ liệu bằng các biểu đồ trực quan.
+Dự án Quản Lý Chi Tiêu Cá Nhân là một ứng dụng Python đơn giản giúp bạn theo dõi và quản lý chi tiêu hàng ngày, hàng tuần, hàng tháng và hàng năm của mình. Với giao diện terminal có sẵn, dự án này cung cấp các tính năng cơ bản như thêm chi tiêu, xem báo cáo chi tiêu, và trực quan hóa dữ liệu bằng các biểu đồ trực quan.
 
 ## Docker spending [![My Skills](https://skillicons.dev/icons?i=docker)](https://skillicons.dev)
 
-> if u want to test on docker here the link for you:
+> Phiên bản được đóng góp ở Docker :
 > [DockerSpending](https://hub.docker.com/r/zeroslayer/python-spending)
+
+## Mục lục
+
+- [Installation pip](#installation-pip)
+  - [Install my-project with pip](#-install-my-project-with-pip)
+- [Install one for all pip [UPDATE]](#install-one-for-all-pip-update)
+- [Các thư viện khác có sẵn trên python](#các-thư-viện-khác-có-sẵn-trên-python)
+- [Run Locally](#run-locally)
+- [Tài liệu cách sử dụng thư viện](#tài-liệu-cách-sử-dụng-thư-viện)
+- [Screenshots](#screenshots)
+- [News! - Themes](#news---themes)
+- [Font & terminal](#font--terminal)
+  - [Font sử dụng](#font-sử-dụng)
+- [Video demo](#video-demo)
+- [Support](#support)
 
 ## Installation pip
 
-Install my-project with pip
+### \* Install my-project with pip
 
-```bash
-pip install inquirer
-```
-
-| Type       | Description                                                |
-| :--------- | :--------------------------------------------------------- |
-| `inquirer` | **Được** sử dụng để tạo các menu tương tác với người dùng. |
-
-```bash
-pip install termcharts
-```
-
-| Type         | Description                                                                     |
-| :----------- | :------------------------------------------------------------------------------ |
-| `termcharts` | **Được** sử dụng để tạo biểu đồ (bar chart, pie chart) trực tiếp trên terminal. |
-
-```bash
-pip install tabulate
-```
-
-| Type       | Description                                                               |
-| :--------- | :------------------------------------------------------------------------ |
-| `tabulate` | **Được** sử dụng để định dạng dữ liệu thành table hiển thị trên terminal. |
-
-```bash
-pip install rich
-```
-
-| Type   | Description                                                               |
-| :----- | :------------------------------------------------------------------------ |
-| `rich` | **Được** sử dụng để định dạng dữ liệu thành table hiển thị trên terminal. |
-
-```bash
-pip install colorama
-```
-
-| Type       | Description                                                        |
-| :--------- | :----------------------------------------------------------------- |
-| `colorama` | **Được** sử dụng để đổi màu bảng hoặc làm gì đó liên quan đến màu. |
-
-```bash
-pip install pyfiglet
-```
-
-| Type       | Description                                  |
-| :--------- | :------------------------------------------- |
-| `pyfiglet` | **Được** sử dụng vẽ mấy cái chữ pixel ASCII. |
-
-```bash
-pip install unidecode
-```
-
-| Type        | Description                                  |
-| :---------- | :------------------------------------------- |
-| `unidecode` | ở đây mình dùng để đọc ASCII bỏ dấu unicode. |
-
-```bash
-pip install keyboard
-```
-
-| Type       | Description                                     |
-| :--------- | :---------------------------------------------- |
-| `keyboard` | **Được** sử dụng để skip intro theme mùa [Tết]. |
-
-```bash
-pip install terminaltexteffects
-```
-
-| Type                  | Description                          |
-| :-------------------- | :----------------------------------- |
-| `terminaltexteffects` | **Được** sử dụng để làm intro theme. |
+| Type                  | Description                                                                     | pip                               |
+| :-------------------- | :------------------------------------------------------------------------------ | :-------------------------------- |
+| `inquirer`            | **Được** sử dụng để tạo các menu tương tác với người dùng.                      | `pip install inquirer`            |
+| `termcharts`          | **Được** sử dụng để tạo biểu đồ (bar chart, pie chart) trực tiếp trên terminal. | `pip install termcharts`          |
+| `tabulate`            | **Được** sử dụng để định dạng dữ liệu thành table hiển thị trên terminal.       | `pip install tabulate`            |
+| `rich`                | **Được** sử dụng để định dạng dữ liệu thành table hiển thị trên terminal.       | `pip install rich`                |
+| `colorama`            | **Được** sử dụng để đổi màu bảng hoặc làm gì đó liên quan đến màu.              | `pip install colorama`            |
+| `pyfiglet`            | **Được** sử dụng vẽ mấy cái chữ pixel ASCII.                                    | `pip install pyfiglet`            |
+| `unidecode`           | ở đây mình dùng để đọc ASCII bỏ dấu unicode.                                    | `pip install unidecode`           |
+| `keyboard`            | **Được** sử dụng để skip intro theme mùa [Tết & Quốc khánh].                    | `pip install keyboard`            |
+| `terminaltexteffects` | **Được** sử dụng để làm intro theme.                                            | `pip install terminaltexteffects` |
 
 ## Install one for all pip [UPDATE]
 
@@ -121,6 +76,15 @@ Go to the project directory
 Start the python project
 
 ` python main.py` | `python3 main.py` | `run in terminal in vs code`
+
+> **Lưu ý quan trọng:**
+> Để tải và cài đặt dự án này, bạn cần chạy lệnh sau:
+>
+> ```
+> pip install -r requirements.txt
+> ```
+>
+> Lệnh này sẽ cài đặt tất cả các gói phụ thuộc cần thiết được liệt kê trong file
 
 ## Tài liệu cách sử dụng thư viện
 

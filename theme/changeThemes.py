@@ -351,7 +351,10 @@ if theme_settings.get("program_name") in seasonal_themes:
                 terminal.print(frame)       
 
     if theme_settings.get("program_name") == 'Zero Hacker':
-        typing_effect(art)
+        effect = BinaryPath(art)
+        with effect.terminal_output() as terminal:
+            for frame in effect:
+                terminal.print(frame) 
 
     if theme_settings.get("program_name") == f"New Year {next_year}": 
         effect = Blackhole(art)

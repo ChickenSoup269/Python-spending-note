@@ -1,12 +1,12 @@
 {
-    "color": "Fore.LIGHTWHITE_EX",
-    "art_style": "standard",
+    "color": "Fore.LIGHTMAGENTA_EX",
+    "art_style": "doom",
     "width": "120",
-    "use_random_colors": true,
-    "program_name": "Zero Spending",
-    "show_time": true,
+    "use_random_colors": false,
+    "program_name": "Halloween",
+    "show_time": false,
     "time_font_style": "banner3",
     "change_title_color": false,
     "title_color_choice": "Kh\u00f4ng \u0111\u1ed5i m\u00e0u (tr\u1eafng)",
-    "time_format": "time"
+    "time_format": "none"
 }
