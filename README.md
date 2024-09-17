@@ -103,13 +103,13 @@ Start the python project
 ## Screenshots
 
 <div align="center">
-  <kbd><img src="./screenShot/Screenshot 2024-09-03 143550.png" width="120px" height="50px"></kbd>
-  <kbd><img src="./screenShot/Screenshot 2024-09-03 143557.png" width="120px" height="50px"></kbd>
-  <kbd><img src="./screenShot/Screenshot 2024-09-03 143622.png" width="120px" height="50px"></kbd>
-  <kbd><img src="./screenShot/Screenshot 2024-09-03 143629.png" width="120px" height="50px"></kbd>
+  <kbd><img src="./screenShot/Screenshot 2024-09-03 143550.png" width="320px" height="220px"></kbd>
+  <kbd><img src="./screenShot/Screenshot 2024-09-03 143557.png" width="320px" height="220px"></kbd>
+  <kbd><img src="./screenShot/Screenshot 2024-09-03 143622.png" width="320px" height="220px"></kbd>
+  <kbd><img src="./screenShot/Screenshot 2024-09-03 143629.png" width="320px" height="220px"></kbd>
+  <kbd><img src="./screenShot/Screenshot 2024-09-03 143537.png" width="320px" height="220px"></kbd>
 </div>
 
-<kbd><img src="./screenShot/Screenshot 2024-09-03 143537.png"></kbd>
 
 ## News! - Themes
 
