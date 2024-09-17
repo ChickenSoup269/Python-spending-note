@@ -11,7 +11,7 @@ Dự án Quản Lý Chi Tiêu Cá Nhân là một ứng dụng Python đơn gi�
 
 ## Docker spending [![My Skills](https://skillicons.dev/icons?i=docker)](https://skillicons.dev)
 
-> Phiên bản được đóng góp ở Docker :
+> Phiên bản được đóng gói ở Docker :
 > [DockerSpending](https://hub.docker.com/r/zeroslayer/python-spending)
 
 ## Mục lục
