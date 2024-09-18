@@ -3,19 +3,10 @@ from imports import *
 # from theme.Halloween import *
 # from theme.QuocKhanh import *
 # from theme.Christmas import *
-from terminaltexteffects.effects.effect_rain import Rain
-from terminaltexteffects.effects.effect_blackhole import Blackhole
-from terminaltexteffects.effects.effect_beams import Beams
-from terminaltexteffects.effects.effect_print import Print
-from terminaltexteffects.effects.effect_scattered import Scattered
-from terminaltexteffects.effects.effect_burn import Burn
-from terminaltexteffects.effects.effect_decrypt import Decrypt
-from terminaltexteffects.effects.effect_binarypath import BinaryPath
 
-
+# from terminaltexteffects.effects.effect_decrypt import Decrypt
 
 next_year = datetime.now().year + 1
-
 
 
 # Hàm tính số ngày còn lại đến sự kiện
@@ -255,13 +246,30 @@ elif theme_settings.get("program_name") == f"New Year {next_year}":
 #  =====================================================
 
 
-elif theme_settings.get("program_name") == "Zero Hacker":  
+elif theme_settings.get("program_name") == "Zero Hacker":
+    for i in range(10, 101, 10):
+        text = Text(f"Loading... {i}%")
+        text.stylize(f"bold green")
+        console.print(text, end="\r")
+        time.sleep(0.10)
+
+    hacking_message = "\nHacking complete!"
+    effect = Print(hacking_message)
+    # hacker_message = pyfiglet.figlet_format("Happy Hacking", font="binary" , width = 120)  
+    # effect2 = Blackhole(hacker_message)
     colors = [Fore.LIGHTGREEN_EX, Fore.GREEN] # trắng và xanh lá
+
+    with effect.terminal_output() as terminal:
+        for frame in effect:
+            terminal.print(frame)
+
+    # with effect2.terminal_output() as terminal:
+    #     for frame in effect2:
+    #         terminal.print(frame)
 
 
 # elif theme_settings.get("program_name") == "DOOM 1993":  
 #     colors = [Fore.LIGHTGREEN_EX, Fore.GREEN] # trắng và xanh lá
-
 
 
 #  =====================================================
@@ -351,7 +359,7 @@ if theme_settings.get("program_name") in seasonal_themes:
                 terminal.print(frame)       
 
     if theme_settings.get("program_name") == 'Zero Hacker':
-        effect = BinaryPath(art)
+        effect = Print(art)
         with effect.terminal_output() as terminal:
             for frame in effect:
                 terminal.print(frame) 

@@ -35,7 +35,7 @@ def theme_menu():
         
         "Hacker": {
             "color": "Fore.LIGHTGREEN_EX",
-            "font": "standard",
+            "font": "binary",
             "width": "120",
             "program_name": "Zero Hacker",
             "use_random_colors": False,

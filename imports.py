@@ -25,5 +25,11 @@ from rich.text import Text
 # import các hàm chung
 from utils import *
 #  =================================
-
-
+# Font chữ animation
+from terminaltexteffects.effects.effect_rain import Rain
+from terminaltexteffects.effects.effect_blackhole import Blackhole
+from terminaltexteffects.effects.effect_beams import Beams
+from terminaltexteffects.effects.effect_print import Print
+from terminaltexteffects.effects.effect_scattered import Scattered
+from terminaltexteffects.effects.effect_burn import Burn
+# from terminaltexteffects.effects.effect_binarypath import BinaryPath
