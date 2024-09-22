@@ -1,6 +1,6 @@
 # Python Quản Lý Chi Tiêu Cá Nhân [![My Skills](https://skillicons.dev/icons?i=python)](https://skillicons.dev)
 
-[![Generic badge](https://img.shields.io/badge/StatusProject-OK-green.svg)](https://shields.io/) [![1.1.4!](https://img.shields.io/badge/Version-1.1.4-1abc9c.svg)](https://GitHub.com/Naereen/ama) ![Maintainer](https://img.shields.io/badge/Python-3.12-blue)
+[![Generic badge](https://img.shields.io/badge/StatusProject-OK-green.svg)](https://shields.io/) [![1.1.5!](https://img.shields.io/badge/Version-1.1.5-1abc9c.svg)](https://GitHub.com/Naereen/ama) ![Maintainer](https://img.shields.io/badge/Python-3.12-blue)
 
 **Tech & version:**  
 [![Generic badge](https://img.shields.io/badge/pyfiglet-1.0.2-green.svg)](https://shields.io/) [![Generic badge](https://img.shields.io/badge/termcharts-1.1.2-blue.svg)](https://shields.io/) [![1.0.1!](https://img.shields.io/badge/inquirer-3.4.0-1abc9c.svg)](https://GitHub.com/Naereen/ama) [![Generic badge](https://img.shields.io/badge/tabulate-0.9.0-red.svg)](https://shields.io/) [![Generic badge](https://img.shields.io/badge/rich-13.7.1-yellow.svg)](https://shields.io/) ![Generic badge](https://img.shields.io/badge/colorama-0.4.6-white.svg)
@@ -109,7 +109,6 @@ Start the python project
   <kbd><img src="./screenShot/Screenshot 2024-09-03 143629.png" width="320px" height="220px"></kbd>
   <kbd><img src="./screenShot/Screenshot 2024-09-03 143537.png" width="320px" height="220px"></kbd>
 </div>
-
 
 ## News! - Themes
 

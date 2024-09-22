@@ -32,4 +32,6 @@ from terminaltexteffects.effects.effect_beams import Beams
 from terminaltexteffects.effects.effect_print import Print
 from terminaltexteffects.effects.effect_scattered import Scattered
 from terminaltexteffects.effects.effect_burn import Burn
+from terminaltexteffects.effects.effect_slide import Slide
+from terminaltexteffects.effects.effect_unstable import Unstable
 # from terminaltexteffects.effects.effect_binarypath import BinaryPath

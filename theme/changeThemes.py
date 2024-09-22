@@ -3,14 +3,80 @@ from imports import *
 # from theme.Halloween import *
 # from theme.QuocKhanh import *
 # from theme.Christmas import *
-
 # from terminaltexteffects.effects.effect_decrypt import Decrypt
 
 next_year = datetime.now().year + 1
 
 
+ # Các theme theo mùa (predefined themes)
+predefined_themes = {
+    "Quốc Khánh": {"color": "Fore.LIGHTRED_EX", "font": "starwars", "width": "120", "program_name": "Quốc Khánh"},
+    "Christmas": {"color": "Fore.LIGHTCYAN_EX", "font": "isometric1", "width": "250", "program_name": "Christmas"},
+    "Halloween": {"color": "Fore.LIGHTMAGENTA_EX", "font": "doom", "width": "120", "program_name": "Halloween"},
+    f"Tết {next_year}": {"color": "Fore.LIGHTYELLOW_EX", "font": "doom", "width": "120", "program_name": f"Lunar New Year {next_year}"},
+    f"New Year {next_year}": {"color": "Fore.LIGHTCYAN_EX", "font": "larry3d", "width": "120", "program_name": f"New Year {next_year}"},
+}
+
+def get_seasonal_theme():
+    today = datetime.now()
+    
+    # Define seasonal events and their corresponding themes
+    seasonal_events = {
+        "Quốc Khánh": (datetime(today.year, 9, 2), "Quốc Khánh"),
+        # "Tết": (tet_dates.get(str(year)), f"Tết {next_year}"),
+        "Halloween": (datetime(today.year, 10, 31), "Halloween"),
+        "Christmas": (datetime(today.year, 12, 25), "Christmas"),
+        "New Year": (datetime(today.year, 1, 1), f"New Year {next_year}"),
+    }
+    
+    for event, (event_date, theme_name) in seasonal_events.items():
+        if today.date() == event_date.date():
+            return predefined_themes[theme_name]
+    
+    return None
+
+
+def apply_seasonal_theme():
+    # Đường dẫn đầy đủ để lưu backup
+    backup_theme_file = 'json/theme_backup.json'
+    current_theme = load_theme_settings()  # Lấy theme hiện tại
+
+    # Tạo thư mục nếu không tồn tại
+    os.makedirs(os.path.dirname(backup_theme_file), exist_ok=True)
+
+    seasonal_theme = get_seasonal_theme()
+
+    # Nếu có theme sự kiện
+    if seasonal_theme:
+        # Lưu theme hiện tại vào file backup
+        if current_theme:
+            with open(backup_theme_file, 'w') as backup_file:
+                json.dump(current_theme, backup_file)  # Lưu theme hiện tại vào file backup
+
+        settings = {
+            "color": seasonal_theme['color'],
+            "art_style": seasonal_theme['font'],
+            "width": seasonal_theme['width'],
+            "program_name": unidecode(seasonal_theme['program_name']),
+            "use_random_colors": seasonal_theme.get('use_random_colors', False),
+            "show_time": seasonal_theme.get('show_time', False),
+            "time_font_style": seasonal_theme.get('time_font_style', "banner3"),
+            "change_title_color": seasonal_theme.get('change_title_color', False),
+            "title_color_choice": seasonal_theme.get('title_color_choice', "Không đổi màu (trắng)"),
+            "time_format": seasonal_theme.get('time_format', "none"),
+        }
+        save_theme_settings(settings)  # Áp dụng theme sự kiện
+        print(f"Theme '{seasonal_theme['program_name']}' đã được áp dụng tự động.")
+
+
+apply_seasonal_theme()
+
+
 # Hàm tính số ngày còn lại đến sự kiện
 def days_until_tet(event_date):
+    if not event_date:
+        return None  # Nếu không có ngày, trả về None
+
     today = datetime.now()
     this_year_event_date = datetime(today.year, event_date.month, event_date.day)
     
@@ -103,10 +169,6 @@ dateTimes = get_formatted_time_with_color() if show_time else ""
 # ====================================
 
 
-#  Ngày Tết Âm Lịch (ví dụ, 10/2/2024, bạn cần thay đổi tùy theo năm)
-tet_date = datetime(2024, 2, 10)  
-
-
 # =================
 
 # Hiệu ứng nhập chữ (typing effect) với điều kiện theo theme
@@ -131,13 +193,12 @@ def typing_effect(message):
     skip_effect = False   
 
     for i, char in enumerate(message):
-        if keyboard.is_pressed('enter'):  # Nếu người dùng nhấn Enter
-            skip_effect = True  # Đặt cờ để bỏ qua hiệu ứng
-            break  # Thoát khỏi vòng lặp
-
-        # Xen kẽ giữa hai màu cho mỗi ký tự
+        if keyboard.is_pressed('enter'): 
+            skip_effect = True  
+            break  
+ 
         colored_message += colors[i % 2] + char
-        # In từng ký tự ra màn hình với hiệu ứng chậm
+   
         print(colors[i % 2] + char, end='', flush=True)
         # Tạo độ trễ giữa các ký tự để có hiệu ứng nhập
         time.sleep(delay)
@@ -179,16 +240,25 @@ days_left_display = ""
 #  ==========================================
 
 # Kiểm tra theme và tính số ngày còn lại đến sự kiện
-if theme_settings.get("program_name") == f"Lunar New Year {next_year}": 
-    days_left, year,next_event = days_until_tet(tet_date)  # Tính số ngày còn lại đến Tết
-    days_left_display = f"Ngày Tết: {tet_date.strftime('%d/%m/%Y')}\nCòn {days_left} ngày nữa đến Tết Âm Lịch năm {year}! 🧧"
-    new_year_message = pyfiglet.figlet_format("Nam Moi Binh An!\n Phat Tai Phat Loc", font="digital")  
-    next_event_display = f"\nTết Nguyên Đán sẽ diễn ra vào ngày: {next_event}! 🎇"
+if theme_settings.get("program_name") == f"Lunar New Year {next_year}":
+    # Lấy ngày Tết từ dữ liệu JSON cho năm tiếp theo
+    tet_date_str = tet_dates.get(str(next_year))
+    if tet_date_str:
+        event_date = datetime.strptime(tet_date_str, '%d/%m/%Y')
+        days_left, year, next_event = days_until_tet(event_date)  # Tính số ngày còn lại đến Tết
+        days_left_display = f"Ngày Tết: {event_date.strftime('%d/%m/%Y')}\nCòn {days_left} ngày nữa đến Tết Âm Lịch năm {year}! 🧧"
+        
+        new_year_message = pyfiglet.figlet_format("Nam Moi Binh An!\nPhat Tai Phat Loc", font="digital")
+        next_event_display = f"\nTết Nguyên Đán sẽ diễn ra vào ngày: {tet_dates.get(str(year))}! 🎇"
 
-    colors = [Fore.LIGHTRED_EX, Fore.LIGHTYELLOW_EX]  # Đỏ và Vàng
-    typing_effect(new_year_message)
+        colors = [Fore.LIGHTRED_EX, Fore.LIGHTYELLOW_EX]  # Đỏ và Vàng
+        typing_effect(new_year_message)  # Hiệu ứng gõ chữ
 
- 
+     
+    else: 
+        print(f"Không có thông tin ngày Tết cho năm {next_year}.")
+
+
 # Tính số ngày còn lại đến Giáng Sinh
 elif theme_settings.get("program_name") == "Christmas":  
     days_left, year, next_event = days_until_christmas()  # Tính số ngày còn lại đến Giáng Sinh
@@ -340,8 +410,11 @@ if change_title_color:
 # In tiêu đề với hiệu ứng typing hoặc không, tùy thuộc vào theme
 if theme_settings.get("program_name") in seasonal_themes: 
     if theme_settings.get("program_name") == f"Lunar New Year {next_year}":
-        typing_effect(art)  
-
+        effect = Slide(art)
+        with effect.terminal_output() as terminal:
+            for frame in effect:
+                terminal.print(frame)
+ 
     if theme_settings.get("program_name") == 'Christmas':
         effect = Rain(art)
         with effect.terminal_output() as terminal:
@@ -358,7 +431,7 @@ if theme_settings.get("program_name") in seasonal_themes:
                 terminal.print(frame)       
 
     if theme_settings.get("program_name") == 'Zero Hacker':
-        effect = Print(art)
+        effect = Unstable(art)
         with effect.terminal_output() as terminal:
             for frame in effect:
                 terminal.print(frame) 

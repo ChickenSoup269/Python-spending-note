@@ -4,6 +4,7 @@ json/Chitieu.json
 json/menu.json
 json/super_chi_tieu.json
 json/chitieu/
+json/theme_backup.json
 
 # Bỏ qua thư mục chứa file bytecode Python
 __pycache__/

@@ -106,7 +106,7 @@ def merge_json_files(input_folder, output_file):
     with open(output_file, 'w', encoding='utf-8') as f:
         json.dump(merged_data, f, indent=4, ensure_ascii=False)
     
-    print(f"Dữ liệu đã được hợp nhất và lưu vào {output_file}")
+    # print(f"Dữ liệu đã được hợp nhất và lưu vào {output_file}")
 
 # Hợp nhất các file chi tiêu đã tách
 input_folder = './json'  # Đường dẫn tới thư mục chứa các tệp JSON
@@ -161,7 +161,10 @@ def load_theme_settings():
             "art_style": "standard",
             "use_random_colors": False,
             "program_name": "Zero Spending",
-            "show_time": True
+            "show_time": True,
+            "event_override": False,  # Thêm khóa này
+            "current_theme": "Default Theme",  # Khởi tạo theme mặc định
+            "default_theme": "Default Theme"  # Khởi tạo theme mặc định
         }
     return settings
 
@@ -169,6 +172,24 @@ def load_theme_settings():
 def save_theme_settings(settings):
     with open('./json/' + theme, 'w') as f:
         json.dump(settings, f, indent=4)
+
+
+# Tết json file 
+file_path ="json/tet.json"
+with open(file_path, 'r', encoding='utf-8') as file:
+    tet_dates = json.load(file)
+
+# Lấy năm hiện tại
+current_year = datetime.now().year + 1
+tet_date_str = tet_dates.get(str(current_year))
+
+if tet_date_str:
+    # Chuyển đổi chuỗi ngày Tết thành đối tượng datetime
+    event_date = datetime.strptime(tet_date_str, '%d/%m/%Y')
+else:
+    print(f"Không có thông tin ngày Tết cho năm {current_year}.")
+    event_date = None
+
 
 # =============================
 

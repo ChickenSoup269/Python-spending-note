@@ -1,8 +1,9 @@
 from imports import *
-
 next_year = datetime.now().year + 1
+
 # Seeting chọn theme
 def theme_menu():
+
     # Các màu từ colorama
     theme_choices = [
         "Đỏ", "Xanh lá", "Xanh dương", "Vàng", "Tím", "Cyan", "Trắng", "Xám", "Ngẫu nhiên", "Quay lại"
@@ -35,7 +36,7 @@ def theme_menu():
         
         "Hacker": {
             "color": "Fore.LIGHTGREEN_EX",
-            "font": "binary",
+            "font": "doom",
             "width": "120",
             "program_name": "Zero Hacker",
             "use_random_colors": False,
@@ -232,3 +233,7 @@ def theme_menu():
         print(f"Theme đã được lưu với màu {theme_answer['color_choice']}, kiểu chữ {theme_answer['font_choice']}.")
     else:
         print("Đã quay lại menu chính.")
+
+    
+
+
