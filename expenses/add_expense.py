@@ -1,7 +1,7 @@
 from expenses import *
 from common.categories import categories
 
-# Thêm chi tiêu 
+# Thêm chi tiêu [theo đơn vị nhập VD: 2 => nhập 2 lần liên tiếp]
 def quick_entry(main_category):
     sub_questions = [
         inquirer.List(
@@ -9,6 +9,7 @@ def quick_entry(main_category):
             message="Chọn chi tiêu cụ thể:",
             choices=categories[main_category] + ["Bỏ qua"],
         ),
+        
         inquirer.Text('description', message="Mô tả chi tiêu", default=""),
         inquirer.Text('amount', message="Số tiền (VNĐ)", default="", validate=lambda _, x: x.isdigit() or x == ""),
         inquirer.Text('quantity', message="Số lượng", default="1", validate=lambda _, x: x.isdigit())
@@ -16,8 +17,11 @@ def quick_entry(main_category):
 
     return inquirer.prompt(sub_questions)
 
+# Nhập từng đơn vị
 def batch_entry(main_category, num_entries):
     entries = []
+    total_expense = 0  # Khởi tạo biến để theo dõi tổng chi tiêu
+
     for _ in range(num_entries):
         sub_answers = quick_entry(main_category)
 
@@ -25,6 +29,8 @@ def batch_entry(main_category, num_entries):
             continue  # Bỏ qua nếu chọn "Bỏ qua"
 
         total_amount = int(sub_answers['amount']) * int(sub_answers['quantity'])
+        total_expense += total_amount  # Cộng dồn tổng tiền cho mỗi mục chi tiêu
+
         entries.append({
             "subcategory": sub_answers['subcategory'],
             "description": sub_answers['description'],
@@ -33,8 +39,11 @@ def batch_entry(main_category, num_entries):
             "total_amount": total_amount
         })
 
+    # Hiển thị tổng chi tiêu sau khi nhập xong
+    print(Fore.YELLOW + f"Tổng số tiền cho {num_entries} mục chi tiêu: {total_expense:,} VNĐ" + Style.RESET_ALL)
     return entries
 
+# Thêm chi tiêu
 def add_expense():
     while True:
         # Hỏi người dùng cách nhập chi tiêu
@@ -221,6 +230,7 @@ def add_expense():
                     "weekday": weekday_name_vn
                 })
 
+                # print(expenses)
                 save_expenses()
                 print(Fore.YELLOW + f"Đã thêm chi tiêu: {sub_answers['subcategory']} - {sub_answers['description']} - Số lượng: {sub_answers['quantity']} - Tổng tiền: {total_amount:,} VNĐ - Ngày: {weekday_name_vn}" + Style.RESET_ALL)
 

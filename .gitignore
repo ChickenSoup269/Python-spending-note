@@ -2,6 +2,8 @@
 
 json/Chitieu.json
 json/menu.json
+json/super_chi_tieu.json
+json/chitieu/
 
 # Bỏ qua thư mục chứa file bytecode Python
 __pycache__/

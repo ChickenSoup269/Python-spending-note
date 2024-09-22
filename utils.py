@@ -1,10 +1,11 @@
 from imports import *
 
+
 expenses = {} 
 savings = {} 
 console = Console()
 
-chitieu = 'Chitieu.json' 
+# chitieu = 'Chitieu.json' 
 savings_file = 'saving.json'
 menu_file = "menu.json"
 theme = 'theme_settings.json'
@@ -30,6 +31,8 @@ weekday_translation = {
 }
 
 #  ===================================
+
+
 # Load menu from JSON file
 def load_menu():
     try:
@@ -44,16 +47,78 @@ def save_menu(menu):
     with open('./json/'+ menu_file, "w" , encoding='utf-8') as f:
         json.dump(menu, f, indent=4)
 
-# Lưu file chi tiêu và tiết kiệm cùng một file json
+# =================================================
+
+# Lưu chi tiêu [UPDATE]
 def save_expenses():
-    with open('./json/' + chitieu, 'w', encoding='utf-8') as f:
+    # Lấy thời gian hiện tại
+    now = datetime.now()
+    year = now.year
+    month = now.strftime('%m')  # Lấy tháng với định dạng 2 chữ số (vd: 09)
+    timestamp = now.strftime('%Y%m%d%H%M%S')  # Thêm timestamp vào tên tệp để phân biệt các phiên bản
+
+    # Tạo tên folder và file theo năm và tháng
+    folder_path = f'./json/chitieu/chitieu{year}/thang{month}'
+    file_path = f'{folder_path}/chitieu.json'  # Thêm timestamp vào tên tệp
+
+    # Kiểm tra và tạo folder nếu chưa tồn tại
+    os.makedirs(folder_path, exist_ok=True)
+
+    # Lưu dữ liệu vào file
+    with open(file_path, 'w', encoding='utf-8') as f:
         json.dump({"expenses": expenses, "savings": savings}, f, indent=4, ensure_ascii=False)
 
-# Tải file chi tiêu
+    print(f"Dữ liệu đã được lưu vào {file_path}") # Thêm dòng in để kiểm tra đường dẫn file
+
+
+def merge_json_files(input_folder, output_file):
+    merged_data = {"expenses": {}, "savings": {}}
+
+    # Duyệt qua tất cả các tệp JSON trong thư mục đầu vào
+    for root, dirs, files in os.walk(input_folder):
+        for file in files:
+            if file.endswith(".json"):
+                file_path = os.path.join(root, file)
+                with open(file_path, 'r', encoding='utf-8') as f:
+                    data = json.load(f)
+                    
+                    # Hợp nhất dữ liệu
+                    if "expenses" in data:
+                        for user, dates in data["expenses"].items():
+                            if user not in merged_data["expenses"]:
+                                merged_data["expenses"][user] = {}
+                            for date, entries in dates.items():
+                                if date not in merged_data["expenses"][user]:
+                                    merged_data["expenses"][user][date] = []
+                                
+                                # Kiểm tra và chỉ thêm các mục mới (tránh trùng lặp)
+                                existing_entries = merged_data["expenses"][user][date]
+                                for entry in entries:
+                                    if entry not in existing_entries:
+                                        merged_data["expenses"][user][date].append(entry)
+                    
+                    if "savings" in data:
+                        for key, value in data["savings"].items():
+                            # Ưu tiên lưu giá trị mới nhất cho mỗi mục tiết kiệm
+                            merged_data["savings"][key] = value
+    
+    # Lưu dữ liệu hợp nhất vào tệp JSON mới
+    with open(output_file, 'w', encoding='utf-8') as f:
+        json.dump(merged_data, f, indent=4, ensure_ascii=False)
+    
+    print(f"Dữ liệu đã được hợp nhất và lưu vào {output_file}")
+
+# Hợp nhất các file chi tiêu đã tách
+input_folder = './json'  # Đường dẫn tới thư mục chứa các tệp JSON
+output_file = './json/super_chi_tieu.json'  # Đường dẫn tới tệp JSON kết quả
+merge_json_files(input_folder, output_file)
+
+
+# Cập nhật hàm load_expenses [UPDATE]
 def load_expenses():
     global expenses, savings
     try:
-        with open('./json/' + chitieu, 'r', encoding='utf-8') as f:
+        with open(output_file, 'r', encoding='utf-8') as f:
             data = json.load(f)
             expenses = data.get("expenses", {})
             savings = data.get("savings", {})
@@ -62,6 +127,27 @@ def load_expenses():
         expenses = {}
         savings = {}
         return expenses 
+
+# def save_expenses():
+#     with open('json/super_chi_tieu.json', 'w', encoding='utf-8') as f:
+#         json.dump({"expenses": expenses, "savings": savings}, f, indent=4, ensure_ascii=False)
+
+# # Tải file chi tiêu
+# def load_expenses():
+#     global expenses, savings
+#     try:
+#         with open('json/super_chi_tieu.json', 'r', encoding='utf-8') as f:
+#             data = json.load(f)
+#             expenses = data.get("expenses", {})
+#             savings = data.get("savings", {})
+#             return expenses  
+#     except FileNotFoundError:
+#         expenses = {}
+#         savings = {}
+#         return expenses 
+
+# =================================================
+
 
 # Hàm để load cài đặt theme từ file JSON
 def load_theme_settings():
@@ -269,5 +355,15 @@ def get_expenses_for_week(expenses, year, month, week_label):
     return expense_list
 # ============================================
 
-# Load expenses when the script starts
 load_expenses()
+# def main():
+#     # Lưu dữ liệu vào file
+#     save_expenses()
+#     # Tải dữ liệu từ file hiện tại
+#     load_expenses()
+#     # print(expenses)  # Hoặc thực hiện các thao tác khác với dữ liệu đã tải
+
+
+
+# if __name__ == "__main__":
+#     main()

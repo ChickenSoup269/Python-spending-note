@@ -1,6 +1,5 @@
 from expenses import *
 
-
 # Tính chi tiêu trong tháng
 def calculate_monthly_totals(num_months=12):
     today = datetime.now().date()
@@ -24,6 +23,7 @@ def calculate_monthly_totals(num_months=12):
         month_labels.append(start_of_month.strftime('%m/%Y'))
 
     return monthly_totals[::-1], month_labels[::-1]  # Đảo ngược để tháng gần nhất lên đầu
+
 def plot_monthly_comparison(num_months=12):
     monthly_totals, month_labels = calculate_monthly_totals(num_months)
     

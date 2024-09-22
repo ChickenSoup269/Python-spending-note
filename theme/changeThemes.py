@@ -242,7 +242,6 @@ elif theme_settings.get("program_name") == f"New Year {next_year}":
             terminal.print(frame)
 
 
-
 #  =====================================================
 
 
