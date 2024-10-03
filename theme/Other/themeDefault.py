@@ -60,7 +60,7 @@ def theme_menu():
     }
 
     # Thêm các lựa chọn theme
-    theme_type_choices = ["Theme tùy chỉnh", "Quốc Khánh", "Christmas", f"Tết {next_year}", "Halloween", f"New Year {next_year}", "DOOM Game" ,"Hacker", "Mặc định", "Quay lại"]
+    theme_type_choices = ["Theme tùy chỉnh", "Quốc Khánh", "Christmas", f"Tết {next_year}", "Halloween", f"New Year {next_year}", "DOOM Game", "Hacker", "Mặc định", "Quay lại"]
 
     # Câu hỏi về lựa chọn loại theme
     theme_type_question = [
@@ -98,7 +98,7 @@ def theme_menu():
         }
         save_theme_settings(settings)
         print(f"Theme '{theme_type_answer['theme_type']}' đã được lưu.")
-      
+
     # Nếu người dùng chọn theme tùy chỉnh
     elif theme_type_answer['theme_type'] == "Theme tùy chỉnh":
         # Các câu hỏi về cài đặt theme
@@ -134,7 +134,7 @@ def theme_menu():
                 default=False
             ),
             inquirer.Text(
-                'width_choice',  # Thêm câu hỏi width
+                'width_choice',
                 message="Nhập độ rộng (width) của chương trình (mặc định là 120):",
                 default="120"
             )
@@ -198,7 +198,8 @@ def theme_menu():
         show_time = theme_answer['show_time']
         change_title_color = theme_answer['change_title_color']
 
-        # Nếu người dùng chọn đổi màu tiêu đề, tiếp tục hỏi về chi tiết đổi màu tiêu đề
+        # Nếu người dùng chọn đổi màu tiêu đề
+        title_color_choice = "Không đổi màu (trắng)"  # Khởi tạo mặc định
         if change_title_color:
             title_color_questions = [
                 inquirer.List(
@@ -208,11 +209,9 @@ def theme_menu():
                 )
             ]
             title_color_answer = inquirer.prompt(title_color_questions)
-            if title_color_answer['title_color_choice'] == "Quay lại":
-                print("Đã quay lại menu chính.")
-                return  # Thoát khỏi hàm, quay lại menu chính
-        else:
-            title_color_answer = {'title_color_choice': 'Không đổi màu (trắng)'}
+
+            # Lưu kết quả lựa chọn màu tiêu đề nếu có thay đổi
+            title_color_choice = title_color_answer['title_color_choice']
 
         # Lưu theme vào file JSON
         settings = {
@@ -223,14 +222,16 @@ def theme_menu():
             "program_name": program_name,  # Tên chương trình do người dùng tùy chỉnh
             "show_time": show_time,
             "time_font_style": time_font_choice,  # Lưu font chữ thời gian
-            "change_title_color": change_title_color,
-            "title_color_choice": title_color_answer['title_color_choice'],  # Lưu lựa chọn màu tiêu đề
+            "change_title_color": change_title_color,  # Trạng thái màu tiêu đề
+            "title_color_choice": title_color_choice,  # Lưu màu tiêu đề cuối cùng
             "time_format": time_display_answer['time_format'],  # Lưu lựa chọn hiển thị giờ/ngày/cả hai
             "time_color": selected_time_color  # Lưu màu đồng hồ/ngày tháng
         }
-        save_theme_settings(settings)
 
+        # Gọi hàm lưu theme
+        save_theme_settings(settings)
         print(f"Theme đã được lưu với màu {theme_answer['color_choice']}, kiểu chữ {theme_answer['font_choice']}.")
+
     else:
         print("Đã quay lại menu chính.")
 

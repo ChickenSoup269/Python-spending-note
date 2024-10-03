@@ -41,7 +41,7 @@ def main_menu():
     while True:
         # Menu chính để chọn nhóm chức năng
         main_choices = [
-            "Tiết kiệm",
+            # "Tiết kiệm",
             # "Kinh doanh",
             "Kiểm soát chi tiêu",
             "Xem danh mục chi tiêu",
@@ -63,9 +63,9 @@ def main_menu():
 
         # if main_answer['main_choice'] == "Kinh doanh":
         #     business_menu()
-        if main_answer['main_choice'] == "Tiết kiệm":
-            savings_menu()  
-        elif main_answer['main_choice'] == "Kiểm soát chi tiêu":
+        # if main_answer['main_choice'] == "Tiết kiệm":
+        #     savings_menu()  
+        if main_answer['main_choice'] == "Kiểm soát chi tiêu":
             expense_menu()
         elif main_answer['main_choice'] == "Xem danh mục chi tiêu":
             expenses = load_expenses()

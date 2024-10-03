@@ -102,6 +102,7 @@ def days_until_christmas():
     days_left = (christmas_date - today).days
     return days_left, christmas_date.year, christmas_date.strftime('%d/%m/%Y')
 
+
 # Hàm tính số ngày còn lại đến Quốc Khánh
 def days_until_independence_day():
     today = datetime.now()
